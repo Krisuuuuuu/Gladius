@@ -1,1 +1,15 @@
-<p>sign-in-part works!</p>
+<div class="wrapper animate__animated animate__fadeIn">
+  <form [formGroup]= 'this.signInForm' (ngSubmit)='this.save()'>
+    <h1>Nice to see you back.</h1>
+    <h2>Sign In.</h2>
+    <mat-form-field appearance='fill'>
+      <mat-label>Email</mat-label>
+      <input matInput placeholder="example@email.com" type="email" formControlName='email' autocomplete="off">
+    </mat-form-field>
+    <mat-form-field appearance='fill'>
+      <mat-label>Password</mat-label>
+      <input matInput placeholder="Password" type="password" formControlName='password' autocomplete="off">
+    </mat-form-field>
+    <button mat-raised-button type='submit'>Sign In</button>
+  </form>
+</div>

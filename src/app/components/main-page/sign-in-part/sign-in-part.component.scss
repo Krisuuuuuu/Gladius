@@ -1,0 +1,29 @@
+@import '../../../meta/theme-meta.scss';
+@import '../../../meta/size-meta.scss';
+@import '../../../meta/mixins-meta.scss';
+
+div.wrapper {
+  padding: 40px 60px;
+  background-color: rgba(255, 255, 255, 0.5);
+
+  form {
+
+    h1{
+      @include h1();
+      margin-bottom: 2px;
+    }
+
+    h2{
+      @include h2();
+      margin-bottom: 20px;
+    }
+
+    p{
+      margin-bottom: 5px;
+    }
+
+    @include form-field($input-width, $input-height);
+
+    @include button($input-width, $input-height);
+  }
+}

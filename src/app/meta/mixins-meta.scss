@@ -1,0 +1,83 @@
+@import "../meta/size-meta.scss";
+
+@mixin h1 {
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-size: $h1-font-size;
+  font-weight: lighter;
+  color: $alt-font-color;
+
+}
+
+@mixin h2 {
+
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-size: $h2-font-size;
+  font-weight: 500;
+  color: $alt-font-color;
+}
+
+@mixin button($input-width, $input-height) {
+
+  button{
+    width: $input-width;
+    height: $input-height;
+    padding-left: 15px;
+    background-color: $button-bg-color;
+    border: none;
+    font-family: "Saira Condensed", Arial, Helvetica, sans-serif;
+    font-size: $base-font-size;
+    font-weight: 500;
+    color: $button-fg-color;
+    text-align: left;
+    transition: 0.3s ease-in;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: lighten($button-bg-color, 5%)
+  }
+}
+
+@mixin form-field($input-width, $input-height) {
+
+  ::ng-deep .mat-form-field {
+    display: block;
+    width: $input-width;
+    font-size: $base-font-size;
+
+    .mat-form-field-flex {
+      background-color: #E8F0FE;
+    }
+
+    .mat-input-element {
+      color: $alt-font-color;
+    }
+    .mat-form-field-label {
+      color: $alt-font-color;
+    }
+    .mat-form-field-underline {
+      background-color: $alt-font-color;
+    }
+    .mat-form-field-ripple {
+      background-color: $alt-font-color;
+    }
+    .mat-form-field-required-marker {
+      color: $alt-font-color;
+    }
+  }
+
+  ::ng-deep .mat-form-field.mat-focused {
+    .mat-form-field-label {
+        color: $alt-font-color;
+    }
+    .mat-form-field-ripple {
+        background-color: $alt-font-color;
+    }
+    .mat-form-field-required-marker {
+        color: $alt-font-color;
+    }
+    .mat-input-element {
+        color: $alt-font-color;
+    }
+}
+}
