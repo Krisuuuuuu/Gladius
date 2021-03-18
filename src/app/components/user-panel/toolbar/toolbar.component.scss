@@ -8,11 +8,13 @@ nav.toolbar-wrapper {
 
   .mat-toolbar {
     width: 100%;
+    background-color: $toolbar-bg-color;
 
     .mat-toolbar-row {
+      height: $toolbar-height;
       padding: 0px;
       border: 2px $toolbar-border-color solid;
-      background-color: $toolbar-bg-color;
+      background-color: transparent;
 
       section.left-container, section.right-container {
         display: flex;

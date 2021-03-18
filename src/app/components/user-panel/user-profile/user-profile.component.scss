@@ -1,0 +1,17 @@
+@import '../../../meta/theme-meta.scss';
+@import '../../../meta/size-meta.scss';
+@import '../../../meta/mixins-meta.scss';
+
+section.user-profile-wrapper {
+  min-height: 100vh;
+  background-image: url(../../../../assets/images/profile_bgc.jpg);
+  @include background-image();
+  background-position: center 0%;
+
+  section.layer{
+    min-height: $user-panel-content-min-height;
+    width: 100%;
+
+    background-color: rgb(232, 239, 243, 0.25);
+  }
+}

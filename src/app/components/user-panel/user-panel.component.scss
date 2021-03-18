@@ -1,3 +1,12 @@
+@import './../../meta/size-meta.scss';
+
 section.user-panel-wrapper{
-  min-height: 120vh;
+  min-height: 100vh;
+
+  main {
+    min-height: $user-panel-content-min-height;
+    background-color: transparent;
+  }
 }
+
+
