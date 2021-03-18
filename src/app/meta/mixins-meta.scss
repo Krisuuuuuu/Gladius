@@ -1,11 +1,15 @@
 @import "../meta/size-meta.scss";
 
+@mixin background-image {
+  background-size: cover;
+  background-attachment: fixed;
+}
+
 @mixin h1 {
   font-family: 'Roboto', Arial, Helvetica, sans-serif;
   font-size: $h1-font-size;
   font-weight: lighter;
   color: $alt-font-color;
-
 }
 
 @mixin h2 {

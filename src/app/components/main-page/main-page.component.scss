@@ -1,12 +1,13 @@
+@import './../../meta/mixins-meta.scss';
+
 section.main-page-wrapper {
   display: flex;
   flex-direction: row;
   height: 100%;
   width: 100%;
   background-image: url(../../../assets/images/main.jpg);
-  background-size: cover;
   background-position: center center;
-  background-attachment: fixed;
+  @include backround-image();
 
   section.left-wrapper {
     position: relative;
