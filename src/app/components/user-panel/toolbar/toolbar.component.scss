@@ -1,0 +1,71 @@
+@import './../../../meta/size-meta.scss';
+@import './../../../meta/theme-meta.scss';
+@import './../../../meta/mixins-meta.scss';
+
+nav.toolbar-wrapper {
+  position: fixed;
+  width: 100%;
+
+  .mat-toolbar {
+    width: 100%;
+
+    .mat-toolbar-row {
+      padding: 0px;
+      border: 2px $toolbar-border-color solid;
+      background-color: $toolbar-bg-color;
+
+      section.left-container, section.right-container {
+        display: flex;
+        height: 100%;
+        width: 50%;
+      }
+
+      section.left-container {
+        flex-direction: row;
+
+        div.logo {
+          height: 100%;
+          padding-left: 25px;
+
+          img {
+            display: block;
+            height: 100%;
+            width: 100%;
+          }
+        }
+      }
+
+      section.right-container {
+        flex-direction: row-reverse;
+      }
+    }
+
+    .mat-toolbar-row.second{
+      position: relative;
+
+      section.center-container{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+
+        display: flex;
+        flex-direction: center;
+        height: 100%;
+        padding: 0 30px;
+        transform: translate(-50%, -50%)
+      }
+
+      button.toolbar-button {
+        margin-right: 20px;
+      }
+    }
+
+    button.toolbar-button {
+      @include toolbar-button();
+      margin-right: 25px;
+    }
+  }
+
+
+
+}

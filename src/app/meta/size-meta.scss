@@ -2,7 +2,15 @@
 $input-width: 500px;
 $input-height: 50px;
 
+//toolbar size
+$toolbar-height: 70px;
+$toolbar-width: 100%;
+
 //fonts size
 $h1-font-size: 26px;
 $h2-font-size: $h1-font-size - 4px;
 $base-font-size: 16px;
+
+//toolbar button
+$toolbar-button-padding: 0 25px 0 10px;
+$toolbar-button-font-size: $base-font-size - 2px;

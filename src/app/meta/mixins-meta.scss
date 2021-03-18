@@ -79,5 +79,35 @@
     .mat-input-element {
         color: $alt-font-color;
     }
+  }
 }
+
+@mixin toolbar-button {
+  padding: $toolbar-button-padding;
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid $toolbar-bg-color;
+  font-family: "Saira Condensed", Arial, Helvetica, sans-serif;
+  font-size: $toolbar-button-font-size;
+  font-weight: 700;
+  color: $toolbar-button-fg-color;
+  transition: 0.3s linear;
+  cursor: pointer;
+
+  .mat-icon {
+    display: inline-block;
+    padding-right: 27px;
+    vertical-align: middle;
+    color: $toolbar-button-icon-fg-color;
+  }
+
+  &:hover{
+    border-bottom: 2px solid $toolbar-button-active-fg-color;
+    color: $toolbar-button-active-fg-color;
+  }
+}
+
+@mixin toolbar-button-active {
+  border-bottom: 2px solid $toolbar-button-active-fg-color;
+  color: $toolbar-button-active-fg-color;
 }
