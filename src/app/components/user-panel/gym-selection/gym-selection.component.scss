@@ -10,5 +10,32 @@ section.wrapper {
     min-height: 100vh;
     width: 100vw;
     background-color: $panel-wrapper-bg;
+
+    div.header {
+      padding-top: 30px;
+
+      h2 {
+        @include h2(30px);
+        text-align: center;
+      }
+    }
+
+    div.container {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      min-height: 75vh;
+      width: 78vw;
+      margin: 0 auto;
+      padding: 40px 60px;
+
+      app-gym-card {
+        margin: 0 0 50px 0;
+      }
+
+      app-gym-card:nth-child(odd){
+        margin: 0 75px 50px 0;
+      }
+    }
   }
 }

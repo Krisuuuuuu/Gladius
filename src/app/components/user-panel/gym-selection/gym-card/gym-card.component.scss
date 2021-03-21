@@ -1,0 +1,77 @@
+@import '../../../../meta/theme-meta.scss';
+@import '../../../../meta/mixins-meta.scss';
+
+div.wrapper {
+  position: relative;
+  height: auto;
+  width: 500px;
+  transition: 0.3s ease-in;
+  overflow: hidden;
+
+  img {
+    display: block;
+    height: 100%;
+    width: 100%;
+    border: 3px solid $alt-font-color;
+  }
+
+  img.active {
+    border: none;
+    border-bottom: 4px solid $toolbar-button-fg-color;
+  }
+
+  div.layer{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    transform: translate(-50%, -50%);
+    transition: 0.5s ease-in;
+    cursor: pointer;
+
+    h1 {
+      @include h1(5px);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      text-align: center;
+      font-family: 'Sairda Condensed', Arial, Helvetica, sans-serif;
+      font-weight: 600;
+      color: white;
+      transform: translate(-50%, -50%);
+      transition: 0.5s ease-in;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    h2{
+      @include h2(0);
+      position: absolute;
+      top: 62%;
+      left: 50%;
+      text-align: center;
+      font-family: 'Sairda Condensed', Arial, Helvetica, sans-serif;
+      font-weight: 500;
+      color: white;
+      transform: translate(-50%, -50%);
+      transition: 0.5s ease-in;
+      opacity: 0;
+      cursor: pointer;
+    }
+  }
+
+
+  div.layer:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+
+    h1 {
+      opacity: 1;
+    }
+
+    h2 {
+      opacity: 1;
+    }
+  }
+}
