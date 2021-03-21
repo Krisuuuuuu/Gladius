@@ -7,11 +7,13 @@ import { MatInputModule } from '@angular/material/input';
 
 import { UserProfileComponent } from './user-profile.component';
 import { ClientInfoComponent } from './client-info/client-info.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 @NgModule({
   declarations: [
     UserProfileComponent,
-    ClientInfoComponent
+    ClientInfoComponent,
+    ChangePasswordComponent
   ],
   imports: [
     CommonModule,

@@ -27,5 +27,4 @@ export class ClientInfoComponent implements OnInit {
   save(): void {
 
   }
-
 }
