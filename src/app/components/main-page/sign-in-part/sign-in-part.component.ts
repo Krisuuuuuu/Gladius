@@ -10,13 +10,15 @@ export class SignInPartComponent implements OnInit {
   signInForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder) {
+
+  }
+
+  ngOnInit(): void {
     this.signInForm = this.formBuilder.group({
       email: '',
       password: ''
     })
   }
-
-  ngOnInit(): void { }
 
   save(): void {
 

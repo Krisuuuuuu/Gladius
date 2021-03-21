@@ -10,14 +10,14 @@ export class ChangePasswordComponent implements OnInit {
   passwordForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder) {
+   }
+
+  ngOnInit(): void {
     this.passwordForm = this.formBuilder.group({
       currentPassword: '',
       newPassword: '',
       newRePassword: '',
     });
-   }
-
-  ngOnInit(): void {
   }
 
   save(): void {

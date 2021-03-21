@@ -10,6 +10,10 @@ export class ClientInfoComponent implements OnInit {
   clientInfoForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder) {
+
+  }
+
+  ngOnInit(): void {
     this.clientInfoForm = this.formBuilder.group({
       country: '',
       city: '',
@@ -18,10 +22,6 @@ export class ClientInfoComponent implements OnInit {
       email: '',
       phoneNumber: ''
     });
-  }
-
-  ngOnInit(): void {
-
   }
 
   save(): void {
