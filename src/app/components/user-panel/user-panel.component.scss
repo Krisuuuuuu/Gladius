@@ -1,8 +1,8 @@
 @import './../../meta/size-meta.scss';
 
 section.user-panel-wrapper{
-
   main {
+    padding-top: 2 * $toolbar-height;
     background-color: transparent;
   }
 }

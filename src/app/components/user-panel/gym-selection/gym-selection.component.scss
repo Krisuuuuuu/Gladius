@@ -1,0 +1,14 @@
+@import '../../../meta/theme-meta.scss';
+@import '../../../meta/mixins-meta.scss';
+
+section.wrapper {
+  background-image: url(../../../../assets//images//gyms_background.jpg);
+  @include background-image();
+  background-position: center 80%;
+
+  section.layer {
+    min-height: 100vh;
+    width: 100vw;
+    background-color: $panel-wrapper-bg;
+  }
+}
