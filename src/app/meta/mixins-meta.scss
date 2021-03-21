@@ -5,59 +5,72 @@
   background-attachment: fixed;
 }
 
-@mixin h1 {
+@mixin h1($margin-bottom) {
+  margin-bottom: $margin-bottom;
   font-family: 'Roboto', Arial, Helvetica, sans-serif;
   font-size: $h1-font-size;
   font-weight: lighter;
   color: $alt-font-color;
 }
 
-@mixin h2 {
-
+@mixin h2($margin-bottom) {
+  margin-bottom: $margin-bottom;
   font-family: 'Roboto', Arial, Helvetica, sans-serif;
   font-size: $h2-font-size;
   font-weight: 500;
   color: $alt-font-color;
 }
 
-@mixin button($input-width, $input-height) {
+@mixin p($margin-bottom){
+  margin-bottom: $margin-bottom;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-size: $p-font-size;
+  font-weight: 600;
+  color: $alt-font-color;
+}
 
-  button{
-    width: $input-width;
-    height: $input-height;
-    padding-left: 15px;
-    background-color: $button-bg-color;
-    border: none;
-    font-family: "Saira Condensed", Arial, Helvetica, sans-serif;
-    font-size: $base-font-size;
-    font-weight: 500;
-    color: $button-fg-color;
-    text-align: left;
-    transition: 0.3s ease-in;
-    cursor: pointer;
-  }
+@mixin button($input-width, $input-height, $display) {
 
-  button:hover {
+  display: $display;
+  width: $input-width;
+  height: $input-height;
+  padding-left: 15px;
+  background-color: $button-bg-color;
+  border: none;
+  font-family: "Saira Condensed", Arial, Helvetica, sans-serif;
+  font-size: $base-font-size;
+  font-weight: 500;
+  color: $button-fg-color;
+  text-align: left;
+  transition: 0.3s ease-in;
+  cursor: pointer;
+
+  &:hover{
     background-color: lighten($button-bg-color, 5%)
   }
 }
 
-@mixin form-field($input-width, $input-height) {
+@mixin form-field($input-width, $input-height, $display, $margin) {
 
   ::ng-deep .mat-form-field {
-    display: block;
+    margin: $margin;
+    display: $display;
     width: $input-width;
     font-size: $base-font-size;
+    cursor: pointer;
 
     .mat-form-field-flex {
       background-color: #E8F0FE;
+      cursor: pointer;
     }
 
     .mat-input-element {
       color: $alt-font-color;
+      cursor: pointer;
     }
     .mat-form-field-label {
       color: $alt-font-color;
+      cursor: pointer;
     }
     .mat-form-field-underline {
       background-color: $alt-font-color;

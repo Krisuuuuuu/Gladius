@@ -5,6 +5,7 @@
 nav.toolbar-wrapper {
   position: fixed;
   width: 100vw;
+  z-index: 100;
 
   .mat-toolbar {
     width: 100%;

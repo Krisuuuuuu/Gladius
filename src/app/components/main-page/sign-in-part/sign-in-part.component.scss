@@ -8,22 +8,22 @@ div.wrapper {
 
   form {
 
-    h1{
-      @include h1();
-      margin-bottom: 2px;
+    h1 {
+      @include h1(2px);
     }
 
-    h2{
-      @include h2();
-      margin-bottom: 20px;
+    h2 {
+      @include h2(20px);
     }
 
-    p{
-      margin-bottom: 5px;
+    p {
+      @include p(100px);
     }
 
-    @include form-field($input-width, $input-height);
+    @include form-field($input-width, $input-height, block, 0);
 
-    @include button($input-width, $input-height);
+    button {
+      @include button($input-width, $input-height, block);
+    }
   }
 }

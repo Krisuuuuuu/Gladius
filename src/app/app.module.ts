@@ -16,7 +16,7 @@ import { UserPanelModule } from './components/user-panel/user-panel.module';
     AppRoutingModule,
     BrowserAnimationsModule,
     MainPageModule,
-    UserPanelModule,
+    UserPanelModule
   ],
   providers: [],
   bootstrap: [AppComponent]

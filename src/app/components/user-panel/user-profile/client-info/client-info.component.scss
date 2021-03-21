@@ -1,0 +1,34 @@
+@import '../../../../meta/theme-meta.scss';
+@import '../../../../meta/mixins-meta.scss';
+
+section.wrapper {
+  width: 75vw;
+  padding: 40px 60px;
+  background-color: $panel-part-bg;
+
+  h1 {
+    @include h1(2px);
+  }
+
+  h2 {
+    @include h2(30px);
+  }
+
+  div.info-set {
+
+    margin: 10px 0;
+
+    p{
+      @include p(20px);
+    }
+  }
+
+  form {
+    @include form-field($input-width, $input-height, inline-block, 0 15px 0 0);
+  }
+
+  button{
+    @include button($input-width, $input-height, block);
+    margin: 20px auto;
+  }
+}

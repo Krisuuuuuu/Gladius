@@ -3,15 +3,22 @@
 @import '../../../meta/mixins-meta.scss';
 
 section.user-profile-wrapper {
-  min-height: 100vh;
   background-image: url(../../../../assets/images/profile_bgc.jpg);
   @include background-image();
+
   background-position: center 0%;
 
-  section.layer{
-    min-height: $user-panel-content-min-height;
+  section.layer {
+    position: relative;
+    height: $user-panel-content-min-height;
     width: 100%;
+    background-color: $panel-wrapper-bg;
 
-    background-color: rgb(232, 239, 243, 0.25);
+    app-client-info {
+      position: absolute;
+      top: 55%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
   }
 }

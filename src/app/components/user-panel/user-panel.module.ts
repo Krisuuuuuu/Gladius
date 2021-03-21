@@ -3,17 +3,17 @@ import { CommonModule } from '@angular/common';
 
 import { ToolbarModule } from './toolbar/toolbar.module';
 import { UserPanelComponent } from './user-panel.component';
-import { UserProfileComponent } from './user-profile/user-profile.component';
+import { UserProfileModuleModule } from './user-profile/user-profile-module.module';
 
 
 @NgModule({
   declarations: [
-    UserPanelComponent,
-    UserProfileComponent
+    UserPanelComponent
   ],
   imports: [
     CommonModule,
-    ToolbarModule
+    ToolbarModule,
+    UserProfileModuleModule,
   ],
   exports: [
     UserPanelComponent
