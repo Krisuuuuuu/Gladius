@@ -128,3 +128,17 @@
   border-bottom: 2px solid $toolbar-button-active-fg-color;
   color: $toolbar-button-active-fg-color;
 }
+
+@mixin absolute {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin panel {
+  @include absolute();
+  width: $panel-width;
+  padding: $panel-padding;
+  background-color: $panel-part-bg;
+}

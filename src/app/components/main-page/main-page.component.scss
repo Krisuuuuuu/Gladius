@@ -15,10 +15,7 @@ section.main-page-wrapper {
     width: 47%;
 
     app-sign-in-part{
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+      @include absolute();
     }
   }
 

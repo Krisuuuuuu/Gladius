@@ -7,13 +7,7 @@ section.layer {
   width: 100%;
 
   section.wrapper {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 75vw;
-    padding: 40px 60px;
-    background-color: $panel-part-bg;
-    transform: translate(-50%, - 50%);
+    @include panel();
 
     h1 {
       @include h1(2px);
@@ -24,7 +18,6 @@ section.layer {
     }
 
     div.info-set {
-
       margin: 10px 0;
 
       p{

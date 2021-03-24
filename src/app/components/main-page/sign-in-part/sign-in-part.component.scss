@@ -3,7 +3,7 @@
 @import '../../../meta/mixins-meta.scss';
 
 div.wrapper {
-  padding: 40px 60px;
+  padding: $panel-padding;
   background-color: rgba(255, 255, 255, 0.5);
 
   form {
