@@ -1,5 +1,8 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, ViewChild } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 
 export interface TableElement {
   no: number,
@@ -26,7 +29,9 @@ export interface TableElement {
   encapsulation: ViewEncapsulation.None
 })
 
-export class BookingTableComponent implements OnInit {
+export class BookingTableComponent implements AfterViewInit {
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
   columnsToDisplay: string[] = ["No.", "Activity Date", "Activity Day", "Activity Hour", "Activity Name", "Booking Status"];
   expandedElement: TableElement | null;
   data: TableElement[] = [
@@ -51,8 +56,12 @@ export class BookingTableComponent implements OnInit {
       status: "Cancelled"
     }
   ];
+
+  dataSource = new MatTableDataSource<TableElement>(this.data);
+
   constructor() { }
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
   }
 }

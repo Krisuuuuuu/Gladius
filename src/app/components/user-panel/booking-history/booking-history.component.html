@@ -4,13 +4,19 @@
       <h2>Booking history</h2>
       <mat-tab-group mat-align-tabs="start">
         <mat-tab label="Active">
-          <app-booking-table></app-booking-table>
+          <ng-template matTabContent>
+            <app-booking-table></app-booking-table>
+          </ng-template>
         </mat-tab>
         <mat-tab label="Cancelled">
-          <app-booking-table></app-booking-table>
+          <ng-template matTabContent>
+            <app-booking-table></app-booking-table>
+          </ng-template>
         </mat-tab>
         <mat-tab label="All">
-          <app-booking-table></app-booking-table>
+          <ng-template matTabContent>
+            <app-booking-table></app-booking-table>
+          </ng-template>
         </mat-tab>
       </mat-tab-group>
     </div>

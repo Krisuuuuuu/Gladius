@@ -1,4 +1,5 @@
 @import "../meta/size-meta.scss";
+@import "../meta/theme-meta.scss";
 
 @mixin background-image {
   background-size: cover;
@@ -180,7 +181,8 @@
 
 @mixin table {
   table {
-    margin: $table-margin;
+    margin-top: $table-margin;
+    background-color: $table-bg-color;
     width: 100%;
 
     .mat-header-cell {
@@ -245,5 +247,24 @@
         @include alt-button();
       }
     }
+  }
+}
+
+@mixin paginator {
+  .mat-paginator {
+    margin-bottom: $table-margin;
+    background-color: $paginator-bg-color;
+  }
+
+  ::ng-deep .mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+    color: $paginator-color !important;
+  }
+
+  ::ng-deep .mat-option {
+    color: $paginator-color;
+  }
+
+  ::ng-deep .mat-select-value {
+    color: $paginator-color;
   }
 }

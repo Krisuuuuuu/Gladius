@@ -1,6 +1,6 @@
 <div class="wrapper">
   <table mat-table
-  [dataSource]="data" multiTemplateDataRows class="mat-elevation-z8">
+  [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
 
     <ng-container matColumnDef="No.">
      <th mat-header-cell *matHeaderCellDef> No. </th>
@@ -55,4 +55,5 @@
       </tr>
       <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
   </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 </div>
