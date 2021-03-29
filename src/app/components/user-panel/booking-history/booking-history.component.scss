@@ -19,10 +19,11 @@ section.wrapper {
     @include panel();
 
     h2 {
-      @include h2(50px);
+      @include h2(30px);
       text-align: center;
     }
 
     @include tabs();
+    @include table();
   }
 }

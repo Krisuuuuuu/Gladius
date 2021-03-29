@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BookingHistoryComponent } from './booking-history.component';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 
 
@@ -9,7 +11,9 @@ import { MatTabsModule } from '@angular/material/tabs';
   declarations: [BookingHistoryComponent],
   imports: [
     CommonModule,
-    MatTabsModule
+    MatTabsModule,
+    MatTableModule,
+    MatPaginatorModule
   ],
   exports: [BookingHistoryComponent]
 })
