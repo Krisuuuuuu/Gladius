@@ -188,11 +188,13 @@
     .mat-header-cell {
       font-size: $header-font-size;
       font-weight: 700;
+      text-align: center;
       color: $header-font;
     }
 
     .mat-cell {
       font-weight: 500;
+      text-align: center;
       color: $cell-font;
     }
 
