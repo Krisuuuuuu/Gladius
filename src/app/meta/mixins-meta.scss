@@ -7,7 +7,7 @@
 
 @mixin h1($margin-bottom) {
   margin-bottom: $margin-bottom;
-  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
   font-size: $h1-font-size;
   font-weight: 400;
   color: $alt-font-color;
@@ -15,22 +15,21 @@
 
 @mixin h2($margin-bottom) {
   margin-bottom: $margin-bottom;
-  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
   font-size: $h2-font-size;
   font-weight: 600;
   color: $alt-font-color;
 }
 
-@mixin p($margin-bottom){
+@mixin p($margin-bottom) {
   margin-bottom: $margin-bottom;
-  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
   font-size: $p-font-size;
   font-weight: 600;
   color: $alt-font-color;
 }
 
 @mixin button($input-width, $input-height, $display) {
-
   display: $display;
   width: $input-width;
   height: $input-height;
@@ -45,13 +44,12 @@
   transition: 0.3s ease-in;
   cursor: pointer;
 
-  &:hover{
-    background-color: lighten($button-bg-color, 5%)
+  &:hover {
+    background-color: lighten($button-bg-color, 5%);
   }
 }
 
 @mixin form-field($input-width, $input-height, $display, $margin) {
-
   ::ng-deep .mat-form-field {
     margin: $margin;
     display: $display;
@@ -60,7 +58,7 @@
     cursor: pointer;
 
     .mat-form-field-flex {
-      background-color: #E8F0FE;
+      background-color: #e8f0fe;
       cursor: pointer;
     }
 
@@ -85,16 +83,16 @@
 
   ::ng-deep .mat-form-field.mat-focused {
     .mat-form-field-label {
-        color: $alt-font-color;
+      color: $alt-font-color;
     }
     .mat-form-field-ripple {
-        background-color: $alt-font-color;
+      background-color: $alt-font-color;
     }
     .mat-form-field-required-marker {
-        color: $alt-font-color;
+      color: $alt-font-color;
     }
     .mat-input-element {
-        color: $alt-font-color;
+      color: $alt-font-color;
     }
   }
 }
@@ -118,7 +116,7 @@
     color: $toolbar-button-icon-fg-color;
   }
 
-  &:hover{
+  &:hover {
     border-bottom: 2px solid $toolbar-button-active-fg-color;
     color: $toolbar-button-active-fg-color;
   }
@@ -141,4 +139,20 @@
   width: $panel-width;
   padding: $panel-padding;
   background-color: $panel-part-bg;
+}
+
+@mixin tabs {
+  .mat-tab-label {
+    color: $alt-font-color;
+    font-weight: 600;
+  }
+
+  .mat-tab-label.mat-tab-label-active {
+    color: $alt-font-color;
+    font-weight: 700;
+  }
+
+  .mat-ink-bar {
+    background-color: $alt-font-color;
+  }
 }
