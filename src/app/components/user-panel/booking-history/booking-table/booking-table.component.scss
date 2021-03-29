@@ -1,0 +1,5 @@
+@import '../../../../meta/mixins-meta.scss';
+
+div.wrapper {
+  @include table();
+}
