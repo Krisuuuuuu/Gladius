@@ -10,53 +10,55 @@
             <ng-container matColumnDef="No.">
              <th mat-header-cell *matHeaderCellDef> No. </th>
               <td mat-cell *matCellDef="let element"> {{element.no}} </td>
-           </ng-container>
-
-           <ng-container matColumnDef="Activity Date">
-            <th mat-header-cell *matHeaderCellDef> Activity Date </th>
-            <td mat-cell *matCellDef="let element"> {{element.activityDate}} </td>
-          </ng-container>
-
-            <ng-container matColumnDef="Activity Day">
-              <th mat-header-cell *matHeaderCellDef> Activity Day </th>
-              <td mat-cell *matCellDef="let element"> {{element.activityDay}} </td>
             </ng-container>
 
-             <ng-container matColumnDef="Activity Hour">
-              <th mat-header-cell *matHeaderCellDef> Activity Hour </th>
-              <td mat-cell *matCellDef="let element"> {{element.activityHour}} </td>
+            <ng-container matColumnDef="Activity Date">
+              <th mat-header-cell *matHeaderCellDef> Activity Date </th>
+              <td mat-cell *matCellDef="let element"> {{element.activityDate}} </td>
             </ng-container>
 
-           <ng-container matColumnDef="Activity Name">
-              <th mat-header-cell *matHeaderCellDef> Activity Name </th>
-              <td mat-cell *matCellDef="let element"> {{element.activityName}} </td>
-           </ng-container>
+              <ng-container matColumnDef="Activity Day">
+                <th mat-header-cell *matHeaderCellDef> Activity Day </th>
+                <td mat-cell *matCellDef="let element"> {{element.activityDay}} </td>
+              </ng-container>
 
-           <ng-container matColumnDef="Booking Status">
-              <th mat-header-cell *matHeaderCellDef> Booking Status </th>
-              <td mat-cell *matCellDef="let element"> {{element.status}} </td>
-           </ng-container>
+              <ng-container matColumnDef="Activity Hour">
+                <th mat-header-cell *matHeaderCellDef> Activity Hour </th>
+                <td mat-cell *matCellDef="let element"> {{element.activityHour}} </td>
+              </ng-container>
 
-            <ng-container matColumnDef="expandedDetail">
-              <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
-                <div class="element-detail"
-                     [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-                <div class="expanded-detail-wrapper">
-                  <p>Gym Name: <span>{{element.gymName}}</span></p>
-                  <p>Booking Date: <span>{{element.bookingDate}}</span></p>
-                </div>
-                <button *ngIf='element.status == "Active"'>Cancel Reservation</button>
-                </div>
-              </td>
-            </ng-container>
+              <ng-container matColumnDef="Activity Name">
+                <th mat-header-cell *matHeaderCellDef> Activity Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.activityName}} </td>
+              </ng-container>
 
-            <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-            <tr mat-row *matRowDef="let element; columns: columnsToDisplay;"
+              <ng-container matColumnDef="Booking Status">
+                <th mat-header-cell *matHeaderCellDef> Booking Status </th>
+                <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="expandedDetail">
+                <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length" class="element-detail-container">
+                  <div class="element-detail"
+                      [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+                    <div class="expanded-detail-wrapper">
+                      <p>Gym Name: <span>{{element.gymName}}</span></p>
+                      <p>Booking Date: <span>{{element.bookingDate}}</span></p>
+                    </div>
+                    <div class="button-wrapper">
+                      <button *ngIf='element.status == "Active"'>Cancel Reservation</button>
+                    </div>
+                  </div>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+              <tr mat-row *matRowDef="let element; columns: columnsToDisplay;"
                 class="element-row"
                 [class.expanded-row]="expandedElement === element"
                 (click)="expandedElement = expandedElement === element ? null : element">
-            </tr>
-            <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
+              </tr>
+              <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
           </table>
         </mat-tab>
         <mat-tab label="Cancelled">

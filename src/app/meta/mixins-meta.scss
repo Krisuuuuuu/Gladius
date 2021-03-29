@@ -36,6 +36,7 @@
   padding-left: 15px;
   background-color: $button-bg-color;
   border: none;
+  border-radius: 3px;
   font-family: "Saira Condensed", Arial, Helvetica, sans-serif;
   font-size: $base-font-size;
   font-weight: 500;
@@ -143,66 +144,106 @@
 
 @mixin tabs {
   .mat-tab-label {
-    color: $alt-font-color;
+    font-size: $tabs-font-size;
     font-weight: 600;
+    color: $tab-font-color;
   }
 
   .mat-tab-label.mat-tab-label-active {
-    color: $alt-font-color;
     font-weight: 700;
+    color: $tab-active-font-color;
   }
 
   .mat-ink-bar {
-    background-color: $alt-font-color;
+    background-color: $tab-ink-bar;
+  }
+}
+
+@mixin alt-button {
+  display: inline-block;
+  padding: 10px 15px;
+  background-color: $button-bg-color;
+  border: none;
+  border-radius: 3px;
+  font-family: "Saira Condensed", Arial, Helvetica, sans-serif;
+  font-size: $base-font-size;
+  font-weight: 500;
+  color: $button-fg-color;
+  text-align: center;
+  transition: 0.3s ease-in;
+  cursor: pointer;
+
+  &:hover {
+    background-color: lighten($button-bg-color, 5%);
   }
 }
 
 @mixin table {
   table {
+    margin: $table-margin;
     width: 100%;
-  }
 
-  tr.detail-row {
-    height: 0;
-  }
+    .mat-header-cell {
+      font-size: $header-font-size;
+      font-weight: 700;
+      color: $header-font;
+    }
 
-  tr.element-row:not(.expanded-row):hover {
-    background: whitesmoke;
-  }
+    .mat-cell {
+      font-weight: 500;
+      color: $cell-font;
+    }
 
-  tr.element-row:not(.expanded-row):active {
-    background: #efefef;
-  }
+    .mat-row {
+      cursor: pointer;
+    }
 
-  .element-row td {
-    border-bottom-width: 0;
-  }
+    tr.detail-row {
+      height: 0;
+      cursor: default;
+    }
 
-  .element-detail {
-    overflow: hidden;
-    display: flex;
-  }
+    tr.element-row:not(.expanded-row):hover {
+      background: whitesmoke;
+    }
 
-  .element-diagram {
-    min-width: 80px;
-    border: 2px solid black;
-    padding: 8px;
-    font-weight: lighter;
-    margin: 8px 0;
-    height: 104px;
-  }
+    tr.element-row:not(.expanded-row):active {
+      background: #efefef;
+    }
 
-  .element-symbol {
-    font-weight: bold;
-    font-size: 40px;
-    line-height: normal;
-  }
+    .element-row td {
+      border-bottom-width: 0;
+    }
 
-  .element-description {
-    padding: 16px;
-  }
+    td.element-detail-container {
+      padding-top: 15px;
+      padding-bottom: 15px;
+    }
 
-  .element-description-attribution {
-    opacity: 0.5;
+    .element-detail {
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+
+      .expanded-detail-wrapper {
+        width: 77%;
+
+        p {
+          font-weight: 700;
+          color: $header-font;
+
+          span {
+            display: inline-block;
+            padding-left: 15px;
+            font-weight: 500;
+            color: $cell-font;
+          }
+        }
+      }
+
+      button {
+        @include alt-button();
+      }
+    }
   }
 }
