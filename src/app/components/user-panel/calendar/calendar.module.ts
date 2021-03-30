@@ -7,11 +7,12 @@ import { CalendarComponent } from './calendar.component';
 import { CalendarHeaderComponent } from './calendar-header/calendar-header.component';
 import { HeaderButtonComponent } from './header-button/header-button.component';
 import { CalendarHourComponent } from './calendar-hour/calendar-hour.component';
+import { CalendarCardComponent } from './calendar-card/calendar-card.component';
 
 
 
 @NgModule({
-  declarations: [CalendarComponent, CalendarHeaderComponent, HeaderButtonComponent, CalendarHourComponent],
+  declarations: [CalendarComponent, CalendarHeaderComponent, HeaderButtonComponent, CalendarHourComponent, CalendarCardComponent],
   imports: [
     CommonModule,
     MatIconModule

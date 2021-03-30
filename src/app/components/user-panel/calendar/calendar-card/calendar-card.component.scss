@@ -1,0 +1,52 @@
+@import "../../../../meta/mixins-meta.scss";
+
+td.card {
+  display: inline-block;
+  height: 168px;
+  width: 182px;
+  margin: 5px;
+  background-color: $card-bg;
+  letter-spacing: 1px;
+  color: $content-active;
+  transition: 0.3s ease-in;
+  cursor: pointer;
+
+  div.content {
+    padding: 15px;
+
+    p {
+      font-size: $calendar-font-size;
+    }
+
+    p.hour {
+      font-weight: 700;
+    }
+
+    div.duration {
+      display: flex;
+      align-items: center;
+
+      .mat-icon {
+        font-weight: 500;
+      }
+
+      span {
+        display: inline-block;
+        margin-left: 5px;
+        font-size: $calendar-font-size;
+      }
+    }
+  }
+
+  &:hover {
+    background-color: $card-hover-bg;
+  }
+}
+
+td.card.active {
+  background-color: $card-active-bg;
+
+  &:hover {
+    background-color: $card-active-hover-bg;
+  }
+}

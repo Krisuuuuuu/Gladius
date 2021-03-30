@@ -25,20 +25,6 @@ section.wrapper {
         display: flex;
         width: 1500px;
         margin: 0 auto;
-
-        td.hour {
-          display: flex;
-          height: 175px;
-          width: 75px;
-          justify-content: center;
-          align-items: center;
-
-          h2 {
-            @include h2(5px);
-            text-align: center;
-            transform: rotate(-90deg);
-          }
-        }
       }
 
       tr.header {
@@ -46,6 +32,7 @@ section.wrapper {
       }
 
       tr.content {
+        height: 180px;
         border-bottom: 3px solid $tr-border;
       }
     }

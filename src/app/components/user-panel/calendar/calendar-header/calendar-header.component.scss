@@ -2,8 +2,8 @@
 @import '../../../../meta/mixins-meta.scss';
 
 th {
-  width: 200px;
-  margin: 0 2px;
+  width: $calendar-cell-width;
+  margin: 0 5px;
   padding: 10px 0;
 
   h2{
