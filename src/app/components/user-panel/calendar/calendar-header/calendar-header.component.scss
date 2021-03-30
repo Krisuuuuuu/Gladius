@@ -1,0 +1,13 @@
+@import '../../../../meta/theme-meta.scss';
+@import '../../../../meta/mixins-meta.scss';
+
+th {
+  width: 200px;
+  margin: 0 2px;
+  padding: 10px 0;
+  border-bottom: 3px solid $alt-font-color;
+
+  h2{
+    @include alt-h2(5px);
+  }
+}
