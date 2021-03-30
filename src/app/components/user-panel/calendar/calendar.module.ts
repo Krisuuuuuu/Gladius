@@ -5,11 +5,12 @@ import { MatIconModule } from '@angular/material/icon';
 
 import { CalendarComponent } from './calendar.component';
 import { CalendarHeaderComponent } from './calendar-header/calendar-header.component';
+import { HeaderButtonComponent } from './header-button/header-button.component';
 
 
 
 @NgModule({
-  declarations: [CalendarComponent, CalendarHeaderComponent],
+  declarations: [CalendarComponent, CalendarHeaderComponent, HeaderButtonComponent],
   imports: [
     CommonModule,
     MatIconModule
