@@ -7,6 +7,7 @@ import { UserProfileModuleModule } from './user-profile/user-profile-module.modu
 import { GymSelectionModule } from './gym-selection/gym-selection.module';
 import { BookingHistoryModule } from './booking-history/booking-history.module';
 import { CalendarModule } from './calendar/calendar.module';
+import { DialogsModule } from '../dialogs/dialogs.module';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { CalendarModule } from './calendar/calendar.module';
     GymSelectionModule,
     BookingHistoryModule,
     CalendarModule,
+    DialogsModule
   ],
   exports: [
     UserPanelComponent

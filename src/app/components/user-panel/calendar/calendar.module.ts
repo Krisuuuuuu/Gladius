@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { MatIconModule } from '@angular/material/icon';
+import { DialogsModule } from '../../dialogs/dialogs.module';
 
 import { CalendarComponent } from './calendar.component';
 import { CalendarHeaderComponent } from './calendar-header/calendar-header.component';
@@ -15,7 +16,8 @@ import { CalendarCardComponent } from './calendar-card/calendar-card.component';
   declarations: [CalendarComponent, CalendarHeaderComponent, HeaderButtonComponent, CalendarHourComponent, CalendarCardComponent],
   imports: [
     CommonModule,
-    MatIconModule
+    MatIconModule,
+    DialogsModule
   ],
   exports: [CalendarComponent]
 })

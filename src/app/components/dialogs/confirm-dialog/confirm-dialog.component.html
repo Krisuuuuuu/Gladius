@@ -1,0 +1,10 @@
+<div class="wrapper">
+  <h2 mat-dialog-title>Confirm</h2>
+  <mat-dialog-content class="mat-typography">
+    <p>{{text}}</p>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button [mat-dialog-close]="false" class="reject">Cancel</button>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Agree</button>
+  </mat-dialog-actions>
+</div>

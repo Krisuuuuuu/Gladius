@@ -1,0 +1,28 @@
+@import "../../../meta/mixins-meta.scss";
+@import "../../../meta/theme-meta.scss";
+
+div.wrapper {
+  height: $dialog-height;
+  width: $dialog-width;
+
+  h2 {
+    @include h2(25px);
+  }
+
+  p {
+    @include dialog-p(15px);
+  }
+
+  button {
+    @include dialog-button();
+  }
+
+  button.reject {
+    margin-right: 5px;
+    background-color: $dialog-button-bg;
+
+    &:hover {
+      background-color: $toolbar-button-active-fg-color;
+    }
+  }
+}

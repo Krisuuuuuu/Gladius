@@ -49,6 +49,10 @@
   &:hover {
     background-color: lighten($button-bg-color, 5%);
   }
+
+  &:focus {
+    outline: none !important;
+  }
 }
 
 @mixin form-field($input-width, $input-height, $display, $margin) {
@@ -122,6 +126,10 @@
     border-bottom: 2px solid $toolbar-button-active-fg-color;
     color: $toolbar-button-active-fg-color;
   }
+
+  &:focus {
+    outline: none !important;
+  }
 }
 
 @mixin toolbar-button-active {
@@ -176,6 +184,10 @@
 
   &:hover {
     background-color: lighten($button-bg-color, 5%);
+  }
+
+  &:focus {
+    outline: none !important;
   }
 }
 
@@ -297,5 +309,40 @@
 
   &:hover {
     background-color: $round-button-active-bg;
+  }
+
+  &:focus {
+    outline: none !important;
+  }
+}
+
+@mixin dialog-p($margin-bottom) {
+  margin-bottom: $margin-bottom;
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
+  font-size: $dialog-p-font-size;
+  font-weight: 500;
+  color: $p-font;
+}
+
+@mixin dialog-button {
+  display: inline-block;
+  padding: 10px 15px;
+  background-color: $button-bg-color;
+  border: none;
+  border-radius: 3px;
+  font-family: "Saira Condensed", Arial, Helvetica, sans-serif;
+  font-size: $base-font-size;
+  font-weight: 500;
+  color: $button-fg-color;
+  text-align: center;
+  transition: 0.3s ease-in;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $toolbar-button-active-fg-color;
+  }
+
+  &:focus {
+    outline: none !important;
   }
 }
