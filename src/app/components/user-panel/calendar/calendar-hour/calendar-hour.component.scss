@@ -1,0 +1,15 @@
+@import '../../../../meta/mixins-meta.scss';
+
+td.hour {
+  display: flex;
+  height: 175px;
+  width: 75px;
+  justify-content: center;
+  align-items: center;
+
+  h2 {
+    @include h2(5px);
+    text-align: center;
+    transform: rotate(-90deg);
+  }
+}

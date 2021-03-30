@@ -1,10 +1,13 @@
 <section class="wrapper">
   <section class="layer">
     <div class="calendar">
-      <tr>
+      <tr class="header">
         <app-header-button [isLeft]='true'></app-header-button>
         <app-calendar-header *ngFor="let day of days" [day]='day'></app-calendar-header>
         <app-header-button [isLeft]='false'></app-header-button>
+      </tr>
+      <tr *ngFor="let hour of hours" class="content">
+        <app-calendar-hour [hour]='hour'></app-calendar-hour>
       </tr>
     </div>
   </section>
