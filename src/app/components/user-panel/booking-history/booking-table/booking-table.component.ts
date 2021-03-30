@@ -32,7 +32,7 @@ export interface TableElement {
 export class BookingTableComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  columnsToDisplay: string[] = ["No.", "Activity Date", "Activity Day", "Activity Hour", "Activity Name", "Booking Status"];
+  columnsToDisplay: string[] = ["No.", "Date", "Day", "Hour", "Activity Name", "Booking Status"];
   expandedElement: TableElement | null;
   data: TableElement[] = [
     {

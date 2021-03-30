@@ -1,0 +1,14 @@
+<section class="wrapper">
+  <section class="layer">
+    <div class="calendar">
+      <tr>
+        <th class="th-button"><button><mat-icon>chevron_left</mat-icon></button></th>
+        <th *ngFor="let day of days">
+          <h2>{{day}}</h2>
+          <p>00-00-0000</p>
+        </th>
+        <th class="th-button"><button><mat-icon>chevron_right</mat-icon></button></th>
+      </tr>
+    </div>
+  </section>
+</section>

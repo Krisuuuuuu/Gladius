@@ -1,0 +1,56 @@
+@import "../../../meta/mixins-meta.scss";
+
+section.wrapper {
+  position: relative;
+  width: 100%;
+  background-image: url(../../../../assets/images/calendar_bgc.jpg);
+  @include background-image();
+  background-position: center -30%;
+
+  section.layer {
+    min-height: $calendar-height;
+    width: 100vw;
+    background-color: $calendar-wrapper-bg;
+
+    div.calendar {
+      background-color: $calendar-bg;
+      position: absolute;
+      top: 15%;
+      left: 50%;
+      width: 100vw;
+      padding: 30px 0;
+      transform: translate(-50%, -50%);
+
+
+      tr {
+        display: flex;
+        width: 1500px;
+        margin: 0 auto;
+
+        th {
+          width: 200px;
+          margin: 0 2px;
+          padding: 10px 0;
+          border-bottom: 3px solid $alt-font-color;
+
+          h2{
+            @include alt-h2(5px);
+          }
+        }
+
+        th.th-button {
+          display: flex;
+          width: 75px;
+          margin: 0 auto;
+          border: none;
+          justify-content: space-around;
+          align-items: center;
+
+          button {
+            @include round-button();
+          }
+        }
+      }
+    }
+  }
+}

@@ -230,9 +230,11 @@
       overflow: hidden;
 
       .expanded-detail-wrapper {
-        width: 77%;
+        width: 79%;
 
         p {
+          padding-left: 35px;
+          text-align: left;
           font-weight: 700;
           color: $header-font;
 
@@ -268,5 +270,32 @@
 
   ::ng-deep .mat-select-value {
     color: $paginator-color;
+  }
+}
+
+@mixin alt-h2($margin-bottom) {
+  margin-bottom: $margin-bottom;
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
+  font-size: $h2-font-size;
+  font-weight: 600;
+  color: $alt-font-color;
+}
+
+@mixin round-button() {
+  display: inline-block;
+  padding: 10px 15px;
+  background-color: $button-bg-color;
+  border: none;
+  border-radius: 50%;
+  font-family: "Saira Condensed", Arial, Helvetica, sans-serif;
+  font-size: $base-font-size;
+  font-weight: 500;
+  color: $button-fg-color;
+  text-align: center;
+  transition: 0.3s ease-in;
+  cursor: pointer;
+
+  &:hover {
+    background-color: lighten($button-bg-color, 5%);
   }
 }
