@@ -83,7 +83,7 @@
   cursor: pointer;
 
   &:hover {
-    background-color: lighten($button-bg-color, 5%);
+    background-color: $all-primary-2;
   }
 
   &:focus {

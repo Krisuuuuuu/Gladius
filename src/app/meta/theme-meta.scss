@@ -1,37 +1,54 @@
+//colors
+$all-primary-1: #FF5614;
+$all-primary-2: #0599e3;
+
+$all-secondary-1: #E8F0FE;
+$all-secondary-2: #fff;
+
+$fg-primary-1: #000;
+$fg-primary-2: #0F1E44;
+
+$fg-secondary-1: #5B7D97;
+
+$bg-primary-1: green;
+$bg-primary-2: #e23023;
+
+$bg-secondary-1: rgb(232, 239, 243, 0.5);
+
 //font
-$base-font-color: #000;
-$alt-font-color: #0F1E44;
+$base-font-color: $fg-primary-1;
+$alt-font-color: $fg-primary-2;
 
 //inputs
-$input-bg-color: #E8F0FE;
+$input-bg-color: $all-secondary-1;
 
 //buttons
-$button-bg-color: #FF5614;
-$button-fg-color: #fff;
+$button-bg-color: $all-primary-1;
+$button-fg-color: $all-secondary-2;
 
 //toolbar
-$toolbar-bg-color: #fff;
+$toolbar-bg-color: $all-secondary-2;
 $toolbar-border-color: #E8E8E8;
 
 //toolbar buttons
-$toolbar-button-fg-color: #FF5614;
-$toolbar-button-icon-fg-color: #5B7D97;
-$toolbar-button-active-fg-color: #0599e3;
+$toolbar-button-fg-color: $all-primary-1;
+$toolbar-button-icon-fg-color: $fg-secondary-1;
+$toolbar-button-active-fg-color: $all-primary-2;
 
 //panel background
 $panel-wrapper-bg: rgb(232, 239, 243, 0.15);
-$panel-part-bg: rgb(232, 239, 243, 0.5);
-$calendar-wrapper-bg: rgb(232, 239, 243, 0.5);
-$calendar-bg: rgb(232, 239, 243, 0.5);
+$panel-part-bg: $bg-secondary-1;
+$calendar-wrapper-bg: $bg-secondary-1;
+$calendar-bg: $bg-secondary-1;
 
 //tabs
-$tab-font-color: #0F1E44;
-$tab-active-font-color: #0F1E44;
-$tab-ink-bar:#0F1E44;
+$tab-font-color: $fg-primary-2;
+$tab-active-font-color: $fg-primary-2;
+$tab-ink-bar:$fg-primary-2;
 
 //table
-$header-font: #0F1E44;
-$cell-font: #5B7D97;
+$header-font: $fg-primary-2;
+$cell-font: $fg-secondary-1;
 $table-bg-color: rgba(255, 255, 255, 0.4);
 
 //paginator
@@ -39,17 +56,17 @@ $paginator-color: $base-font-color;
 $paginator-bg-color: rgba(255, 255, 255, 0.85);
 
 //calendar
-$round-button-bg: #FF5614;
-$round-button-active-bg: #0599e3;
-$tr-header-border: #0F1E44;
+$round-button-bg: $all-primary-1;
+$round-button-active-bg: $all-primary-2;
+$tr-header-border: $fg-primary-2;
 $tr-border: gray;
-$card-bg: #FF5614;
-$card-hover-bg: #0599e3;
-$card-active-bg: green;
-$card-active-hover-bg: #e23023;
-$content-active: #E8F0FE;
+$card-bg: $all-primary-1;
+$card-hover-bg: $all-primary-2;
+$card-active-bg: $bg-primary-1;
+$card-active-hover-bg: $bg-primary-2;
+$content-active: $all-secondary-1;
 
 //dialog
-$p-font: #000;
+$p-font: $fg-primary-1;
 $dialog-button-bg: darkgray;
 $dialog-button-bg-hover: #444;
