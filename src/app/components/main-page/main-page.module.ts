@@ -5,8 +5,9 @@ import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
-import { MainPageComponent } from './main-page.component';
+
 import { SignInPartComponent } from './sign-in-part/sign-in-part.component';
+import { MainPageComponent } from './main-page/main-page.component';
 
 
 
