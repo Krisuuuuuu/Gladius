@@ -1,11 +1,11 @@
-@import '../../../meta/theme-meta.scss';
-@import '../../../meta/mixins-meta.scss';
+@import '../../../../meta/theme-meta.scss';
+@import '../../../../meta/mixins-meta.scss';
 
 section.wrapper {
   position: relative;
   min-height: $booking-history-height;
   width: 100%;
-  background-image: url(../../../../assets/images/4.jpg);
+  background-image: url(../../../../../assets/images/4.jpg);
   @include background-image();
   background-position: center center;
 
