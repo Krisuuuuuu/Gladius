@@ -8,7 +8,7 @@ import { BookingHistoryModule } from './booking-history/booking-history.module';
 import { CalendarModule } from './calendar/calendar.module';
 import { DialogsModule } from '../dialogs/dialogs.module';
 
-import { UserPanelComponent } from './user-panel.component';
+import { UserPanelComponent } from './user-panel/user-panel.component';
 
 
 @NgModule({
