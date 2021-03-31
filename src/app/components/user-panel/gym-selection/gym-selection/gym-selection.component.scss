@@ -1,8 +1,8 @@
-@import '../../../meta/theme-meta.scss';
-@import '../../../meta/mixins-meta.scss';
+@import '../../../../meta/theme-meta.scss';
+@import '../../../../meta/mixins-meta.scss';
 
 section.wrapper {
-  background-image: url(../../../../assets//images//gyms_background.jpg);
+  background-image: url(../../../../../assets//images//gyms_background.jpg);
   @include background-image();
   background-position: center 80%;
 
