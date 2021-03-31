@@ -1,10 +1,28 @@
 @import "../meta/size-meta.scss";
 @import "../meta/theme-meta.scss";
 
+//General
+
 @mixin background-image {
   background-size: cover;
   background-attachment: fixed;
 }
+
+@mixin absolute {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin panel {
+  @include absolute();
+  width: $panel-width;
+  padding: $panel-padding;
+  background-color: $panel-part-bg;
+}
+
+//Text
 
 @mixin h1($margin-bottom) {
   margin-bottom: $margin-bottom;
@@ -22,6 +40,14 @@
   color: $alt-font-color;
 }
 
+@mixin alt-h2($margin-bottom) {
+  margin-bottom: $margin-bottom;
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
+  font-size: $h2-font-size;
+  font-weight: 600;
+  color: $alt-font-color;
+}
+
 @mixin p($margin-bottom) {
   margin-bottom: $margin-bottom;
   font-family: "Roboto", Arial, Helvetica, sans-serif;
@@ -29,6 +55,16 @@
   font-weight: 600;
   color: $alt-font-color;
 }
+
+@mixin dialog-p($margin-bottom) {
+  margin-bottom: $margin-bottom;
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
+  font-size: $dialog-p-font-size;
+  font-weight: 500;
+  color: $p-font;
+}
+
+//buttons
 
 @mixin button($input-width, $input-height, $display) {
   display: $display;
@@ -54,6 +90,111 @@
     outline: none !important;
   }
 }
+
+@mixin toolbar-button {
+  padding: $toolbar-button-padding;
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid $toolbar-bg-color;
+  font-family: "Saira Condensed", Arial, Helvetica, sans-serif;
+  font-size: $toolbar-button-font-size;
+  font-weight: 700;
+  color: $toolbar-button-fg-color;
+  transition: 0.3s linear;
+  cursor: pointer;
+
+  .mat-icon {
+    display: inline-block;
+    padding-right: 27px;
+    vertical-align: middle;
+    color: $toolbar-button-icon-fg-color;
+  }
+
+  &:hover {
+    border-bottom: 2px solid $toolbar-button-active-fg-color;
+    color: $toolbar-button-active-fg-color;
+  }
+
+  &:focus {
+    outline: none !important;
+  }
+}
+
+@mixin toolbar-button-active {
+  border-bottom: 2px solid $toolbar-button-active-fg-color;
+  color: $toolbar-button-active-fg-color;
+}
+
+@mixin alt-button {
+  display: inline-block;
+  padding: 10px 15px;
+  background-color: $button-bg-color;
+  border: none;
+  border-radius: 3px;
+  font-family: "Saira Condensed", Arial, Helvetica, sans-serif;
+  font-size: $base-font-size;
+  font-weight: 500;
+  color: $button-fg-color;
+  text-align: center;
+  transition: 0.3s ease-in;
+  cursor: pointer;
+
+  &:hover {
+    background-color: lighten($button-bg-color, 5%);
+  }
+
+  &:focus {
+    outline: none !important;
+  }
+}
+
+@mixin round-button() {
+  display: inline-block;
+  padding: 10px 15px;
+  background-color: $round-button-bg;
+  border: none;
+  border-radius: 50%;
+  font-family: "Saira Condensed", Arial, Helvetica, sans-serif;
+  font-size: $base-font-size;
+  font-weight: 500;
+  color: $button-fg-color;
+  text-align: center;
+  transition: 0.3s ease-in;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $round-button-active-bg;
+  }
+
+  &:focus {
+    outline: none !important;
+  }
+}
+
+@mixin dialog-button {
+  display: inline-block;
+  padding: 10px 15px;
+  background-color: $button-bg-color;
+  border: none;
+  border-radius: 3px;
+  font-family: "Saira Condensed", Arial, Helvetica, sans-serif;
+  font-size: $base-font-size;
+  font-weight: 500;
+  color: $button-fg-color;
+  text-align: center;
+  transition: 0.3s ease-in;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $toolbar-button-active-fg-color;
+  }
+
+  &:focus {
+    outline: none !important;
+  }
+}
+
+//Features
 
 @mixin form-field($input-width, $input-height, $display, $margin) {
   ::ng-deep .mat-form-field {
@@ -103,54 +244,6 @@
   }
 }
 
-@mixin toolbar-button {
-  padding: $toolbar-button-padding;
-  background-color: transparent;
-  border: none;
-  border-bottom: 2px solid $toolbar-bg-color;
-  font-family: "Saira Condensed", Arial, Helvetica, sans-serif;
-  font-size: $toolbar-button-font-size;
-  font-weight: 700;
-  color: $toolbar-button-fg-color;
-  transition: 0.3s linear;
-  cursor: pointer;
-
-  .mat-icon {
-    display: inline-block;
-    padding-right: 27px;
-    vertical-align: middle;
-    color: $toolbar-button-icon-fg-color;
-  }
-
-  &:hover {
-    border-bottom: 2px solid $toolbar-button-active-fg-color;
-    color: $toolbar-button-active-fg-color;
-  }
-
-  &:focus {
-    outline: none !important;
-  }
-}
-
-@mixin toolbar-button-active {
-  border-bottom: 2px solid $toolbar-button-active-fg-color;
-  color: $toolbar-button-active-fg-color;
-}
-
-@mixin absolute {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-@mixin panel {
-  @include absolute();
-  width: $panel-width;
-  padding: $panel-padding;
-  background-color: $panel-part-bg;
-}
-
 @mixin tabs {
   .mat-tab-label {
     font-size: $tabs-font-size;
@@ -165,29 +258,6 @@
 
   .mat-ink-bar {
     background-color: $tab-ink-bar;
-  }
-}
-
-@mixin alt-button {
-  display: inline-block;
-  padding: 10px 15px;
-  background-color: $button-bg-color;
-  border: none;
-  border-radius: 3px;
-  font-family: "Saira Condensed", Arial, Helvetica, sans-serif;
-  font-size: $base-font-size;
-  font-weight: 500;
-  color: $button-fg-color;
-  text-align: center;
-  transition: 0.3s ease-in;
-  cursor: pointer;
-
-  &:hover {
-    background-color: lighten($button-bg-color, 5%);
-  }
-
-  &:focus {
-    outline: none !important;
   }
 }
 
@@ -285,64 +355,10 @@
   }
 }
 
-@mixin alt-h2($margin-bottom) {
-  margin-bottom: $margin-bottom;
-  font-family: "Roboto", Arial, Helvetica, sans-serif;
-  font-size: $h2-font-size;
-  font-weight: 600;
-  color: $alt-font-color;
-}
 
-@mixin round-button() {
-  display: inline-block;
-  padding: 10px 15px;
-  background-color: $round-button-bg;
-  border: none;
-  border-radius: 50%;
-  font-family: "Saira Condensed", Arial, Helvetica, sans-serif;
-  font-size: $base-font-size;
-  font-weight: 500;
-  color: $button-fg-color;
-  text-align: center;
-  transition: 0.3s ease-in;
-  cursor: pointer;
 
-  &:hover {
-    background-color: $round-button-active-bg;
-  }
 
-  &:focus {
-    outline: none !important;
-  }
-}
 
-@mixin dialog-p($margin-bottom) {
-  margin-bottom: $margin-bottom;
-  font-family: "Roboto", Arial, Helvetica, sans-serif;
-  font-size: $dialog-p-font-size;
-  font-weight: 500;
-  color: $p-font;
-}
 
-@mixin dialog-button {
-  display: inline-block;
-  padding: 10px 15px;
-  background-color: $button-bg-color;
-  border: none;
-  border-radius: 3px;
-  font-family: "Saira Condensed", Arial, Helvetica, sans-serif;
-  font-size: $base-font-size;
-  font-weight: 500;
-  color: $button-fg-color;
-  text-align: center;
-  transition: 0.3s ease-in;
-  cursor: pointer;
 
-  &:hover {
-    background-color: $toolbar-button-active-fg-color;
-  }
 
-  &:focus {
-    outline: none !important;
-  }
-}
