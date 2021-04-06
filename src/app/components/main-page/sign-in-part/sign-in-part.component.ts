@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-in-part',
@@ -10,9 +11,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 export class SignInPartComponent implements OnInit {
   signInForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
-
-  }
+  constructor(private formBuilder: FormBuilder, private router: Router) {}
 
   ngOnInit(): void {
     this.signInForm = this.formBuilder.group({
@@ -21,8 +20,7 @@ export class SignInPartComponent implements OnInit {
     })
   }
 
-  save(): void {
-
+  signIn(): void {
+    this.router.navigateByUrl('panel');
   }
-
 }
