@@ -1,6 +1,6 @@
 @import '../../../../utils/mixins-meta.scss';
 
-section.wrapper {
+section.booking-history-wrapper {
   position: relative;
   min-height: $booking-history-height;
   width: 100%;
@@ -8,7 +8,7 @@ section.wrapper {
   @include background-image();
   background-position: center center;
 
-  section.layer {
+  section.booking-history-layer {
     min-height: 100vh;
     width: 100vw;
     background-color: $panel-wrapper-bg;

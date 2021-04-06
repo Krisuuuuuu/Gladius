@@ -1,11 +1,11 @@
 @import '../../../../utils/mixins-meta.scss';
 
-section.layer {
+section.client-info-layer {
   position: relative;
   min-height: $client-info-height;
   width: 100%;
 
-  section.wrapper {
+  section.client-info-wrapper {
     @include panel();
 
     h1 {

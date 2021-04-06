@@ -23,7 +23,7 @@ div.gym-card-wrapper {
     border-bottom: 4px solid $toolbar-button-fg-color;
   }
 
-  div.layer {
+  div.gym-card-layer {
     @include absolute();
     height: 100%;
     width: 100%;
