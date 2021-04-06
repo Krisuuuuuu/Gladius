@@ -1,6 +1,7 @@
 <section class="wrapper">
   <section class="layer">
-    <div class="calendar">
+    <app-calendar-panel></app-calendar-panel>
+    <div class="calendar animate__animated animate__fadeIn">
       <tr class="header">
         <app-header-button [isLeft]='true'></app-header-button>
         <app-calendar-header *ngFor="let day of days" [day]='day'></app-calendar-header>

@@ -1,0 +1,27 @@
+<div class="wrapper">
+  <div class="header">
+    <h1>Book classes in: <span>My Gym</span></h1>
+    <button>Change Club</button>
+  </div>
+  <div class="content">
+    <mat-form-field appearance="fill">
+      <mat-label>Area</mat-label>
+      <mat-select>
+        <mat-option *ngFor='let area of areas' [value]='area'>{{area}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Classes</mat-label>
+      <mat-select>
+        <mat-option *ngFor='let class of classes' [value]='class'>{{class}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Trainer</mat-label>
+      <mat-select>
+        <mat-option *ngFor='let trainer of trainers' [value]='trainer'>{{trainer}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button>Reset</button>
+  </div>
+</div>

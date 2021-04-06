@@ -1,0 +1,42 @@
+@import "../../../../utils/mixins-meta.scss";
+
+div.wrapper {
+  width: 100vw;
+  padding: $panel-padding;
+  background-color: $bg-secondary-1;
+
+  div.header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+
+    h1{
+      @include h1(0);
+      display: inline-block;
+
+      span {
+        margin-left: 10px;
+        font-weight: 500;
+        color: $fg-primary-1;
+      }
+    }
+
+    button {
+      @include dialog-button();
+      margin-left: 15px;
+    }
+  }
+
+  div.content {
+    display: flex;
+    align-items: center;
+    width: 100vw;
+
+    @include form-field($select-width, $select-height, inline-block, 0 15px 0 0);
+
+    button {
+      @include dialog-button();
+      margin-bottom: 1.34375em;
+    }
+  }
+}

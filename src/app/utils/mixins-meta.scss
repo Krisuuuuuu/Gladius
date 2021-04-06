@@ -197,7 +197,7 @@
 //Features
 
 @mixin form-field($input-width, $input-height, $display, $margin) {
-  ::ng-deep .mat-form-field {
+  .mat-form-field {
     margin: $margin;
     display: $display;
     width: $input-width;
@@ -228,7 +228,7 @@
     }
   }
 
-  ::ng-deep .mat-form-field.mat-focused {
+  .mat-form-field.mat-focused {
     .mat-form-field-label {
       color: $alt-font-color;
     }
@@ -354,11 +354,3 @@
     color: $paginator-color;
   }
 }
-
-
-
-
-
-
-
-
