@@ -1,6 +1,6 @@
 @import '../../../../utils/mixins-meta.scss';
 
-div.wrapper {
+div.booking-table-wrapper {
   @include table();
   @include paginator();
 }
