@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { ClientInfoComponent } from './client-info/client-info.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { AppRoutingModule } from 'src/app/routing/app-routing.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     CommonModule,
     MatFormFieldModule,
     MatInputModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AppRoutingModule
   ],
   exports: [
     UserProfileComponent

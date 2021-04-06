@@ -9,6 +9,7 @@ import { CalendarModule } from './calendar/calendar.module';
 import { DialogsModule } from '../dialogs/dialogs.module';
 
 import { UserPanelComponent } from './user-panel/user-panel.component';
+import { AppRoutingModule } from 'src/app/routing/app-routing.module';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { UserPanelComponent } from './user-panel/user-panel.component';
     GymSelectionModule,
     BookingHistoryModule,
     CalendarModule,
-    DialogsModule
+    DialogsModule,
+    AppRoutingModule
   ],
   exports: [
     UserPanelComponent
