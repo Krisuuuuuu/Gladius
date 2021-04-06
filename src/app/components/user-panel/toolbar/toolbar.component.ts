@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-toolbar',
@@ -7,9 +8,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ToolbarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
 
+  signOut(): void {
+    this.router.navigateByUrl("");
+  }
+
+  redirectToGymSelection(): void {
+    this.router.navigateByUrl("panel");
+  }
+
+  redirectToCalendar(): void {
+    this.router.navigateByUrl("panel/calendar");
+  }
+
+  redirectToHistory(): void {
+    this.router.navigateByUrl("panel/history");
+  }
+
+  reditectToEditing(): void {
+    this.router.navigateByUrl("panel/edit/profile");
+  }
 }

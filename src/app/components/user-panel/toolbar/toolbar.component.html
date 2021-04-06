@@ -7,23 +7,23 @@
         </div>
       </section>
       <section class="right-container">
-        <button class='toolbar-button'>
+        <button class='toolbar-button' (click)="this.signOut()">
           <mat-icon>power_settings_new</mat-icon> Sign out
         </button>
       </section>
     </mat-toolbar-row>
     <mat-toolbar-row class="second">
       <section class="center-container">
-        <button class='toolbar-button'>
+        <button class='toolbar-button' (click)="this.redirectToGymSelection()">
           <mat-icon>room</mat-icon> My Gym
         </button>
-        <button class='toolbar-button'>
+        <button class='toolbar-button' (click)="this.redirectToCalendar()">
           <mat-icon>lock</mat-icon> Book
         </button>
-        <button class='toolbar-button'>
+        <button class='toolbar-button' (click)="this.redirectToHistory()">
           <mat-icon>today</mat-icon> Booking History
         </button>
-        <button class='toolbar-button'>
+        <button class='toolbar-button' (click)="this.reditectToEditing()">
           <mat-icon>account_circle</mat-icon> Profile
         </button>
       </section>

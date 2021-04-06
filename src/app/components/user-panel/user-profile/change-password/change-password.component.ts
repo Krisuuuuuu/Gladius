@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-change-password',
@@ -9,8 +10,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 export class ChangePasswordComponent implements OnInit {
   passwordForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
-   }
+  constructor(private formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
     this.passwordForm = this.formBuilder.group({
@@ -20,7 +20,9 @@ export class ChangePasswordComponent implements OnInit {
     });
   }
 
-  save(): void {
+  save(): void { }
 
+  redirectToEditProfile(): void {
+    this.router.navigateByUrl("panel/edit/profile");
   }
 }

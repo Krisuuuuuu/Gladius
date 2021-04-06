@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-client-info',
@@ -9,9 +10,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 export class ClientInfoComponent implements OnInit {
   clientInfoForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
-
-  }
+  constructor(private formBuilder: FormBuilder, private router: Router) {}
 
   ngOnInit(): void {
     this.clientInfoForm = this.formBuilder.group({
@@ -26,5 +25,9 @@ export class ClientInfoComponent implements OnInit {
 
   save(): void {
 
+  }
+
+  changePassword(): void {
+    this.router.navigateByUrl('panel/edit/password');
   }
 }
