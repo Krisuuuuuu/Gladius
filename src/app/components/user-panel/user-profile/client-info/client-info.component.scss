@@ -1,4 +1,4 @@
-@import '../../../../utils/mixins-meta.scss';
+@import './../../../../utils/mixins-meta.scss';
 
 section.client-info-layer {
   position: relative;
@@ -16,22 +16,25 @@ section.client-info-layer {
       @include h2(30px);
     }
 
-    div.info-set {
-      margin: 10px 0;
 
-      p{
-        @include p(20px);
-      }
     }
 
     form {
-      @include form-field($input-width, $input-height, inline-block, 0 15px 0 0);
-    }
 
-    button{
-      @include button($input-width, $input-height, block);
-      margin: 20px auto;
+      div.info-set {
+        margin: 10px 0;
+
+        @include form-field($input-width, $input-height, inline-block, 0 15px 0 0);
+
+        p{
+          @include p(20px);
+        }
     }
+  }
+
+  button{
+    @include button($input-width, $input-height, block);
+    margin: 20px auto;
   }
 }
 

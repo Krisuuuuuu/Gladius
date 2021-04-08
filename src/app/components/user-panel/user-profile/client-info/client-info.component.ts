@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-client-info',
   templateUrl: './client-info.component.html',
-  styleUrls: ['./client-info.component.scss']
+  styleUrls: ['./client-info.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class ClientInfoComponent implements OnInit {
   clientInfoForm: FormGroup;
