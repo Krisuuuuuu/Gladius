@@ -26,6 +26,10 @@ section.client-info-layer {
 
         @include form-field($input-width, $input-height, inline-block, 0 15px 0 0);
 
+        .mat-icon {
+          color: $fg-primary-2;
+        }
+
         p{
           @include p(20px);
         }

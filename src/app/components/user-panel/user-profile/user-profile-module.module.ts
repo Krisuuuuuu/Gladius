@@ -9,6 +9,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { ClientInfoComponent } from './client-info/client-info.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { AppRoutingModule } from 'src/app/routing/app-routing.module';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { AppRoutingModule } from 'src/app/routing/app-routing.module';
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatIconModule
   ],
   exports: [
     UserProfileComponent
