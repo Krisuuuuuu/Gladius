@@ -8,7 +8,7 @@ import { ConfirmDialogComponent } from 'src/app/components/dialogs/confirm-dialo
   styleUrls: ['./calendar-card.component.scss']
 })
 export class CalendarCardComponent implements OnInit {
-  isBooked: boolean = true;
+  isBooked: boolean = false;
 
   constructor(public dialog: MatDialog) { }
 
