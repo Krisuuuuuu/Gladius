@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainPageModule } from './components/main-page/main-page.module';
 import { UserPanelModule } from './components/user-panel/user-panel.module';
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { UserPanelModule } from './components/user-panel/user-panel.module';
     AppRoutingModule,
     BrowserAnimationsModule,
     MainPageModule,
-    UserPanelModule
+    UserPanelModule,
+    StoreModule.forRoot({}, {})
   ],
   providers: [],
   bootstrap: [AppComponent]
