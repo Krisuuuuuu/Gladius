@@ -7,4 +7,5 @@ export interface IGym {
   postal_code: string;
   open_hour: string;
   close_hour: string;
+  thumbnail: string;
 }
