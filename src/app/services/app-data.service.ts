@@ -11,7 +11,7 @@ import { IGym } from '../model/gym-selection/IGym';
 @Injectable({
   providedIn: 'root'
 })
-export class AppDataServiceService {
+export class AppDataService {
 
   private baseUrl: string = environment.baseUrl;
 
@@ -24,13 +24,13 @@ export class AppDataServiceService {
   }
 
   getGymInfo(gymId: string): Observable<IGymInfo> {
-    const url: string = `${this.baseUrl}/${gymId}/info/`;
+    const url: string = `${this.baseUrl}/gym/${gymId}/info/`;
 
     return this.httpClient.get<IGymInfo>(url);
   }
 
-  getActivitiesForWeek(startDate: string): Observable<ICalendarData> {
-    const url: string = `${this.baseUrl}/reservation/availableThisWeek/${startDate}`;
+  getActivitiesForWeek(startDate: string, endDate: string): Observable<ICalendarData> {
+    const url: string = `${this.baseUrl}/reservation/${startDate}/${endDate}/`;
 
     return this.httpClient.get<ICalendarData>(url);
   }

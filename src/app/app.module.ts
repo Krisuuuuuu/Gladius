@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainPageModule } from './components/main-page/main-page.module';
 import { UserPanelModule } from './components/user-panel/user-panel.module';
 import { StoreModule } from '@ngrx/store';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { StoreModule } from '@ngrx/store';
     BrowserAnimationsModule,
     MainPageModule,
     UserPanelModule,
+    HttpClientModule,
     StoreModule.forRoot({}, {})
   ],
   providers: [],

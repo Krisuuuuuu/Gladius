@@ -9,7 +9,7 @@ import { IUserProfile } from '../model/user-profile/IUserProfile';
 @Injectable({
   providedIn: 'root'
 })
-export class UserServiceService {
+export class UserService {
 
   private baseUrl: string = environment.baseUrl;
 
@@ -22,19 +22,19 @@ export class UserServiceService {
   }
 
   getUserProfile(email: string): Observable<IUserProfile> {
-    const url: string = `${this.baseUrl}/client/${email}/`;
+    const url: string = `${this.baseUrl}/client/`;
 
     return this.httpClient.get<IUserProfile>(url);
   }
 
   putDataToEditUserProfile(email: string, userProfile: IUserProfile): Observable<IUserProfile> {
-    const url: string = `${this.baseUrl}/client/${email}/edit`;
+    const url: string = `${this.baseUrl}/client/edit`;
 
     return this.httpClient.put<IUserProfile>(url, userProfile);
   }
 
   putDataToEditUserPassword(email: string, changePassword: IChangePassword): Observable<IChangePassword> {
-    const url: string = `${this.baseUrl}/client/${email}/editPassword`;
+    const url: string = `${this.baseUrl}/client/editPassword`;
 
     return this.httpClient.put<IChangePassword>(url, changePassword);
   }
