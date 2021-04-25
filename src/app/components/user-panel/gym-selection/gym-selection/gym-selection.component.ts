@@ -11,11 +11,6 @@ export class GymSelectionComponent implements OnInit {
   constructor(private appDataService: AppDataService) { }
 
   ngOnInit(): void {
-    let result;
-    this.appDataService.getGyms("MyCompany").subscribe(data => {
-      result = data;
-      debugger
-    });
-  }
 
+  }
 }
