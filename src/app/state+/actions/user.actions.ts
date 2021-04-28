@@ -14,17 +14,17 @@ const signOut = createAction(
 const userProfileReceived = createAction(
   '[User Profile] User profile received',
   props<{ userProfile: IUserProfile }>()
-)
+);
 
 const userProfileChanged = createAction(
   '[User Profile] User profile changed',
   props<{ userProfile: IUserProfile }>()
-)
+);
 
 const userPasswordChanged = createAction(
   '[User Profile] User password changed',
   props<{ userPassword: IChangePassword }>()
-)
+);
 
 export const UserActions = {
   signIn,
