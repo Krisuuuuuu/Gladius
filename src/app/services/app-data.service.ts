@@ -19,9 +19,8 @@ export class AppDataService {
 
   getGyms(companyName: string): Observable<Array<IGym>> {
     const url: string = `${this.baseUrl}/gym/${companyName}/gyms/`;
-    const result = this.httpClient.get<Array<IGym>>(url);
-    debugger
-    return result;
+
+    return this.httpClient.get<Array<IGym>>(url);
   }
 
   getGymInfo(gymId: string): Observable<IGymInfo> {
