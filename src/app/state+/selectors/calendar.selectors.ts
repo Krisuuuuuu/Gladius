@@ -1,5 +1,4 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
-import { IGymInfo } from "src/app/model/calendar/IGymInfo";
 import { ICalendarState } from "../model/ICalendarState";
 
 const selectCalendarState = createFeatureSelector<ICalendarState>(
@@ -37,4 +36,4 @@ export const CalendarSelectors = {
   selectCurrentActivity,
   selectCurrentTrainer,
   selectCalendarData
-}
+};

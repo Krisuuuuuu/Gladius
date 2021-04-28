@@ -6,12 +6,12 @@ const gymsReceived = createAction(
   props<{ gyms: Array<IGym> }>()
 );
 
-const selectedGymChanged = createAction(
-  '[Gym Selection] Selected gym changed',
+const currentGymChanged = createAction(
+  '[Gym Selection] Current gym changed',
   props<{ gym: IGym }>()
 );
 
 export const GymSelectionActions = {
   gymsReceived,
-  selectedGymChanged
+  currentGymChanged
 };
