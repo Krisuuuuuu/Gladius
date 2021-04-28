@@ -13,18 +13,18 @@ const calendarDataReceived = createAction(
   props<{ calendarData: ICalendarData }>()
 )
 
-const selectedAreaChanged = createAction(
-  '[Calendar] Selected area changed',
+const currentAreaChanged = createAction(
+  '[Calendar] Current area changed',
   props<{ areaName: string }>()
 );
 
-const selectedActivityChanged = createAction(
-  '[Calendar] Selected activity changed',
+const currentActivityChanged = createAction(
+  '[Calendar] Current activity changed',
   props<{ activityName: string }>()
 );
 
-const selectedTrainerChanged = createAction(
-  '[Calendar] Selected trainer changed',
+const currentTrainerChanged = createAction(
+  '[Calendar] Current trainer changed',
   props<{ trainerName: string }>()
 );
 
@@ -40,9 +40,9 @@ const newActivityBooked = createAction(
 export const calendarActions = {
   gymInfoReceived,
   calendarDataReceived,
-  selectedAreaChanged,
-  selectedActivityChanged,
-  selectedTrainerChanged,
+  currentAreaChanged,
+  currentActivityChanged,
+  currentTrainerChanged,
   allPreferencesReset,
   newActivityBooked
 }

@@ -12,4 +12,4 @@ const selectBookings = createSelector(
 
 export const BookingHistorySelectors = {
   selectBookings
-}
+};
