@@ -3,9 +3,17 @@ import { IAddBooking } from "src/app/model/calendar/IAddBooking";
 import { ICalendarData } from "src/app/model/calendar/ICalendarData";
 import { IGymInfo } from "src/app/model/calendar/IGymInfo";
 
+const loadGymInfo = createAction(
+  '[Calendar] Load gym info'
+);
+
 const gymInfoReceived = createAction(
   '[Calendar] Gym info received',
   props<{ gymInfo: IGymInfo }>()
+);
+
+const loadCalendarData = createAction(
+  '[Calendar] Load calendar data'
 );
 
 const calendarDataReceived = createAction(
@@ -38,7 +46,9 @@ const newActivityBooked = createAction(
 );
 
 export const calendarActions = {
+  loadGymInfo,
   gymInfoReceived,
+  loadCalendarData,
   calendarDataReceived,
   currentAreaChanged,
   currentActivityChanged,

@@ -1,6 +1,10 @@
 import { createAction, props } from "@ngrx/store";
 import { IGym } from "src/app/model/gym-selection/IGym";
 
+const loadGyms = createAction(
+  '[Gym Selection] Load gyms'
+);
+
 const gymsReceived = createAction(
   '[Gym Selection] List of gyms received',
   props<{ gyms: Array<IGym> }>()
@@ -12,6 +16,7 @@ const currentGymChanged = createAction(
 );
 
 export const GymSelectionActions = {
+  loadGyms,
   gymsReceived,
   currentGymChanged
 };

@@ -11,6 +11,10 @@ const signOut = createAction(
   '[User Panel] Sign Out'
 );
 
+const loadUserProfile = createAction(
+  '[User Profile] Load user profile'
+);
+
 const userProfileReceived = createAction(
   '[User Profile] User profile received',
   props<{ userProfile: IUserProfile }>()
@@ -29,6 +33,7 @@ const userPasswordChanged = createAction(
 export const UserActions = {
   signIn,
   signOut,
+  loadUserProfile,
   userProfileReceived,
   userProfileChanged,
   userPasswordChanged

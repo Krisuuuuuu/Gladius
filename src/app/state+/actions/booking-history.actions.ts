@@ -2,6 +2,10 @@ import { createAction, props } from "@ngrx/store";
 import { IBooking } from "src/app/model/booking-history/IBooking";
 import { IDeleteBooking } from "src/app/model/booking-history/IDeleteBooking";
 
+const loadBookingHistory = createAction(
+  '[Booking History] Load booking history'
+);
+
 const bookingHistoryReceived = createAction(
   '[Booking History] List of booking history received',
   props<{ bookingHistory: Array<IBooking> }>()
@@ -18,6 +22,7 @@ const moveToAnotherPage = createAction(
 );
 
 export const BookingHistoryActions = {
+  loadBookingHistory,
   bookingHistoryReceived,
   deleteBooking,
   moveToAnotherPage
