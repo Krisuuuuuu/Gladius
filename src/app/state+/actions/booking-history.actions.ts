@@ -3,7 +3,8 @@ import { IBooking } from "src/app/model/booking-history/IBooking";
 import { IDeleteBooking } from "src/app/model/booking-history/IDeleteBooking";
 
 const loadBookingHistory = createAction(
-  '[Booking History] Load booking history'
+  '[Booking History] Load booking history',
+  props<{ email: string }>()
 );
 
 const bookingHistoryReceived = createAction(
@@ -16,6 +17,10 @@ const deleteBooking = createAction(
   props<{ booking: IDeleteBooking }>()
 );
 
+const deleteBookingSuccess = createAction(
+  '[Booking History] Delete booking'
+);
+
 const moveToAnotherPage = createAction(
   '[Booking History] Move to another page',
   props<{ pageNumber: number, bookingList: Array<IBooking> }>()
@@ -25,5 +30,6 @@ export const BookingHistoryActions = {
   loadBookingHistory,
   bookingHistoryReceived,
   deleteBooking,
+  deleteBookingSuccess,
   moveToAnotherPage
 };

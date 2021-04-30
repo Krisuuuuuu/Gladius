@@ -2,7 +2,8 @@ import { createAction, props } from "@ngrx/store";
 import { IGym } from "src/app/model/gym-selection/IGym";
 
 const loadGyms = createAction(
-  '[Gym Selection] Load gyms'
+  '[Gym Selection] Load gyms',
+  props<{ email: string }>()
 );
 
 const gymsReceived = createAction(

@@ -13,9 +13,18 @@ export class BookingHistoryEffects {
   getAllBookingHistory$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(importedActions.BookingHistoryActions.loadBookingHistory),
-      mergeMap(() => this.appDataService.getBookingsHistory("test").pipe(
+      mergeMap(({ email }) => this.appDataService.getBookingsHistory(email).pipe(
         map(bookingHistory => importedActions.BookingHistoryActions.bookingHistoryReceived({ bookingHistory }))
       ))
+    );
+  });
+
+  deleteBookingFromHistory$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(importedActions.BookingHistoryActions.deleteBooking),
+        mergeMap(({ booking }) => this.appDataService.postDataToRemoveBooking(booking).pipe(
+          map(() => importedActions.BookingHistoryActions.deleteBookingSuccess())
+        ))
     );
   });
 }

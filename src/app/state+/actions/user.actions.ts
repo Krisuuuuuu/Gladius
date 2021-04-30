@@ -20,14 +20,22 @@ const userProfileReceived = createAction(
   props<{ userProfile: IUserProfile }>()
 );
 
-const userProfileChanged = createAction(
+const updateUserProfile = createAction(
   '[User Profile] User profile changed',
   props<{ userProfile: IUserProfile }>()
 );
 
-const userPasswordChanged = createAction(
-  '[User Profile] User password changed',
+const userProfileUpdatedSuccessfully = createAction(
+  '[User Profile] User profile updated successfully'
+);
+
+const updateUserPassword = createAction(
+  '[User Profile] User password updated',
   props<{ userPassword: IChangePassword }>()
+);
+
+const userPasswordUpdatedSuccessfully = createAction(
+  '[User Profile] User password updated successfully',
 );
 
 export const UserActions = {
@@ -35,6 +43,8 @@ export const UserActions = {
   signOut,
   loadUserProfile,
   userProfileReceived,
-  userProfileChanged,
-  userPasswordChanged
-}
+  updateUserProfile,
+  userProfileUpdatedSuccessfully,
+  updateUserPassword,
+  userPasswordUpdatedSuccessfully
+};

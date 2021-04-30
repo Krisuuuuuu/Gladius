@@ -22,8 +22,17 @@ export class CalendarEffects {
     getCalendarData$ = createEffect(() => {
       return this.actions$.pipe(
         ofType(importedActions.calendarActions.loadCalendarData),
-        mergeMap(() => this.appDataService.getActivitiesForWeek("test", "test").pipe(
+        mergeMap(({ startDate, endDate }) => this.appDataService.getActivitiesForWeek(startDate, endDate).pipe(
           map(calendarData => importedActions.calendarActions.calendarDataReceived({ calendarData }))
+        ))
+      );
+    });
+
+    addNewBooking$ = createEffect(() => {
+      return this.actions$.pipe(
+        ofType(importedActions.calendarActions.newActivityBooked),
+        mergeMap(({ booking }) => this.appDataService.postDataToAddBooking(booking).pipe(
+          map(() => importedActions.calendarActions.newActivityBookedSuccess())
         ))
       );
     });

@@ -19,4 +19,22 @@ export class UserProfileEffects {
       ))
     );
   });
+
+  updateUserProfile$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(importedActions.UserActions.updateUserProfile),
+      mergeMap(({ userProfile }) => this.userService.putDataToEditUserProfile("test", userProfile).pipe(
+        map(() => importedActions.UserActions.userProfileUpdatedSuccessfully())
+      ))
+    );
+  });
+
+  updateUserPassword$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(importedActions.UserActions.updateUserPassword),
+      mergeMap(({ userPassword }) => this.userService.putDataToEditUserPassword("test", userPassword).pipe(
+        map(() => importedActions.UserActions.userProfileUpdatedSuccessfully())
+      ))
+    )
+  });
 }

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { IBooking } from '../model/booking-history/IBooking';
 import { IDeleteBooking } from '../model/booking-history/IDeleteBooking';
+import { IAddBooking } from '../model/calendar/IAddBooking';
 import { ICalendarData } from '../model/calendar/ICalendarData';
 import { IGymInfo } from '../model/calendar/IGymInfo';
 import { IGym } from '../model/gym-selection/IGym';
@@ -41,10 +42,10 @@ export class AppDataService {
     return this.httpClient.get<Array<IBooking>>(url);
   }
 
-  postDataToAddBooking(booking: IBooking): Observable<IBooking> {
+  postDataToAddBooking(booking: IAddBooking): Observable<IAddBooking> {
     const url: string = `${this.baseUrl}/reservation/add/`;
 
-    return this.httpClient.post<IBooking>(url, booking);
+    return this.httpClient.post<IAddBooking>(url, booking);
   }
 
   postDataToRemoveBooking(booking: IDeleteBooking): Observable<IDeleteBooking> {

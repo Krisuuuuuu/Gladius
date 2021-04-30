@@ -13,7 +13,7 @@ export class GymSelectionEffects {
   getAllGyms$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(importedActions.GymSelectionActions.loadGyms),
-      mergeMap(() => this.appDataService.getGyms("test").pipe(
+      mergeMap(({ email }) => this.appDataService.getGyms(email).pipe(
         map(gyms => importedActions.GymSelectionActions.gymsReceived({ gyms }))
       ))
     );
