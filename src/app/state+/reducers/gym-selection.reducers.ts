@@ -20,7 +20,7 @@ const reducer = createReducer(
   on(GymSelectionActions.currentGymChanged, (state: IGymSelectionState, { gym }) => {
     return {
       ...state,
-      currentGym: {...gym}
+      currentGym: gym
     };
   })
 )
