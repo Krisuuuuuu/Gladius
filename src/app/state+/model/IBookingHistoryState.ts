@@ -1,11 +1,17 @@
 import { IBooking } from "src/app/model/booking-history/IBooking";
 
 export interface IBookingHistoryState {
-  areBookingsAdding: boolean;
+  areBookingsReceiving: boolean;
+  isBookingDeleting: boolean;
   bookings: Array<IBooking>;
+  filteredBookings: Array<IBooking>;
+  displayedBookings: Array<IBooking>;
 }
 
 export const initialBookingHistoryState: IBookingHistoryState = {
-  areBookingsAdding: false,
-  bookings: []
+  areBookingsReceiving: false,
+  isBookingDeleting: false,
+  bookings: [],
+  filteredBookings: [],
+  displayedBookings: []
 };

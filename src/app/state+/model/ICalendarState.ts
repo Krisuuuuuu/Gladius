@@ -2,8 +2,9 @@ import { ICalendarData } from "src/app/model/calendar/ICalendarData";
 import { IGymInfo } from "src/app/model/calendar/IGymInfo";
 
 export interface ICalendarState {
-  isGymInfoAdding: boolean;
-  isCalendarDataAdding: boolean;
+  isGymInfoReceiving: boolean;
+  isCalendarDataReceiving: boolean;
+  isNewBookingAdding: boolean;
   gymInfo: IGymInfo | null;
   currentArea: string;
   currentActivity: string;
@@ -12,8 +13,9 @@ export interface ICalendarState {
 }
 
 export const InitialCalendarState: ICalendarState = {
-  isGymInfoAdding: false,
-  isCalendarDataAdding: false,
+  isGymInfoReceiving: false,
+  isCalendarDataReceiving: false,
+  isNewBookingAdding: false,
   gymInfo: null,
   currentArea: '',
   currentActivity: '',

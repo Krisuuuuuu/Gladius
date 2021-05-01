@@ -21,9 +21,9 @@ const deleteBookingSuccess = createAction(
   '[Booking History] Delete booking'
 );
 
-const moveToAnotherPage = createAction(
-  '[Booking History] Move to another page',
-  props<{ pageNumber: number, bookingList: Array<IBooking> }>()
+const updateDisplayedData = createAction(
+  '[Booking History] Update displayed data',
+  props<{ displayedBookingHistory: Array<IBooking> }>()
 );
 
 export const BookingHistoryActions = {
@@ -31,5 +31,5 @@ export const BookingHistoryActions = {
   bookingHistoryReceived,
   deleteBooking,
   deleteBookingSuccess,
-  moveToAnotherPage
+  updateDisplayedData,
 };
