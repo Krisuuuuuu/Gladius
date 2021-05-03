@@ -3,7 +3,7 @@
     <div class="header">
       <h2>Select your gym</h2>
     </div>
-    <div class="container  animate__animated animate__fadeIn">
+    <div class="container animate__animated animate__fadeIn">
       <app-gym-card *ngFor="let gym of gyms" [gym]="gym" (click)="changeCurrentGym(gym)"></app-gym-card>
     </div>
   </section>
