@@ -11,7 +11,6 @@ import { GymSelectionSelectors } from 'src/app/state+/selectors/gym-selection.se
   styleUrls: ['./gym-selection.component.scss']
 })
 export class GymSelectionComponent implements OnInit {
-
   gyms: Array<IGym>;
 
   constructor(private store: Store<any>) { }
