@@ -2,12 +2,12 @@ import { IGym } from "src/app/model/gym-selection/IGym";
 
 export interface IGymSelectionState {
   areGymsReceiving: boolean;
-  currentGym: IGym | null;
+  currentGym: IGym;
   gyms: Array<IGym>;
 }
 
 export const InitialGymSelectionState: IGymSelectionState = {
   areGymsReceiving: false,
-  currentGym: null,
+  currentGym: {} as IGym,
   gyms: []
 };

@@ -3,11 +3,11 @@ import { IUserProfile } from "src/app/model/user-profile/IUserProfile";
 export interface IUserProfileState {
   isUserProfileReceiving: boolean;
   isUserProfileUpdating: boolean;
-  userProfile: IUserProfile | null;
+  userProfile: IUserProfile;
 }
 
 export const InitialUserProfileState: IUserProfileState = {
   isUserProfileReceiving: false,
   isUserProfileUpdating: false,
-  userProfile: null
+  userProfile: {} as IUserProfile
 };

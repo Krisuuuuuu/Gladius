@@ -13,7 +13,7 @@ export class CalendarEffects {
     getGymInfo$ = createEffect(() => {
       return this.actions$.pipe(
         ofType(importedActions.calendarActions.loadGymInfo),
-        mergeMap(() => this.appDataService.getGymInfo("1").pipe(
+        mergeMap(({id}) => this.appDataService.getGymInfo(id).pipe(
           map(gymInfo => importedActions.calendarActions.gymInfoReceived({ gymInfo }))
         ))
       );

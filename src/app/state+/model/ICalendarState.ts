@@ -5,20 +5,20 @@ export interface ICalendarState {
   isGymInfoReceiving: boolean;
   isCalendarDataReceiving: boolean;
   isNewBookingAdding: boolean;
-  gymInfo: IGymInfo | null;
+  gymInfo: IGymInfo;
   currentArea: string;
   currentActivity: string;
   currentTrainer: string;
-  calendarData: ICalendarData | null;
+  calendarData: ICalendarData;
 }
 
 export const InitialCalendarState: ICalendarState = {
   isGymInfoReceiving: false,
   isCalendarDataReceiving: false,
   isNewBookingAdding: false,
-  gymInfo: null,
+  gymInfo: {} as IGymInfo,
   currentArea: '',
   currentActivity: '',
   currentTrainer: '',
-  calendarData: null
+  calendarData: {} as ICalendarData
 };

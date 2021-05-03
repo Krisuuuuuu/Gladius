@@ -4,7 +4,8 @@ import { ICalendarData } from "src/app/model/calendar/ICalendarData";
 import { IGymInfo } from "src/app/model/calendar/IGymInfo";
 
 const loadGymInfo = createAction(
-  '[Calendar] Load gym info'
+  '[Calendar] Load gym info',
+  props<{ id: string }>()
 );
 
 const gymInfoReceived = createAction(
