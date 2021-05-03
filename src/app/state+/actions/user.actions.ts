@@ -1,10 +1,11 @@
 import { createAction, props } from "@ngrx/store";
+import { ISignInData } from "src/app/model/main-page/ISignInData";
 import { IChangePassword } from "src/app/model/user-profile/IChangePassword";
 import { IUserProfile } from "src/app/model/user-profile/IUserProfile";
 
 const signIn = createAction(
   '[Main Page] Sign In',
-  props<{ email: string, password: string }>()
+  props<{ signInData: ISignInData }>()
 );
 
 const signOut = createAction(
