@@ -34,18 +34,36 @@ div.gym-card-wrapper {
 
   h1 {
     @include h1(5px);
-    @include absolute();
+    position: absolute;
+    top: 40%;
+    left: 50%;
     text-align: center;
     font-family: "Sairda Condensed", Arial, Helvetica, sans-serif;
     font-weight: 600;
     color: white;
+    transform: translate(-50%, -50%);
     transition: 0.5s ease-in;
     opacity: 0;
     cursor: pointer;
   }
 
   h2 {
-    @include h2(0);
+    @include h2(5px);
+    position: absolute;
+    top: 52%;
+    left: 50%;
+    text-align: center;
+    font-family: "Sairda Condensed", Arial, Helvetica, sans-serif;
+    font-weight: 500;
+    color: white;
+    transform: translate(-50%, -50%);
+    transition: 0.5s ease-in;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  p {
+    @include p(0);
     position: absolute;
     top: 62%;
     left: 50%;
@@ -75,6 +93,10 @@ div.gym-card-wrapper {
     }
 
     h2 {
+      opacity: 1;
+    }
+
+    p {
       opacity: 1;
     }
   }

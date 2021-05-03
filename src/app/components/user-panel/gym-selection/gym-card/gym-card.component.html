@@ -1,6 +1,7 @@
 <div class="gym-card-wrapper">
   <img src="./../../../../../assets/images/gyms_min.jpg" alt="" />
   <div class="gym-card-layer"></div>
-  <h1>Gym Name</h1>
-  <h2>Gym Address</h2>
+  <h1>{{ gym.name }}</h1>
+  <h2>{{ gym.street }}, {{ gym.city }}</h2>
+  <p>{{ gym.open_hour }} - {{ gym.close_hour }}</p>
 </div>
