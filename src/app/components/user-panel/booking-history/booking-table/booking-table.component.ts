@@ -1,19 +1,9 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { AfterViewInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Input, OnChanges, ViewChild } from '@angular/core';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-
-export interface TableElement {
-  no: number,
-  activityName: string,
-  activityDate: string,
-  activityDay: string,
-  activityHour: string,
-  bookingDate: string,
-  gymName: string,
-  status: string
-}
+import { IBooking } from 'src/app/model/booking-history/IBooking';
 
 @Component({
   selector: 'app-booking-table',
@@ -29,39 +19,44 @@ export interface TableElement {
   encapsulation: ViewEncapsulation.None
 })
 
-export class BookingTableComponent implements AfterViewInit {
+export class BookingTableComponent implements AfterViewInit, OnChanges {
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @Input() data: Array<IBooking> = [];
 
   columnsToDisplay: string[] = ["No.", "Date", "Day", "Hour", "Activity Name", "Booking Status"];
-  expandedElement: TableElement | null;
-  data: TableElement[] = [
-    {
-      no: 1,
-      activityName: "Example Activity",
-      activityDate: "00-00-0000",
-      activityDay: "Monday",
-      activityHour: "9.00",
-      bookingDate: "00-00-0000",
-      gymName: "Example Gym",
-      status: "Active"
-    },
-    {
-      no: 2,
-      activityName: "Example Activity",
-      activityDate: "00-00-0000",
-      activityDay: "Monday",
-      activityHour: "9.00",
-      bookingDate: "00-00-0000",
-      gymName: "Example Gym",
-      status: "Cancelled"
-    }
-  ];
 
-  dataSource = new MatTableDataSource<TableElement>(this.data);
+  expandedElement: IBooking;
+
+  dataSource = new MatTableDataSource<IBooking>(this.data);
+
+  currentSize: number;
+
+  pageSizes: Array<number>;
+
+  totalSize: number;
 
   constructor() { }
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
+  }
+
+  ngOnChanges(): void {
+    this.customizePaginator();
+  }
+
+  private customizePaginator(): void {
+    this.totalSize = this.data.length;
+    const pageSizes: Array<number> = [1, 5, 10, 25, 50, 100];
+
+    for (let i = 0; i < pageSizes.length; i++) {
+      if(pageSizes[i] <= this.totalSize)
+        this.pageSizes.push(this.pageSizes[i]);
+    }
+
+    if(this.totalSize <= 10 && !this.pageSizes.includes(this.totalSize))
+      this.pageSizes.push(this.totalSize);
+
+    this.currentSize = this.pageSizes[0];
   }
 }

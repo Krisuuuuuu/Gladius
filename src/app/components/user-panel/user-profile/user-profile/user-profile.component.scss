@@ -1,7 +1,7 @@
 @import '../../../../utils/mixins-meta.scss';
 
 section.user-profile-wrapper {
-  background-image: url(../../../../../assets/images/profile_bgc.jpg);
+  background-image: url(./../../../../../assets/images/profile_bgc.jpg);
   @include background-image();
   background-position: center 30%;
 }

@@ -4,7 +4,7 @@ section.booking-history-wrapper {
   position: relative;
   min-height: $booking-history-height;
   width: 100%;
-  background-image: url(../../../../../assets/images/booking_history.jpg);
+  background-image: url(./../../../../../assets/images/booking_history.jpg);
   @include background-image();
   background-position: center center;
 
