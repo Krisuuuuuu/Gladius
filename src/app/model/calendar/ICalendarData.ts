@@ -1,9 +1,9 @@
 import { IActivity } from "./IActivity";
+import { IDateToDisplay } from "./IDateToDisplay";
 
 export interface ICalendarData {
   id: string;
   gym_name: string;
-  week_start_date: string;
-  week_end_date: string;
+  datesToDisplay: Array<IDateToDisplay>;
   activities: Array<IActivity>;
 }

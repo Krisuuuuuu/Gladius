@@ -1,8 +1,8 @@
 <td class="card" (click)="openDialog()">
   <div class="content">
-    <p class="hour">Hour</p>
-    <p class="title">Title</p>
-    <p class="places">000/000</p>
-    <div class="duration"><mat-icon>access_time</mat-icon><span>Duration</span></div>
+    <p class="hour">{{ activity.start_hour }}</p>
+    <p class="title">{{ activity.name }}</p>
+    <p class="places">{{ activity.current_bookings_number }} / {{ activity.max_clients }}</p>
+    <div class="duration"><mat-icon>access_time</mat-icon><span> {{ calculateDuration() }} </span></div>
   </div>
 </td>

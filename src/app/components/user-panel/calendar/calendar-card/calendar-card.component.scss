@@ -45,8 +45,8 @@ td.card {
 
 td.card.active {
   background-color: $card-active-bg;
+}
 
-  &:hover {
-    background-color: $card-active-hover-bg;
-  }
+td.card.locked {
+  background-color: $card-active-bg;
 }

@@ -4,17 +4,11 @@
     <div class="calendar animate__animated animate__fadeIn">
       <tr class="header">
         <app-header-button [isLeft]='true'></app-header-button>
-        <app-calendar-header *ngFor="let day of days" [day]='day'></app-calendar-header>
+        <app-calendar-header *ngFor="let date of calendarData.datesToDisplay" [dateToDisplay]='date'></app-calendar-header>
         <app-header-button [isLeft]='false'></app-header-button>
       </tr>
-      <tr *ngFor="let hour of hours" class="content">
+      <tr *ngFor="let hour of hours; let i = index" class="content">
         <app-calendar-hour [hour]='hour'></app-calendar-hour>
-        <app-calendar-card></app-calendar-card>
-        <app-calendar-card></app-calendar-card>
-        <app-calendar-card></app-calendar-card>
-        <app-calendar-card></app-calendar-card>
-        <app-calendar-card></app-calendar-card>
-        <app-calendar-card></app-calendar-card>
         <app-calendar-card></app-calendar-card>
       </tr>
     </div>
