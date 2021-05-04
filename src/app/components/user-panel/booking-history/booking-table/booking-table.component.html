@@ -41,7 +41,7 @@
               <p>Booking Date: <span>{{element.booking_date}}</span></p>
             </div>
             <div class="button-wrapper">
-              <button *ngIf='element.status == "Active"'>Cancel Reservation</button>
+              <button *ngIf='element.status == "Active"' (click)="cancelBooking(element)">Cancel Reservation</button>
             </div>
           </div>
         </td>

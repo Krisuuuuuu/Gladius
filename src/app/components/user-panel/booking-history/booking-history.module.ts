@@ -4,10 +4,10 @@ import { CommonModule } from '@angular/common';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { DialogsModule } from '../../dialogs/dialogs.module';
 
 import { BookingHistoryComponent } from './booking-history/booking-history.component';
 import { BookingTableComponent } from './booking-table/booking-table.component';
-
 
 
 @NgModule({
@@ -19,7 +19,8 @@ import { BookingTableComponent } from './booking-table/booking-table.component';
     CommonModule,
     MatTabsModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    DialogsModule,
   ],
   exports: [BookingHistoryComponent]
 })

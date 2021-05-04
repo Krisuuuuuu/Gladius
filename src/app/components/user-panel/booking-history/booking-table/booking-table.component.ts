@@ -1,9 +1,15 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { AfterViewInit, Input, OnChanges, ViewChild } from '@angular/core';
 import { Component, ViewEncapsulation } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { Store } from '@ngrx/store';
+import { ConfirmDialogComponent } from 'src/app/components/dialogs/confirm-dialog/confirm-dialog.component';
 import { IBooking } from 'src/app/model/booking-history/IBooking';
+import { IDeleteBooking } from 'src/app/model/booking-history/IDeleteBooking';
+import { BookingHistoryActions } from 'src/app/state+/actions/booking-history.actions';
+import { bookingHistoryReducer } from 'src/app/state+/reducers/booking-history.reducers';
 
 @Component({
   selector: 'app-booking-table',
@@ -35,7 +41,7 @@ export class BookingTableComponent implements AfterViewInit, OnChanges {
 
   totalSize: number;
 
-  constructor() { }
+  constructor(public dialog: MatDialog, private store: Store<any>) { }
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
@@ -43,6 +49,29 @@ export class BookingTableComponent implements AfterViewInit, OnChanges {
 
   ngOnChanges(): void {
     this.customizePaginator();
+  }
+
+  cancelBooking(booking: IBooking): void {
+    let message: string;
+
+    message = "Do you want to book this activity?";
+
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: message
+    });
+
+    dialogRef.afterClosed().subscribe(
+      result => {
+        if(result === true){
+
+          const bookingToDelete: IDeleteBooking = {
+            user_email: "mock",
+            booking_id: booking.id
+          };
+
+          this.store.dispatch(BookingHistoryActions.deleteBooking({ booking: bookingToDelete }));
+        }
+    });
   }
 
   private customizePaginator(): void {
