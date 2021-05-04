@@ -1,10 +1,6 @@
 import { Component, Input, OnChanges } from '@angular/core';
-import { MatDialog} from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { ConfirmDialogComponent } from 'src/app/components/dialogs/confirm-dialog/confirm-dialog.component';
 import { IActivity } from 'src/app/model/calendar/IActivity';
-import { IAddBooking } from 'src/app/model/calendar/IAddBooking';
-import { calendarActions } from 'src/app/state+/actions/calendar.actions';
 
 @Component({
   selector: 'app-calendar-card',
@@ -15,32 +11,10 @@ export class CalendarCardComponent implements OnChanges {
   @Input() activity: IActivity;
   specialClass: string = '';
 
-  constructor(public dialog: MatDialog, private store: Store<any>) { }
+  constructor(private store: Store<any>) { }
 
   ngOnChanges(): void {
     this.setColorOfCard();
-  }
-
-  openDialog(): void {
-    let message: string;
-
-    message = "Do you want to book this activity?";
-
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      data: message
-    });
-
-    dialogRef.afterClosed().subscribe(
-      result => {
-        if(result === true){
-          const newBooking: IAddBooking = {
-            user_email: "mock",
-            activity_id: this.activity.id
-          };
-
-          this.store.dispatch(calendarActions.newActivityBooked({ booking: newBooking }));
-        }
-    });
   }
 
   calculateDuration(): string {

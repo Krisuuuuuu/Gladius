@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
+import { ConfirmDialogComponent } from 'src/app/components/dialogs/confirm-dialog/confirm-dialog.component';
 import { IActivity } from 'src/app/model/calendar/IActivity';
+import { IAddBooking } from 'src/app/model/calendar/IAddBooking';
 import { ICalendarData } from 'src/app/model/calendar/ICalendarData';
 import { IGym } from 'src/app/model/gym-selection/IGym';
+import { calendarActions } from 'src/app/state+/actions/calendar.actions';
 import { CalendarSelectors } from 'src/app/state+/selectors/calendar.selectors';
 import { GymSelectionSelectors } from 'src/app/state+/selectors/gym-selection.selectors';
 
@@ -21,7 +25,7 @@ export class CalendarComponent implements OnInit {
   hours: Array<string> = [];
   activities: Array<IActivity> = [];
 
-  constructor(private store: Store<any>) { }
+  constructor(public dialog: MatDialog, private store: Store<any>) { }
 
   ngOnInit(): void {
     this.store.select(GymSelectionSelectors.selectCurrentGym).subscribe(
@@ -55,6 +59,40 @@ export class CalendarComponent implements OnInit {
         this.filterActivities();
       }
     );
+  }
+
+  getActivity(date: string, hour: string): IActivity | undefined {
+    const activities: Array<IActivity> = this.activities.filter(a => a.date === date && a.start_hour === hour);
+    let result: IActivity | undefined;
+
+    if(activities.length > 0)
+      result = activities[0];
+    else
+      result = undefined;
+
+    return result;
+  }
+
+  createNewBooking(activity: IActivity): void {
+    let message: string;
+
+    message = "Do you want to book this activity?";
+
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: message
+    });
+
+    dialogRef.afterClosed().subscribe(
+      result => {
+        if(result === true){
+          const newBooking: IAddBooking = {
+            user_email: "mock",
+            activity_id: activity.id
+          };
+
+          this.store.dispatch(calendarActions.newActivityBooked({ booking: newBooking }));
+        }
+    });
   }
 
   private setOpeningHours(): void {

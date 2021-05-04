@@ -9,7 +9,10 @@
       </tr>
       <tr *ngFor="let hour of hours; let i = index" class="content">
         <app-calendar-hour [hour]='hour'></app-calendar-hour>
-        <app-calendar-card></app-calendar-card>
+        <ng-container *ngFor="let dateToDisplay of calendarData.datesToDisplay">
+          <app-calendar-card *ngIf="getActivity(dateToDisplay.date, hour) !== undefined" (click)="createNewBooking"></app-calendar-card>
+          <app-calendar-card *ngIf="getActivity(dateToDisplay.date, hour) === undefined" class="empty"></app-calendar-card>
+        </ng-container>
       </tr>
     </div>
   </section>
