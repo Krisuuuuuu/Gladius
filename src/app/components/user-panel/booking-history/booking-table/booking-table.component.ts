@@ -29,7 +29,7 @@ export class BookingTableComponent implements AfterViewInit, OnChanges {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @Input() data: Array<IBooking> = [];
 
-  columnsToDisplay: string[] = ["No.", "Date", "Day", "Hour", "Activity Name", "Booking Status"];
+  columnsToDisplay: string[] = ["No.", "Activity Name", "Date", "Start Hour", "End Hour", "Booking Status"];
 
   expandedElement: IBooking;
 
@@ -37,7 +37,7 @@ export class BookingTableComponent implements AfterViewInit, OnChanges {
 
   currentSize: number;
 
-  pageSizes: Array<number>;
+  pageSizes: Array<number> = [];
 
   totalSize: number;
 

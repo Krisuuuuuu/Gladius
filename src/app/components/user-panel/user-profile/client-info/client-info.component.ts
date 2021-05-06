@@ -51,7 +51,7 @@ export class ClientInfoComponent implements OnInit {
       phone_number: this.clientInfoForm.controls['phoneNumber'].value,
     };
 
-    this.store.dispatch(UserActions.updateUserProfile({ userProfile: userProfile }));
+    this.store.dispatch(UserActions.updateUserProfile({ token: "", userProfile: userProfile }));
     this.router.navigateByUrl("panel/edit/calendar");
   }
 
@@ -60,6 +60,6 @@ export class ClientInfoComponent implements OnInit {
   }
 
   private getUserProfile(): void {
-    this.store.dispatch(UserActions.loadUserProfile());
+    this.store.dispatch(UserActions.loadUserProfile({ token: "" }));
   }
 }

@@ -37,7 +37,7 @@ export class AppDataService {
   }
 
   getBookingsHistory(email: string): Observable<Array<IBooking>> {
-    const url: string = `${this.baseUrl}/reservation/${email}/history/`;
+    const url: string = `${this.baseUrl}/reservations/${email}/history/`;
 
     return this.httpClient.get<Array<IBooking>>(url);
   }

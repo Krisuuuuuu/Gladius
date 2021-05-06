@@ -4,6 +4,6 @@ import { IDateToDisplay } from "./IDateToDisplay";
 export interface ICalendarData {
   id: string;
   gym_name: string;
-  datesToDisplay: Array<IDateToDisplay>;
+  display_dates: Array<IDateToDisplay>;
   activities: Array<IActivity>;
 }

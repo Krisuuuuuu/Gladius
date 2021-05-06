@@ -62,7 +62,7 @@ const reducer = createReducer(
   }),
 );
 
-export function bookingHistoryReducer(
+export function CalendarReducer(
   state: ICalendarState | undefined,
   action: Action
 ): ICalendarState {

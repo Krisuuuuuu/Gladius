@@ -30,6 +30,6 @@ export class GymSelectionComponent implements OnInit {
   }
 
   private getGyms(): void {
-    this.store.dispatch(GymSelectionActions.loadGyms({ email: "mock" }));
+    this.store.dispatch(GymSelectionActions.loadGyms({ companyName: "MyCompany" }));
   }
 }

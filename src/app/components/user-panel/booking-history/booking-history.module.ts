@@ -8,6 +8,10 @@ import { DialogsModule } from '../../dialogs/dialogs.module';
 
 import { BookingHistoryComponent } from './booking-history/booking-history.component';
 import { BookingTableComponent } from './booking-table/booking-table.component';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { bookingHistoryReducer } from 'src/app/state+/reducers/booking-history.reducers';
+import { BookingHistoryEffects } from 'src/app/state+/effects/booking-history.effects';
 
 
 @NgModule({
@@ -21,6 +25,8 @@ import { BookingTableComponent } from './booking-table/booking-table.component';
     MatTableModule,
     MatPaginatorModule,
     DialogsModule,
+    StoreModule.forFeature('bookingHistory', bookingHistoryReducer),
+    EffectsModule.forFeature([BookingHistoryEffects]),
   ],
   exports: [BookingHistoryComponent]
 })

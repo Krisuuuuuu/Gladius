@@ -10,6 +10,10 @@ import { ClientInfoComponent } from './client-info/client-info.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { AppRoutingModule } from 'src/app/routing/app-routing.module';
 import { MatIconModule } from '@angular/material/icon';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { userProfileReducer } from 'src/app/state+/reducers/user-profile.reducers';
+import { UserProfileEffects } from 'src/app/state+/effects/user-profile.effects';
 
 @NgModule({
   declarations: [
@@ -23,7 +27,9 @@ import { MatIconModule } from '@angular/material/icon';
     MatInputModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    MatIconModule
+    MatIconModule,
+    StoreModule.forFeature('userProfile', userProfileReducer),
+    EffectsModule.forFeature([UserProfileEffects]),
   ],
   exports: [
     UserProfileComponent

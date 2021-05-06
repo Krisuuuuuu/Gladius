@@ -3,7 +3,7 @@ import { IGym } from "src/app/model/gym-selection/IGym";
 
 const loadGyms = createAction(
   '[Gym Selection] Load gyms',
-  props<{ email: string }>()
+  props<{ companyName: string }>()
 );
 
 const gymsReceived = createAction(
