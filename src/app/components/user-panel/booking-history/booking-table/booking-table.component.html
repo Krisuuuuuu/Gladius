@@ -38,6 +38,7 @@
               [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
             <div class="expanded-detail-wrapper">
               <p>Gym Name: <span>{{element.gym_name}}</span></p>
+              <p>Area: <span>{{element.area}}</span></p>
             </div>
             <div class="button-wrapper">
               <button *ngIf='element.status == "Active"' (click)="cancelBooking(element)">Cancel Reservation</button>

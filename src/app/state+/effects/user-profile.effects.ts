@@ -14,7 +14,7 @@ export class UserProfileEffects {
   getUserProfile$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(importedActions.UserActions.loadUserProfile),
-      mergeMap(({ token }) => this.userService.getUserProfile(token).pipe(
+      mergeMap(() => this.userService.getUserProfile().pipe(
         map(userProfile => importedActions.UserActions.userProfileReceived({ userProfile }))
       ))
     );
@@ -23,7 +23,7 @@ export class UserProfileEffects {
   updateUserProfile$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(importedActions.UserActions.updateUserProfile),
-      mergeMap(({ token, userProfile }) => this.userService.putDataToEditUserProfile(token, userProfile).pipe(
+      mergeMap(({ userProfile }) => this.userService.putDataToEditUserProfile(userProfile).pipe(
         map(() => importedActions.UserActions.userProfileUpdatedSuccessfully())
       ))
     );
@@ -32,7 +32,7 @@ export class UserProfileEffects {
   updateUserPassword$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(importedActions.UserActions.updateUserPassword),
-      mergeMap(({ token, userPassword }) => this.userService.putDataToEditUserPassword(token, userPassword).pipe(
+      mergeMap(({ userPassword }) => this.userService.putDataToEditUserPassword(userPassword).pipe(
         map(() => importedActions.UserActions.userProfileUpdatedSuccessfully())
       ))
     )

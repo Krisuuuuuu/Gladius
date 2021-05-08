@@ -7,8 +7,6 @@ import { IAddBooking } from 'src/app/model/calendar/IAddBooking';
 import { ICalendarData } from 'src/app/model/calendar/ICalendarData';
 import { IGym } from 'src/app/model/gym-selection/IGym';
 import { calendarActions } from 'src/app/state+/actions/calendar.actions';
-import { CalendarSelectors } from 'src/app/state+/selectors/calendar.selectors';
-import { GymSelectionSelectors } from 'src/app/state+/selectors/gym-selection.selectors';
 
 @Component({
   selector: 'app-calendar',
@@ -28,49 +26,7 @@ export class CalendarComponent implements OnInit {
   constructor(public dialog: MatDialog, private store: Store<any>) { }
 
   ngOnInit(): void {
-    this.store.select(GymSelectionSelectors.selectCurrentGym).subscribe(
-      currentGym => {
-        this.currentGym = currentGym;
-        this.setOpeningHours();
-      }
-    );
 
-    this.store.select(CalendarSelectors.selectCalendarData).subscribe(
-      calendarData => this.calendarData = calendarData
-    );
-
-    this.store.select(CalendarSelectors.selectCurrentArea).subscribe(
-      currentArea => {
-        this.currentArea = currentArea;
-        this.filterActivities();
-      }
-    );
-
-    this.store.select(CalendarSelectors.selectCurrentActivity).subscribe(
-      currentActivity => {
-        this.currentActivity = currentActivity;
-        this.filterActivities();
-      }
-    );
-
-    this.store.select(CalendarSelectors.selectCurrentTrainer).subscribe(
-      currentTrainer => {
-        this.currentTrainer = currentTrainer;
-        this.filterActivities();
-      }
-    );
-  }
-
-  getActivity(date: string, hour: string): IActivity | undefined {
-    const activities: Array<IActivity> = this.activities.filter(a => a.date === date && a.start_hour === hour);
-    let result: IActivity | undefined;
-
-    if(activities.length > 0)
-      result = activities[0];
-    else
-      result = undefined;
-
-    return result;
   }
 
   createNewBooking(activity: IActivity): void {
@@ -102,14 +58,8 @@ export class CalendarComponent implements OnInit {
 
     for (let i = 0; i < allHours.length; i++) {
       const hour: number = +allHours[i];
-      if(hour >= startHour && hour <= endHour)
+      if(hour >= startHour && hour + 2 <= endHour)
         this.hours.push(allHours[i]);
     }
-  }
-
-  private filterActivities(): void {
-    let activities: Array<IActivity> = { ...this.calendarData.activities };
-    activities = activities.filter(a => a.area === this.currentArea && a.name === this.currentActivity && a.trainer === this.currentTrainer);
-    this.activities = activities;
   }
 }

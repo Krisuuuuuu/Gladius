@@ -33,7 +33,7 @@ export class ChangePasswordComponent implements OnInit {
         newPassword: this.passwordForm.controls['newPassword'].value
       };
 
-      this.store.dispatch(UserActions.updateUserPassword({ token: "", userPassword: changePassword }));
+      this.store.dispatch(UserActions.updateUserPassword({ userPassword: changePassword }));
       this.router.navigateByUrl("panel/edit/calendar");
     }
    }

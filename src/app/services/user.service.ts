@@ -21,19 +21,19 @@ export class UserService {
     return this.httpClient.post<string>(url, signInData);
   }
 
-  getUserProfile(email: string): Observable<IUserProfile> {
+  getUserProfile(): Observable<IUserProfile> {
     const url: string = `${this.baseUrl}/client/`;
 
     return this.httpClient.get<IUserProfile>(url);
   }
 
-  putDataToEditUserProfile(email: string, userProfile: IUserProfile): Observable<IUserProfile> {
+  putDataToEditUserProfile(userProfile: IUserProfile): Observable<IUserProfile> {
     const url: string = `${this.baseUrl}/client/edit`;
 
     return this.httpClient.put<IUserProfile>(url, userProfile);
   }
 
-  putDataToEditUserPassword(email: string, changePassword: IChangePassword): Observable<IChangePassword> {
+  putDataToEditUserPassword(changePassword: IChangePassword): Observable<IChangePassword> {
     const url: string = `${this.baseUrl}/client/editPassword`;
 
     return this.httpClient.put<IChangePassword>(url, changePassword);

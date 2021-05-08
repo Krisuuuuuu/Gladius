@@ -17,12 +17,13 @@ export class GymSelectionComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.select(GymSelectionSelectors.selectGyms).subscribe(
-      gyms => this.gyms = gyms
+      gyms => {
+        this.gyms = gyms;
+        if(this.gyms !== undefined && this.gyms.length > 0)
+          this.changeCurrentGym(this.gyms[0]);
+      }
     );
     this.getGyms();
-
-    if(this.gyms !== undefined && this.gyms.length > 0)
-      this.changeCurrentGym(this.gyms[0]);
   }
 
   changeCurrentGym(gym: IGym): void {

@@ -7,19 +7,13 @@
     <mat-form-field appearance="fill">
       <mat-label>Area</mat-label>
       <mat-select>
-        <mat-option *ngFor='let area of areas' [value]='area' (change)="changeCurrentArea(area)">{{area}}</mat-option>
+        <mat-option *ngFor='let area of areas' [value]='area'>{{area}}</mat-option>
       </mat-select>
     </mat-form-field>
     <mat-form-field appearance="fill">
-      <mat-label>Classes</mat-label>
+      <mat-label>Activities</mat-label>
       <mat-select>
-        <mat-option *ngFor='let activity of activities' [value]='activity' (change)="changeCurrentArea(activity)">{{activity}}</mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>Trainer</mat-label>
-      <mat-select>
-        <mat-option *ngFor='let trainer of trainers' [value]='trainer' (change)="changeCurrentArea(trainer)">{{trainer}}</mat-option>
+        <mat-option *ngFor='let activity of activities' [value]='activity'>{{activity}}</mat-option>
       </mat-select>
     </mat-form-field>
     <button>Reset</button>

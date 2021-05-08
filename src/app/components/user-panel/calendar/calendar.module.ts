@@ -11,6 +11,10 @@ import { HeaderButtonComponent } from './header-button/header-button.component';
 import { CalendarHourComponent } from './calendar-hour/calendar-hour.component';
 import { CalendarCardComponent } from './calendar-card/calendar-card.component';
 import { CalendarPanelComponent } from './calendar-panel/calendar-panel.component';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { CalendarReducer } from 'src/app/state+/reducers/calendar.reducers';
+import { CalendarEffects } from 'src/app/state+/effects/calendar.effects';
 
 
 
@@ -27,7 +31,9 @@ import { CalendarPanelComponent } from './calendar-panel/calendar-panel.componen
     CommonModule,
     MatIconModule,
     DialogsModule,
-    MatSelectModule
+    MatSelectModule,
+    StoreModule.forFeature('calendar', CalendarReducer),
+    EffectsModule.forFeature([CalendarEffects]),
   ],
   exports: [CalendarComponent]
 })

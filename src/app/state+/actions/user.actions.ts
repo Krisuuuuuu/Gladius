@@ -13,8 +13,7 @@ const signOut = createAction(
 );
 
 const loadUserProfile = createAction(
-  '[User Profile] Load user profile',
-  props<{ token: string }>()
+  '[User Profile] Load user profile'
 );
 
 const userProfileReceived = createAction(
@@ -24,7 +23,7 @@ const userProfileReceived = createAction(
 
 const updateUserProfile = createAction(
   '[User Profile] User profile changed',
-  props<{ token: string, userProfile: IUserProfile }>()
+  props<{ userProfile: IUserProfile }>()
 );
 
 const userProfileUpdatedSuccessfully = createAction(
@@ -33,7 +32,7 @@ const userProfileUpdatedSuccessfully = createAction(
 
 const updateUserPassword = createAction(
   '[User Profile] User password updated',
-  props<{ token: string, userPassword: IChangePassword }>()
+  props<{ userPassword: IChangePassword }>()
 );
 
 const userPasswordUpdatedSuccessfully = createAction(
