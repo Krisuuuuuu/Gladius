@@ -13,7 +13,7 @@ import { UserProfileSelectors } from 'src/app/state+/selectors/user-profile.sele
   encapsulation: ViewEncapsulation.None
 })
 export class ClientInfoComponent implements OnInit {
-  userProfile: IUserProfile | null;
+  userProfile: IUserProfile;
 
   clientInfoForm: FormGroup;
 
@@ -21,6 +21,10 @@ export class ClientInfoComponent implements OnInit {
 
   ngOnInit(): void {
     this.clientInfoForm = this.formBuilder.group({
+      name: '',
+      surname: '',
+      pesel: '',
+      birthDate: '',
       country: '',
       city: '',
       postalCode: '',
@@ -30,7 +34,21 @@ export class ClientInfoComponent implements OnInit {
     });
 
     this.store.select(UserProfileSelectors.selectUserProfile).subscribe(
-      userProfile => this.userProfile = userProfile
+      userProfile => {
+        if(Object.keys(userProfile).length > 0) {
+          this.userProfile = userProfile;
+          this.clientInfoForm.controls['name'].setValue(userProfile.name);
+          this.clientInfoForm.controls['surname'].setValue(userProfile.surname);
+          this.clientInfoForm.controls['pesel'].setValue(userProfile.pesel);
+          this.clientInfoForm.controls['birthDate'].setValue(userProfile.birth_date);
+          this.clientInfoForm.controls['country'].setValue(userProfile.country);
+          this.clientInfoForm.controls['city'].setValue(userProfile.city);
+          this.clientInfoForm.controls['postalCode'].setValue(userProfile.postal_code);
+          this.clientInfoForm.controls['street'].setValue(userProfile.street);
+          this.clientInfoForm.controls['email'].setValue(userProfile.email);
+          this.clientInfoForm.controls['phoneNumber'].setValue(userProfile.phone_number);
+        }
+      }
     );
 
     this.getUserProfile();
@@ -38,11 +56,11 @@ export class ClientInfoComponent implements OnInit {
 
   save(): void {
     const userProfile: IUserProfile = {
-      id: this.userProfile !== null ? this.userProfile.id : '',
-      name: this.userProfile !== null ? this.userProfile.name : '',
-      surname: this.userProfile !== null ? this.userProfile.surname : '',
-      pesel: this.userProfile !== null ? this.userProfile.pesel : '',
-      birth_date: this.userProfile !== null ? this.userProfile.birth_date : '',
+      id: this.userProfile.id,
+      name: this.userProfile.name,
+      surname: this.userProfile.surname,
+      pesel: this.userProfile.pesel,
+      birth_date: this.userProfile.birth_date,
       country: this.clientInfoForm.controls['country'].value,
       city: this.clientInfoForm.controls['city'].value,
       street: this.clientInfoForm.controls['street'].value,

@@ -41,5 +41,6 @@ export class MainPageEffects {
           localStorage.clear();
         })
       ),
+      { dispatch: false }
     );
 }

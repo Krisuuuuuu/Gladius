@@ -43,7 +43,8 @@ export class CalendarComponent implements OnInit {
         if(result === true){
           const newBooking: IAddBooking = {
             user_email: "mock",
-            activity_id: activity.id
+            activity_id: activity.id,
+            area_id: ''
           };
 
           this.store.dispatch(calendarActions.newActivityBooked({ booking: newBooking }));
