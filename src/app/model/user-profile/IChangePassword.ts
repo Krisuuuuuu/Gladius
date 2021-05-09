@@ -1,6 +1,5 @@
 
 export interface IChangePassword {
-  email: string;
   password: string;
-  newPassword: string;
+  new_password: string;
 }

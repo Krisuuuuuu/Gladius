@@ -20,21 +20,23 @@ export class UserProfileEffects {
     );
   });
 
-  updateUserProfile$ = createEffect(() => {
-    return this.actions$.pipe(
+  updateUserProfile$ = createEffect(() =>
+    this.actions$.pipe(
       ofType(importedActions.UserActions.updateUserProfile),
       mergeMap(({ userProfile }) => this.userService.putDataToEditUserProfile(userProfile).pipe(
         map(() => importedActions.UserActions.userProfileUpdatedSuccessfully())
       ))
-    );
-  });
+    ),
+    { dispatch: false }
+  );
 
-  updateUserPassword$ = createEffect(() => {
-    return this.actions$.pipe(
+  updateUserPassword$ = createEffect(() =>
+    this.actions$.pipe(
       ofType(importedActions.UserActions.updateUserPassword),
       mergeMap(({ userPassword }) => this.userService.putDataToEditUserPassword(userPassword).pipe(
         map(() => importedActions.UserActions.userProfileUpdatedSuccessfully())
       ))
-    )
-  });
+    ),
+    { dispatch: false }
+  );
 }

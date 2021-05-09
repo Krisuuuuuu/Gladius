@@ -28,13 +28,14 @@ export class ChangePasswordComponent implements OnInit {
   save(): void {
     if(this.passwordForm.controls['newPassword'].value === this.passwordForm.controls['newRePassword'].value){
       const changePassword: IChangePassword = {
-        email: 'mock',
         password: this.passwordForm.controls['currentPassword'].value,
-        newPassword: this.passwordForm.controls['newPassword'].value
+        new_password: this.passwordForm.controls['newPassword'].value
       };
 
       this.store.dispatch(UserActions.updateUserPassword({ userPassword: changePassword }));
-      this.router.navigateByUrl("panel/edit/calendar");
+      this.passwordForm.reset();
+
+      this.router.navigateByUrl("panel/edit/profile");
     }
    }
 

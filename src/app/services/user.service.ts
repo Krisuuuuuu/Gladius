@@ -36,14 +36,14 @@ export class UserService {
 
   putDataToEditUserProfile(userProfile: IUserProfile): Observable<IUserProfile> {
     authenticationHeader.headers = authenticationHeader.headers.set('Authorization', 'Token ' + localStorage.getItem('token'));
-    const url: string = `${this.baseUrl}/client/edit`;
+    const url: string = `${this.baseUrl}/client/edit/`;
 
     return this.httpClient.put<IUserProfile>(url, userProfile, authenticationHeader);
   }
 
   putDataToEditUserPassword(changePassword: IChangePassword): Observable<IChangePassword> {
     authenticationHeader.headers = authenticationHeader.headers.set('Authorization', 'Token ' + localStorage.getItem('token'));
-    const url: string = `${this.baseUrl}/client/editPassword`;
+    const url: string = `${this.baseUrl}/client/editPassword/`;
 
     return this.httpClient.put<IChangePassword>(url, changePassword, authenticationHeader);
   }

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { IUserProfile } from 'src/app/model/user-profile/IUserProfile';
@@ -21,10 +21,10 @@ export class ClientInfoComponent implements OnInit {
 
   ngOnInit(): void {
     this.clientInfoForm = this.formBuilder.group({
-      name: '',
-      surname: '',
-      pesel: '',
-      birthDate: '',
+      name: new FormControl({ value: '', disabled: true }),
+      surname: new FormControl({ value: '', disabled: true }),
+      pesel: new FormControl({ value: '', disabled: true }),
+      birthDate: new FormControl({ value: '', disabled: true }),
       country: '',
       city: '',
       postalCode: '',
@@ -68,9 +68,9 @@ export class ClientInfoComponent implements OnInit {
       email: this.clientInfoForm.controls['email'].value,
       phone_number: this.clientInfoForm.controls['phoneNumber'].value,
     };
-
+    debugger
     this.store.dispatch(UserActions.updateUserProfile({ userProfile: userProfile }));
-    this.router.navigateByUrl("panel/edit/calendar");
+    this.router.navigateByUrl("panel/gyms");
   }
 
   changePassword(): void {
