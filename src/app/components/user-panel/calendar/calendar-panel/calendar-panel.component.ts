@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { IActivityInfo } from 'src/app/model/calendar/IActivityInfo';
 import { IGymInfo } from 'src/app/model/calendar/IGymInfo';
 import { IGym } from 'src/app/model/gym-selection/IGym';
 import { calendarActions } from 'src/app/state+/actions/calendar.actions';
@@ -25,53 +24,65 @@ export class CalendarPanelComponent implements OnInit {
   currentActivity: string = '';
 
   areas: string[] = [];
+  areasToDisplay: string[] = [];
   activities: string[] = [];
-  trainers: string[] = [];
+  activitiesToDisplay: string[] = [];
 
   constructor(private router: Router, private store: Store<any>) {}
 
   ngOnInit(): void {
-    // this.store.select(CalendarSelectors.selectCurrentArea).subscribe(
-    //   area => this.currentArea = area
-    // );
+    this.store.select(CalendarSelectors.selectCurrentArea).subscribe(
+      area => this.currentArea = area
+    );
 
-    // this.store.select(CalendarSelectors.selectCurrentActivity).subscribe(
-    //   activity => this.currentActivity = activity
-    // );
+    this.store.select(CalendarSelectors.selectCurrentActivity).subscribe(
+      activity => this.currentActivity = activity
+    );
 
-    // this.store.select(GymSelectionSelectors.selectCurrentGym).subscribe(
-    //   currentGym => this.currentGym = currentGym
-    // );
+    this.store.select(GymSelectionSelectors.selectCurrentGym).subscribe(
+      currentGym => this.currentGym = currentGym
+    );
 
-    // this.store.select(CalendarSelectors.selectGymInfo).subscribe(
-    //   gymInfo => {
-    //     if(Object.keys(gymInfo).length > 0){
-    //       this.gymInfo = gymInfo;
-    //       this.initPanel();
-    //     }
+    this.store.select(CalendarSelectors.selectGymInfo).subscribe(
+      gymInfo => {
+        if(Object.keys(gymInfo).length > 0){
+          this.gymInfo = gymInfo;
+          this.initPanel();
+        }
+        else{
+          this.store.dispatch(GymSelectionActions.loadGyms({ companyName: environment.companyName }));
+        }
+      }
+    );
 
-    //   }
-    // );
+    this.store.select(GymSelectionSelectors.selectGyms).subscribe(
+      gyms => {
+        if(gyms.length > 0){
+          this.gyms = gyms;
 
-    // this.store.select(GymSelectionSelectors.selectGyms).subscribe(
-    //   gyms => {
-    //     if(gyms.length > 0){
-    //       this.gyms = gyms;
-
-    //       if(Object.keys(this.currentGym).length > 0){
-    //         this.store.dispatch(calendarActions.loadGymInfo({ id: this.currentGym.id }));
-    //       }
-    //       else{
-    //         this.store.dispatch(GymSelectionActions.currentGymChanged({ gym: gyms[0] }));
-    //         this.store.dispatch(calendarActions.loadGymInfo({ id: gyms[0].id }));
-    //       }
-    //     }
-    //   }
-    // );
+          if(Object.keys(this.currentGym).length > 0){
+            this.store.dispatch(calendarActions.loadGymInfo({ id: this.currentGym.id }));
+          }
+          else{
+            this.store.dispatch(GymSelectionActions.currentGymChanged({ gym: gyms[0] }));
+            this.store.dispatch(calendarActions.loadGymInfo({ id: gyms[0].id }));
+          }
+        }
+      }
+    );
   }
 
   redirectToGymSelection(): void {
     this.router.navigateByUrl("panel");
+  }
+
+  changeCurrentArea(name: string): void {
+    this.store.dispatch(calendarActions.currentAreaChanged({ areaName: name }));
+    this.customizeActivities();
+  }
+
+  changeCurrentActivity(name: string): void {
+    this.store.dispatch(calendarActions.currentActivityChanged({ activityName: name }));
   }
 
   private initPanel(): void {
@@ -84,5 +95,12 @@ export class CalendarPanelComponent implements OnInit {
       this.activities = this.gymInfo.areas[0].activities.map(a => a.name);
       this.store.dispatch(calendarActions.currentActivityChanged({ activityName: this.activities[0]}));
     }
+  }
+
+  private customizeActivities(): void {
+    const index: number = this.areas.indexOf(this.currentArea);
+    let activities: string [] = this.gymInfo.areas[index].activities.map(a => a.name);
+    this.activities = activities;
+    this.store.dispatch(calendarActions.currentActivityChanged({ activityName: this.activities[0]}));
   }
 }
