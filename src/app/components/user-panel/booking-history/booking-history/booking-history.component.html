@@ -3,19 +3,19 @@
     <div class="panel-container animate__animated animate__fadeIn">
       <h2>Booking history</h2>
       <mat-tab-group mat-align-tabs="start">
+        <mat-tab label="All">
+          <ng-template matTabContent>
+            <app-booking-table [bookingsType]="'All'"></app-booking-table>
+          </ng-template>
+        </mat-tab>
         <mat-tab label="Active">
           <ng-template matTabContent>
-            <app-booking-table [data]="activeBookingHistory"></app-booking-table>
+            <app-booking-table [bookingsType]="'Active'"></app-booking-table>
           </ng-template>
         </mat-tab>
         <mat-tab label="Cancelled">
           <ng-template matTabContent>
-            <app-booking-table [data]="cancelledBookingHistory"></app-booking-table>
-          </ng-template>
-        </mat-tab>
-        <mat-tab label="All">
-          <ng-template matTabContent>
-            <app-booking-table [data]="bookingHistory"></app-booking-table>
+            <app-booking-table [bookingsType]="'Canceled'"></app-booking-table>
           </ng-template>
         </mat-tab>
       </mat-tab-group>

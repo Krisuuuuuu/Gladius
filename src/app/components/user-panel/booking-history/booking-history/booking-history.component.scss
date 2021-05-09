@@ -1,4 +1,5 @@
 @import '../../../../utils/mixins-meta.scss';
+@import '../../../../utils/theme-meta.scss';
 
 section.booking-history-wrapper {
   position: relative;
@@ -15,7 +16,10 @@ section.booking-history-wrapper {
   }
 
   div.panel-container {
-    @include panel();
+    margin: 0 auto;
+    width: $panel-width;
+    padding: $panel-padding;
+    background-color: $panel-part-bg;
 
     h2 {
       @include h2(30px);

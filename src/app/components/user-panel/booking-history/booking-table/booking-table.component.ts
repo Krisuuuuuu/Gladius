@@ -1,5 +1,5 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { AfterViewInit, Input, OnChanges, ViewChild } from '@angular/core';
+import { AfterViewInit, Input, OnInit, ViewChild } from '@angular/core';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -9,7 +9,7 @@ import { ConfirmDialogComponent } from 'src/app/components/dialogs/confirm-dialo
 import { IBooking } from 'src/app/model/booking-history/IBooking';
 import { IDeleteBooking } from 'src/app/model/booking-history/IDeleteBooking';
 import { BookingHistoryActions } from 'src/app/state+/actions/booking-history.actions';
-import { bookingHistoryReducer } from 'src/app/state+/reducers/booking-history.reducers';
+import { BookingHistorySelectors } from 'src/app/state+/selectors/booking-history.selectors';
 
 @Component({
   selector: 'app-booking-table',
@@ -25,9 +25,14 @@ import { bookingHistoryReducer } from 'src/app/state+/reducers/booking-history.r
   encapsulation: ViewEncapsulation.None
 })
 
-export class BookingTableComponent implements AfterViewInit, OnChanges {
+export class BookingTableComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  @Input() data: Array<IBooking> = [];
+
+  @Input()bookingsType: string;
+
+  bookingsHistory: Array<IBooking> = [];
+
+  data: Array<IBooking> = [];
 
   columnsToDisplay: string[] = ["No.", "Activity Name", "Date", "Start Hour", "End Hour", "Booking Status"];
 
@@ -37,24 +42,33 @@ export class BookingTableComponent implements AfterViewInit, OnChanges {
 
   currentSize: number;
 
-  pageSizes: Array<number> = [];
-
   totalSize: number;
 
   constructor(public dialog: MatDialog, private store: Store<any>) { }
+
+  ngOnInit(): void {
+    this.store.select(BookingHistorySelectors.selectBookings).subscribe(
+      bookingsHistory => {
+        if(bookingsHistory.length > 0){
+          this.bookingsHistory = bookingsHistory;
+          this.totalSize = bookingsHistory.length;
+          this.filterData();
+          this.dataSource = new MatTableDataSource<IBooking>(this.data);
+        }
+      }
+    );
+
+    this.getBookingHistory();
+  }
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
   }
 
-  ngOnChanges(): void {
-    this.customizePaginator();
-  }
-
   cancelBooking(booking: IBooking): void {
     let message: string;
 
-    message = "Do you want to book this activity?";
+    message = "Do you want to remove this reservation?";
 
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       data: message
@@ -65,27 +79,35 @@ export class BookingTableComponent implements AfterViewInit, OnChanges {
         if(result === true){
 
           const bookingToDelete: IDeleteBooking = {
-            user_email: "mock",
             booking_id: booking.id
           };
 
           this.store.dispatch(BookingHistoryActions.deleteBooking({ booking: bookingToDelete }));
+          let elements: Array<IBooking> = this.data.filter(b => b.id === bookingToDelete.booking_id);
+          elements[0].booking_status = 'Cancelled';
+          this.filterData();
+          this.dataSource = new MatTableDataSource<IBooking>(this.data);
         }
     });
   }
 
-  private customizePaginator(): void {
-    this.totalSize = this.data.length;
-    const pageSizes: Array<number> = [1, 5, 10, 25, 50, 100];
-
-    for (let i = 0; i < pageSizes.length; i++) {
-      if(pageSizes[i] <= this.totalSize)
-        this.pageSizes.push(this.pageSizes[i]);
+  private filterData(): void {
+    switch (this.bookingsType) {
+      case "All":
+        this.data = this.bookingsHistory;
+        break;
+      case "Active":
+        this.data = this.bookingsHistory.filter(bk => bk.booking_status === 'Active');
+        break;
+      case "Canceled":
+        this.data = this.bookingsHistory.filter(bk => bk.booking_status === 'Canceled');
+        break;
+      default:
+        break;
     }
+  }
 
-    if(this.totalSize <= 10 && !this.pageSizes.includes(this.totalSize))
-      this.pageSizes.push(this.totalSize);
-
-    this.currentSize = this.pageSizes[0];
+  private getBookingHistory(): void {
+    this.store.dispatch(BookingHistoryActions.loadBookingHistory());
   }
 }

@@ -4,7 +4,6 @@ import { IDeleteBooking } from "src/app/model/booking-history/IDeleteBooking";
 
 const loadBookingHistory = createAction(
   '[Booking History] Load booking history',
-  props<{ email: string }>()
 );
 
 const bookingHistoryReceived = createAction(

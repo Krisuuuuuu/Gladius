@@ -28,41 +28,41 @@ export class AppDataService {
     authenticationHeader.headers = authenticationHeader.headers.set('Authorization', 'Token ' + localStorage.getItem('token'));
     const url: string = `${this.baseUrl}/gym/${companyName}/gyms/`;
 
-    return this.httpClient.get<Array<IGym>>(url);
+    return this.httpClient.get<Array<IGym>>(url, authenticationHeader);
   }
 
   getGymInfo(gymId: string): Observable<IGymInfo> {
     authenticationHeader.headers = authenticationHeader.headers.set('Authorization', 'Token ' + localStorage.getItem('token'));
     const url: string = `${this.baseUrl}/gym/${gymId}/info/`;
 
-    return this.httpClient.get<IGymInfo>(url);
+    return this.httpClient.get<IGymInfo>(url, authenticationHeader);
   }
 
   getActivitiesForWeek(startDate: string, endDate: string): Observable<ICalendarData> {
     authenticationHeader.headers = authenticationHeader.headers.set('Authorization', 'Token ' + localStorage.getItem('token'));
     const url: string = `${this.baseUrl}/reservation/${startDate}/${endDate}/`;
 
-    return this.httpClient.get<ICalendarData>(url);
+    return this.httpClient.get<ICalendarData>(url, authenticationHeader);
   }
 
-  getBookingsHistory(email: string): Observable<Array<IBooking>> {
+  getBookingsHistory(): Observable<Array<IBooking>> {
     authenticationHeader.headers = authenticationHeader.headers.set('Authorization', 'Token ' + localStorage.getItem('token'));
-    const url: string = `${this.baseUrl}/reservations/${email}/history/`;
+    const url: string = `${this.baseUrl}/reservations/history/`;
 
-    return this.httpClient.get<Array<IBooking>>(url);
+    return this.httpClient.get<Array<IBooking>>(url, authenticationHeader);
   }
 
   postDataToAddBooking(booking: IAddBooking): Observable<IAddBooking> {
     authenticationHeader.headers = authenticationHeader.headers.set('Authorization', 'Token ' + localStorage.getItem('token'));
     const url: string = `${this.baseUrl}/reservation/add/`;
 
-    return this.httpClient.post<IAddBooking>(url, booking);
+    return this.httpClient.post<IAddBooking>(url, booking, authenticationHeader);
   }
 
   postDataToRemoveBooking(booking: IDeleteBooking): Observable<IDeleteBooking> {
     authenticationHeader.headers = authenticationHeader.headers.set('Authorization', 'Token ' + localStorage.getItem('token'));
-    const url: string = `${this.baseUrl}/reservation/delete/`;
+    const url: string = `${this.baseUrl}/reservations/delete/`;
 
-    return this.httpClient.post<IDeleteBooking>(url, booking);
+    return this.httpClient.post<IDeleteBooking>(url, booking, authenticationHeader);
   }
 }
