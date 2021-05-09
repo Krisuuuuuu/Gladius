@@ -14,7 +14,7 @@ import { UserActions } from 'src/app/state+/actions/user.actions';
 export class SignInPartComponent implements OnInit {
   signInForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private store: Store<any>) {}
+  constructor(private formBuilder: FormBuilder, private store: Store<any>) {}
 
   ngOnInit(): void {
     this.signInForm = this.formBuilder.group({
@@ -24,13 +24,12 @@ export class SignInPartComponent implements OnInit {
   }
 
   signIn(): void {
-    // const signInData: ISignInData = {
-    //   username: this.signInForm.controls['email'].value,
-    //   password: this.signInForm.controls['password'].value
-    // };
+    const signInData: ISignInData = {
+      username: this.signInForm.controls['email'].value,
+      password: this.signInForm.controls['password'].value
+    };
 
-    // this.store.dispatch(UserActions.signIn({ signInData: signInData }));
-
-    this.router.navigateByUrl('panel');
+    this.store.dispatch(UserActions.signInButtonClicked({ signInData: signInData }));
+    this.signInForm.reset();
   }
 }

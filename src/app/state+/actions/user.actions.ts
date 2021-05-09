@@ -3,13 +3,18 @@ import { ISignInData } from "src/app/model/main-page/ISignInData";
 import { IChangePassword } from "src/app/model/user-profile/IChangePassword";
 import { IUserProfile } from "src/app/model/user-profile/IUserProfile";
 
-const signIn = createAction(
-  '[Main Page] Sign In',
+const signInButtonClicked = createAction(
+  '[Main Page] Sign in button clicked',
   props<{ signInData: ISignInData }>()
+)
+
+const signInSuccess = createAction(
+  '[Main Page] Sign in',
+  props< {token: any }>()
 );
 
 const signOut = createAction(
-  '[User Panel] Sign Out'
+  '[User Panel] Sign out'
 );
 
 const loadUserProfile = createAction(
@@ -40,7 +45,8 @@ const userPasswordUpdatedSuccessfully = createAction(
 );
 
 export const UserActions = {
-  signIn,
+  signInButtonClicked,
+  signInSuccess,
   signOut,
   loadUserProfile,
   userProfileReceived,

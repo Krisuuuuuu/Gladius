@@ -4,6 +4,7 @@ import { IGym } from 'src/app/model/gym-selection/IGym';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { GymSelectionActions } from 'src/app/state+/actions/gym-selection.actions';
 import { GymSelectionSelectors } from 'src/app/state+/selectors/gym-selection.selectors';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-gym-selection',
@@ -11,6 +12,8 @@ import { GymSelectionSelectors } from 'src/app/state+/selectors/gym-selection.se
   styleUrls: ['./gym-selection.component.scss']
 })
 export class GymSelectionComponent implements OnInit {
+  companyName: string = environment.companyName;
+
   gyms: Array<IGym>;
 
   constructor(private store: Store<any>) { }
@@ -31,6 +34,6 @@ export class GymSelectionComponent implements OnInit {
   }
 
   private getGyms(): void {
-    this.store.dispatch(GymSelectionActions.loadGyms({ companyName: "MyCompany" }));
+    this.store.dispatch(GymSelectionActions.loadGyms({ companyName: this.companyName }));
   }
 }
