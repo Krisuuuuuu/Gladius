@@ -1,8 +1,9 @@
-<td class="card">
+<td class="card {{specialClass}}">
   <div class="content">
-    <p class="hour">{{ activity.start_hour }}</p>
-    <p class="title">{{ activity.name }}</p>
-    <p class="places">{{ activity.current_bookings_number }} / {{ activity.max_clients }}</p>
-    <div class="duration"><mat-icon>access_time</mat-icon><span> {{ calculateDuration() }} </span></div>
+    <p class="hour">{{ visible == true ? activity.start_hour : 'tarar' }}</p>
+    <p class="title">{{ visible == true ? activity.name : '' }}</p>
+    <p class="places">{{ visible == true ? activity.current_bookings_number : '' }} /
+      {{ visible == true ? activity.max_clients : ''}}</p>
+    <div class="duration"><mat-icon>access_time</mat-icon><span> {{ visible == true ? calculateDuration() : ''}} </span></div>
   </div>
 </td>

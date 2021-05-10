@@ -40,7 +40,7 @@ export class AppDataService {
 
   getActivitiesForWeek(startDate: string, endDate: string): Observable<ICalendarData> {
     authenticationHeader.headers = authenticationHeader.headers.set('Authorization', 'Token ' + localStorage.getItem('token'));
-    const url: string = `${this.baseUrl}/reservation/${startDate}/${endDate}/`;
+    const url: string = `${this.baseUrl}/reservations/${startDate}/${endDate}/`;
 
     return this.httpClient.get<ICalendarData>(url, authenticationHeader);
   }
@@ -54,7 +54,7 @@ export class AppDataService {
 
   postDataToAddBooking(booking: IAddBooking): Observable<IAddBooking> {
     authenticationHeader.headers = authenticationHeader.headers.set('Authorization', 'Token ' + localStorage.getItem('token'));
-    const url: string = `${this.baseUrl}/reservation/add/`;
+    const url: string = `${this.baseUrl}/reservations/add/`;
 
     return this.httpClient.post<IAddBooking>(url, booking, authenticationHeader);
   }

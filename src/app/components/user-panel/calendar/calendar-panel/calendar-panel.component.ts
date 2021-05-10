@@ -28,7 +28,7 @@ export class CalendarPanelComponent implements OnInit {
   activities: string[] = [];
   activitiesToDisplay: string[] = [];
 
-  constructor(private router: Router, private store: Store<any>) {}
+  constructor(private router: Router, private store: Store<any>) { }
 
   ngOnInit(): void {
     this.store.select(CalendarSelectors.selectCurrentArea).subscribe(
@@ -45,11 +45,11 @@ export class CalendarPanelComponent implements OnInit {
 
     this.store.select(CalendarSelectors.selectGymInfo).subscribe(
       gymInfo => {
-        if(Object.keys(gymInfo).length > 0){
+        if (Object.keys(gymInfo).length > 0) {
           this.gymInfo = gymInfo;
           this.initPanel();
         }
-        else{
+        else {
           this.store.dispatch(GymSelectionActions.loadGyms({ companyName: environment.companyName }));
         }
       }
@@ -57,13 +57,13 @@ export class CalendarPanelComponent implements OnInit {
 
     this.store.select(GymSelectionSelectors.selectGyms).subscribe(
       gyms => {
-        if(gyms.length > 0){
+        if (gyms.length > 0) {
           this.gyms = gyms;
 
-          if(Object.keys(this.currentGym).length > 0){
+          if (Object.keys(this.currentGym).length > 0) {
             this.store.dispatch(calendarActions.loadGymInfo({ id: this.currentGym.id }));
           }
-          else{
+          else {
             this.store.dispatch(GymSelectionActions.currentGymChanged({ gym: gyms[0] }));
             this.store.dispatch(calendarActions.loadGymInfo({ id: gyms[0].id }));
           }
@@ -85,22 +85,25 @@ export class CalendarPanelComponent implements OnInit {
     this.store.dispatch(calendarActions.currentActivityChanged({ activityName: name }));
   }
 
+  resetPanel(): void {
+    if (this.areas.length > 0)
+      this.store.dispatch(calendarActions.currentAreaChanged({ areaName: this.areas[0] }));
+
+    if (this.gymInfo.areas[0].activities.length > 0) {
+      this.activities = this.gymInfo.areas[0].activities.map(a => a.name);
+      this.store.dispatch(calendarActions.currentActivityChanged({ activityName: this.activities[0] }));
+    }
+  }
+
   private initPanel(): void {
     this.areas = this.gymInfo.areas.map(a => a.name);
-
-    if(this.areas.length > 0)
-      this.store.dispatch(calendarActions.currentAreaChanged({ areaName: this.areas[0]}));
-
-    if(this.gymInfo.areas[0].activities.length > 0){
-      this.activities = this.gymInfo.areas[0].activities.map(a => a.name);
-      this.store.dispatch(calendarActions.currentActivityChanged({ activityName: this.activities[0]}));
-    }
+    this.resetPanel();
   }
 
   private customizeActivities(): void {
     const index: number = this.areas.indexOf(this.currentArea);
-    let activities: string [] = this.gymInfo.areas[index].activities.map(a => a.name);
+    let activities: string[] = this.gymInfo.areas[index].activities.map(a => a.name);
     this.activities = activities;
-    this.store.dispatch(calendarActions.currentActivityChanged({ activityName: this.activities[0]}));
+    this.store.dispatch(calendarActions.currentActivityChanged({ activityName: this.activities[0] }));
   }
 }

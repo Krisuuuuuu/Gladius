@@ -14,6 +14,7 @@ $bg-primary-1: green;
 $bg-primary-2: #e23023;
 
 $bg-secondary-1: rgb(232, 239, 243, 0.5);
+$bg-secondary-2: gray;
 
 //font
 $base-font-color: $fg-primary-1;
@@ -59,11 +60,11 @@ $paginator-bg-color: rgba(255, 255, 255, 0.85);
 $round-button-bg: $all-primary-1;
 $round-button-active-bg: $all-primary-2;
 $tr-header-border: $fg-primary-2;
-$tr-border: gray;
+$tr-border: $bg-secondary-2;
 $card-bg: $all-primary-1;
 $card-hover-bg: $all-primary-2;
 $card-active-bg: $bg-primary-1;
-$card-locked-bg: $bg-primary-2;
+$card-locked-bg: $bg-secondary-2;
 $content-active: $all-secondary-1;
 
 //dialog

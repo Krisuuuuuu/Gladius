@@ -42,7 +42,7 @@ section.calendar-wrapper {
         height: 180px;
         border-bottom: 3px solid $tr-border;
 
-        .app-calendar-card.empty {
+        app-calendar-card.empty {
           opacity: 0;
           cursor: default;
         }
