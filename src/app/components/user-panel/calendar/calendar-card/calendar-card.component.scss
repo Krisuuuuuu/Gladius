@@ -18,16 +18,18 @@ td.card {
       font-size: $calendar-font-size;
     }
 
-    p.hour {
-      font-weight: 700;
-    }
 
     div.duration {
       display: flex;
       align-items: center;
 
+      p.hour {
+        font-weight: 700;
+      }
+
       .mat-icon {
         font-weight: 500;
+        margin-right: 5px;
       }
 
       span {

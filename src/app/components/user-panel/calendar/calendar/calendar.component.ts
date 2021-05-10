@@ -1,10 +1,7 @@
 import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { ConfirmDialogComponent } from 'src/app/components/dialogs/confirm-dialog/confirm-dialog.component';
 import { IActivity } from 'src/app/model/calendar/IActivity';
-import { IAddBooking } from 'src/app/model/calendar/IAddBooking';
 import { ICalendarData } from 'src/app/model/calendar/ICalendarData';
 import { IDateToDisplay } from 'src/app/model/calendar/IDateToDisplay';
 import { IGym } from 'src/app/model/gym-selection/IGym';
@@ -66,9 +63,14 @@ export class CalendarComponent implements OnInit {
 
 
   checkIfActivityExists(hour: string, dateToDisplay: IDateToDisplay): boolean {
-    hour = hour.slice(0,4);
+    if(+hour < 10)
+      hour = '0' + hour;
+
+    hour = hour.slice(0, 4).replace('.', ':');
+
     let date: string = dateToDisplay.date.slice(0, 10);
     let result: boolean = false;
+
     this.activities = [
       {
         id: "1",
@@ -78,8 +80,8 @@ export class CalendarComponent implements OnInit {
         date: "2021-05-10",
         current_bookings_number: 250,
         max_clients: 250,
-        start_hour: "8.00",
-        end_hour: "10.00",
+        start_hour: "08:00",
+        end_hour: "10:00",
         is_booked_by_me: false
       },
       {
@@ -90,8 +92,8 @@ export class CalendarComponent implements OnInit {
         date: "2021-05-11",
         current_bookings_number: 250,
         max_clients: 250,
-        start_hour: "8.00",
-        end_hour: "10.00",
+        start_hour: "08:00",
+        end_hour: "10:00",
         is_booked_by_me: true
       },
       {
@@ -102,8 +104,8 @@ export class CalendarComponent implements OnInit {
         date: "2021-05-12",
         current_bookings_number: 244,
         max_clients: 250,
-        start_hour: "8.00",
-        end_hour: "10.00",
+        start_hour: "08:00",
+        end_hour: "10:00",
         is_booked_by_me: true
       },
       {
@@ -114,8 +116,8 @@ export class CalendarComponent implements OnInit {
         date: "2021-05-10",
         current_bookings_number: 244,
         max_clients: 250,
-        start_hour: "16.00",
-        end_hour: "18.00",
+        start_hour: "16:00",
+        end_hour: "18:00",
         is_booked_by_me: false
       },
       {
@@ -126,8 +128,8 @@ export class CalendarComponent implements OnInit {
         date: "2021-05-11",
         current_bookings_number: 244,
         max_clients: 250,
-        start_hour: "12.00",
-        end_hour: "14.00",
+        start_hour: "12:00",
+        end_hour: "14:00",
         is_booked_by_me: false
       },
       {
@@ -138,15 +140,15 @@ export class CalendarComponent implements OnInit {
         date: "2021-05-15",
         current_bookings_number: 244,
         max_clients: 250,
-        start_hour: "8.00",
-        end_hour: "10.00",
+        start_hour: "08:00",
+        end_hour: "10:00",
         is_booked_by_me: false
       },
     ]
 
     if(this.activities.length > 0) {
       let filteredActivities: Array<IActivity> = this.activities.filter(a => a.date.slice(0, 10) == date
-        && a.start_hour.slice(0,4) == hour);
+        && a.start_hour.slice(0, 4) == hour);
         if(filteredActivities.length > 0)
         result = true;
     }
@@ -155,8 +157,12 @@ export class CalendarComponent implements OnInit {
   }
 
   getActivity(hour: string, dateToDisplay: IDateToDisplay): IActivity {
-    hour = hour.slice(0,4);
+    if(+hour < 10)
+    hour = '0' + hour;
+
+    hour = hour.slice(0,4).replace('.', ':');
     let date: string = dateToDisplay.date.slice(0, 10);
+
     let filteredActivities: Array<IActivity> = this.activities.filter(a => a.date.slice(0, 10) == date
     && a.start_hour.slice(0,4) == hour);
 

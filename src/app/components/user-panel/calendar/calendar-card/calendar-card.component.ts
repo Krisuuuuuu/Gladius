@@ -24,16 +24,6 @@ export class CalendarCardComponent implements OnChanges {
       this.setColorOfCard();
   }
 
-  calculateDuration(): string {
-    const startDate: Date = new Date(this.activity.start_hour);
-    const endDate: Date = new Date(this.activity.end_hour);
-
-    const result: number = startDate.getTime() - endDate.getTime();
-    const resultDate = new Date(result);
-
-    return resultDate.toString();
-  }
-
   setColorOfCard(): void {
     if(this.activity.is_booked_by_me)
       this.specialClass = 'active';
