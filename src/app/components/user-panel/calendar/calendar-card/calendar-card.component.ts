@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { ConfirmDialogComponent } from 'src/app/components/dialogs/confirm-dialog/confirm-dialog.component';
 import { IActivity } from 'src/app/model/calendar/IActivity';
 import { IAddBooking } from 'src/app/model/calendar/IAddBooking';
+import { IAreaInfo } from 'src/app/model/calendar/IAreaInfo';
 import { calendarActions } from 'src/app/state+/actions/calendar.actions';
 
 @Component({
@@ -14,6 +15,7 @@ import { calendarActions } from 'src/app/state+/actions/calendar.actions';
 export class CalendarCardComponent implements OnChanges {
   @Input() activity: IActivity;
   @Input() visible: boolean;
+  @Input() area: IAreaInfo;
 
   specialClass: string = '';
 
@@ -33,7 +35,7 @@ export class CalendarCardComponent implements OnChanges {
       this.specialClass = '';
   }
 
-  createNewBooking(activity: IActivity): void {
+  createNewBooking(): void {
     if(this.specialClass === 'active' || this.specialClass === 'locked')
       return;
 
@@ -49,8 +51,8 @@ export class CalendarCardComponent implements OnChanges {
       result => {
         if (result === true) {
           const newBooking: IAddBooking = {
-            activity_id: activity.id,
-            area_id: ''
+            activity_id: this.activity.id,
+            area_id: this.area.id,
           };
 
           this.store.dispatch(calendarActions.newActivityBooked({ booking: newBooking }));

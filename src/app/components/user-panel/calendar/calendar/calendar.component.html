@@ -12,7 +12,7 @@
 
         <ng-container *ngFor="let dateToDisplay of calendarData.display_dates">
           <app-calendar-card *ngIf="checkIfActivityExists(hour, dateToDisplay); else branch"
-            [activity]="getActivity(hour, dateToDisplay)" [visible]="true">
+            [activity]="getActivity(hour, dateToDisplay)" [visible]="true" [area]="getCurrentAreaModel()">
           </app-calendar-card>
         </ng-container>
 
