@@ -21,7 +21,7 @@ export class BookingHistoryEffects {
       mergeMap(() => this.appDataService.getBookingsHistory().pipe(
         map(bookingHistory => importedActions.BookingHistoryActions.bookingHistoryReceived({ bookingHistory })),
         catchError(() => {
-          this.toastr.error("Loading of booking history failed.");
+          this.toastr.error("Loading of booking history failed");
           return of(importedActions.BookingHistoryActions.loadingBookingHistoryFailed());
         })
       ))
@@ -35,7 +35,7 @@ export class BookingHistoryEffects {
           tap(() => this.toastr.success("Reservation has been cancelled successfully")),
           map(() => importedActions.BookingHistoryActions.deletingBookingSuccess()),
           catchError(() => {
-            this.toastr.error("Reservation canceling failed.");
+            this.toastr.error("Reservation canceling failed");
             return of(importedActions.BookingHistoryActions.loadingBookingHistoryFailed());
           })
         ))

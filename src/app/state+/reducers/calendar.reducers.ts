@@ -17,6 +17,12 @@ const reducer = createReducer(
       gymInfo: gymInfo
     };
   }),
+  on(calendarActions.loadingGymInfoFailed, (state: ICalendarState) => {
+    return {
+      ...state,
+      isGymInfoReceiving: false,
+    };
+  }),
   on(calendarActions.loadCalendarData, (state: ICalendarState) => {
     return {
       ...state,
@@ -30,6 +36,12 @@ const reducer = createReducer(
       calendarData: calendarData
     };
   }),
+  on(calendarActions.loadingCalendarDataFailed, (state: ICalendarState) => {
+    return {
+      ...state,
+      isCalendarDataReceiving: false,
+    };
+  }),
   on(calendarActions.newActivityBooked, (state: ICalendarState) => {
     return {
       ...state,
@@ -37,6 +49,12 @@ const reducer = createReducer(
     };
   }),
   on(calendarActions.newActivityBookedSuccess, (state: ICalendarState) => {
+    return {
+      ...state,
+      isNewBookingAdding: false
+    };
+  }),
+  on(calendarActions.bookingNewActivityFailed, (state: ICalendarState) => {
     return {
       ...state,
       isNewBookingAdding: false

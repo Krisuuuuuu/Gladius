@@ -13,6 +13,10 @@ const gymInfoReceived = createAction(
   props<{ gymInfo: IGymInfo }>()
 );
 
+const loadingGymInfoFailed = createAction(
+  '[Calendar] Loading gym info failed'
+);
+
 const loadCalendarData = createAction(
   '[Calendar] Load calendar data',
   props<{
@@ -24,6 +28,10 @@ const loadCalendarData = createAction(
 const calendarDataReceived = createAction(
   '[Calendar] Calendar data received',
   props<{ calendarData: ICalendarData }>()
+);
+
+const loadingCalendarDataFailed = createAction(
+  '[Calendar] Loading calendar data failed',
 );
 
 const currentAreaChanged = createAction(
@@ -54,15 +62,22 @@ const newActivityBookedSuccess = createAction(
   '[Calendar] New activity booked successfully',
 );
 
+const bookingNewActivityFailed = createAction(
+  '[Calendar] Booking of new activity failed',
+);
+
 export const calendarActions = {
   loadGymInfo,
   gymInfoReceived,
+  loadingGymInfoFailed,
   loadCalendarData,
   calendarDataReceived,
+  loadingCalendarDataFailed,
   currentAreaChanged,
   currentActivityChanged,
   currentTrainerChanged,
   allPreferencesReset,
   newActivityBooked,
-  newActivityBookedSuccess
+  newActivityBookedSuccess,
+  bookingNewActivityFailed
 }

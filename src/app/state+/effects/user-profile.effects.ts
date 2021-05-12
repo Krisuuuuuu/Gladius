@@ -22,7 +22,7 @@ export class UserProfileEffects {
       mergeMap(() => this.userService.getUserProfile().pipe(
         map(userProfile => importedActions.UserActions.userProfileReceived({ userProfile })),
         catchError(() => {
-          this.toastr.error("Loading of user profile failed.");
+          this.toastr.error("Loading of user profile failed");
           return of(importedActions.UserActions.signInFailed());
         })
       ))
@@ -36,7 +36,7 @@ export class UserProfileEffects {
         tap(() => this.toastr.success("User profile has been updated successfully")),
         map(() => importedActions.UserActions.userProfileUpdatedSuccessfully()),
         catchError(() => {
-          this.toastr.error("Updating of user profile failed.");
+          this.toastr.error("Updating of user profile failed");
           return of(importedActions.UserActions.signInFailed());
         })
       ))
@@ -51,7 +51,7 @@ export class UserProfileEffects {
         tap(() => this.toastr.success("Password has been updated successfully")),
         map(() => importedActions.UserActions.userProfileUpdatedSuccessfully()),
         catchError(() => {
-          this.toastr.error("Updating of user password failed.");
+          this.toastr.error("Updating of user password failed");
           return of(importedActions.UserActions.signInFailed());
         })
       ))

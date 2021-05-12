@@ -21,7 +21,7 @@ export class GymSelectionEffects {
       mergeMap(({ companyName }) => this.appDataService.getGyms(companyName).pipe(
         map(gyms => importedActions.GymSelectionActions.gymsReceived({ gyms })),
         catchError(() => {
-          this.toastr.error("Loading of gyms failed.");
+          this.toastr.error("Loading of gyms failed");
           return of(importedActions.GymSelectionActions.loadingGymsFailed());
         })
       ))
