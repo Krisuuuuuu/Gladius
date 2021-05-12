@@ -13,6 +13,10 @@ const signInSuccess = createAction(
   props< {token: any }>()
 );
 
+const signInFailed = createAction(
+  '[Main Page] Sign in failed'
+);
+
 const signOut = createAction(
   '[User Panel] Sign out'
 );
@@ -26,6 +30,10 @@ const userProfileReceived = createAction(
   props<{ userProfile: IUserProfile }>()
 );
 
+const loadingUserProfileFailed = createAction(
+  '[User Profile] Loading user profile failed'
+);
+
 const updateUserProfile = createAction(
   '[User Profile] User profile changed',
   props<{ userProfile: IUserProfile }>()
@@ -33,6 +41,10 @@ const updateUserProfile = createAction(
 
 const userProfileUpdatedSuccessfully = createAction(
   '[User Profile] User profile updated successfully'
+);
+
+const updatingUserProfileFailed = createAction(
+  '[User Profile] Updating user profile failed'
 );
 
 const updateUserPassword = createAction(
@@ -44,14 +56,22 @@ const userPasswordUpdatedSuccessfully = createAction(
   '[User Profile] User password updated successfully',
 );
 
+const updatingPasswordFailed = createAction(
+  '[User Profile] Updating password failed',
+);
+
 export const UserActions = {
   signInButtonClicked,
   signInSuccess,
+  signInFailed,
   signOut,
   loadUserProfile,
   userProfileReceived,
+  loadingUserProfileFailed,
   updateUserProfile,
   userProfileUpdatedSuccessfully,
+  updatingUserProfileFailed,
   updateUserPassword,
-  userPasswordUpdatedSuccessfully
+  userPasswordUpdatedSuccessfully,
+  updatingPasswordFailed
 };

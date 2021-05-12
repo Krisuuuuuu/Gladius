@@ -15,6 +15,12 @@ const reducer = createReducer(
       ...state,
       isSigningIn: false
     };
+  }),
+  on(UserActions.signInFailed, (state: IMainPageState) => {
+    return {
+      ...state,
+      isSigningIn: false
+    };
   })
 );
 

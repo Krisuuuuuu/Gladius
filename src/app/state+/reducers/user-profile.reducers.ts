@@ -17,6 +17,12 @@ const reducer = createReducer(
       userProfile: userProfile
     };
   }),
+  on(UserActions.loadingUserProfileFailed, (state: IUserProfileState) => {
+    return {
+      ...state,
+      isUserProfileReceiving: false
+    };
+  }),
   on(UserActions.updateUserProfile, (state: IUserProfileState) => {
     return {
       ...state,
@@ -29,6 +35,12 @@ const reducer = createReducer(
       isUserProfileUpdating: false
     };
   }),
+  on(UserActions.updatingUserProfileFailed, (state: IUserProfileState) => {
+    return {
+      ...state,
+      isUserProfileUpdating: false
+    };
+  }),
   on(UserActions.updateUserPassword, (state: IUserProfileState) => {
     return {
       ...state,
@@ -36,6 +48,12 @@ const reducer = createReducer(
     };
   }),
   on(UserActions.userPasswordUpdatedSuccessfully, (state: IUserProfileState) => {
+    return {
+      ...state,
+      isUserProfileUpdating: false
+    };
+  }),
+  on(UserActions.updatingPasswordFailed, (state: IUserProfileState) => {
     return {
       ...state,
       isUserProfileUpdating: false
