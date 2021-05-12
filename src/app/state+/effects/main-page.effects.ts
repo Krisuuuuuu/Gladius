@@ -4,13 +4,15 @@ import { mergeMap, map, tap } from "rxjs/operators";
 import * as importedActions from "../actions/user.actions";
 import { UserService } from "src/app/services/user.service";
 import { Router } from "@angular/router";
+import { ToastrService } from "ngx-toastr";
 
 @Injectable()
 export class MainPageEffects {
 
   constructor(private actions$:Actions,
     private userService: UserService,
-    private router: Router) {}
+    private router: Router,
+    private toastr: ToastrService) {}
 
     signIn$ = createEffect(() => {
       return this.actions$.pipe(
