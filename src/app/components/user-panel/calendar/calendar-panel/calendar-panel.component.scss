@@ -1,8 +1,10 @@
 @import "../../../../utils/mixins-meta.scss";
+@import "../../../../utils/size-meta.scss";
 
 div.calendar-panel-wrapper {
-  @include panel();
   width: 100vw;
+  padding: $panel-padding;
+  background-color: $panel-part-bg;
 
   div.header {
     display: flex;

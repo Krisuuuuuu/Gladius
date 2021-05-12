@@ -1,25 +1,26 @@
 <section class="calendar-wrapper">
   <section class="calendar-layer">
     <app-calendar-panel class="animate__animated animate__fadeIn"></app-calendar-panel>
-    <div class="calendar animate__animated animate__fadeIn">
-      <tr class="header">
-        <app-header-button [isLeft]='true'></app-header-button>
-        <app-calendar-header *ngFor="let date of calendarData.display_dates" [dateToDisplay]='date'></app-calendar-header>
-        <app-header-button [isLeft]='false'></app-header-button>
-      </tr>
-      <tr *ngFor="let hour of hours; let i = index" class="content">
-        <app-calendar-hour [hour]='hour'></app-calendar-hour>
+    <div class="calendar-content-wrapper">
+      <div class="calendar animate__animated animate__fadeIn">
+        <tr class="header">
+          <app-header-button [isLeft]='true' (click)="getAnotherWeek(true)"></app-header-button>
+          <app-calendar-header *ngFor="let date of calendarData.display_dates" [dateToDisplay]='date'></app-calendar-header>
+          <app-header-button [isLeft]='false' (click)="getAnotherWeek(false)"></app-header-button>
+        </tr>
+        <tr *ngFor="let tile of tilesToDisplay" class="content">
+          <app-calendar-hour [hour]="tile.hour"></app-calendar-hour>
+          <ng-container *ngFor="let activity of tile.activities">
+            <app-calendar-card *ngIf="activity !== undefined; else branch"
+              [activity]="activity" [visible]="true">
 
-        <ng-container *ngFor="let dateToDisplay of calendarData.display_dates">
-          <app-calendar-card *ngIf="checkIfActivityExists(hour, dateToDisplay); else branch"
-            [activity]="getActivity(hour, dateToDisplay)" [visible]="true" [area]="getCurrentAreaModel()">
-          </app-calendar-card>
-        </ng-container>
-
-        <ng-template #branch>
-          <app-calendar-card class="empty" [visible]="false"></app-calendar-card>
-        </ng-template>
-      </tr>
+            </app-calendar-card>
+          </ng-container>
+          <ng-template #branch>
+            <app-calendar-card class="empty" [visible]="false"></app-calendar-card>
+          </ng-template>
+        </tr>
+      </div>
     </div>
   </section>
 </section>

@@ -68,7 +68,7 @@ export class ClientInfoComponent implements OnInit {
       email: this.clientInfoForm.controls['email'].value,
       phone_number: this.clientInfoForm.controls['phoneNumber'].value,
     };
-    debugger
+
     this.store.dispatch(UserActions.updateUserProfile({ userProfile: userProfile }));
     this.router.navigateByUrl("panel/gyms");
   }

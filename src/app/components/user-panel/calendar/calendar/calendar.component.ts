@@ -6,9 +6,9 @@ import { IAreaInfo } from 'src/app/model/calendar/IAreaInfo';
 import { ICalendarData } from 'src/app/model/calendar/ICalendarData';
 import { IDateToDisplay } from 'src/app/model/calendar/IDateToDisplay';
 import { IGymInfo } from 'src/app/model/calendar/IGymInfo';
+import { ITileToDisplay } from 'src/app/model/calendar/ITileToDisplay';
 import { IGym } from 'src/app/model/gym-selection/IGym';
 import { calendarActions } from 'src/app/state+/actions/calendar.actions';
-import { gymSelectionReducer } from 'src/app/state+/reducers/gym-selection.reducers';
 import { CalendarSelectors } from 'src/app/state+/selectors/calendar.selectors';
 import { GymSelectionSelectors } from 'src/app/state+/selectors/gym-selection.selectors';
 
@@ -28,6 +28,7 @@ export class CalendarComponent implements OnInit {
   activities: Array<IActivity> = [];
   startWeekDate: Date;
   endWeekDate: Date;
+  tilesToDisplay: Array<ITileToDisplay> = [];
 
   constructor(private store: Store<any>) { }
 
@@ -40,22 +41,21 @@ export class CalendarComponent implements OnInit {
     this.store.select(CalendarSelectors.selectCurrentArea).subscribe(
       currentArea => {
         currentArea = currentArea;
-        this.filterActivities();
       }
     );
 
     this.store.select(CalendarSelectors.selectCurrentActivity).subscribe(
       currentActivity => {
         currentActivity = currentActivity;
-        this.filterActivities();
       }
     );
 
     this.store.select(GymSelectionSelectors.selectCurrentGym).subscribe(
       currentGym => {
         this.currentGym = currentGym;
-        if (Object.keys(currentGym).length > 0)
+        if (Object.keys(currentGym).length > 0){
           this.setOpeningHours();
+        }
       }
     );
 
@@ -63,7 +63,7 @@ export class CalendarComponent implements OnInit {
       calendarData => {
         this.calendarData = calendarData;
         if (Object.keys(calendarData).length > 0) {
-          this.filterActivities();
+          this.getTiles(calendarData);
         }
       }
     );
@@ -73,100 +73,24 @@ export class CalendarComponent implements OnInit {
       endDate: formatDate(this.endWeekDate, 'yyyy-MM-dd', 'en-US')}));
   }
 
+  getTiles(calendarData: ICalendarData): void {
+    this.activities = [...this.calendarData.activities];
 
+    this.tilesToDisplay = [];
 
-  checkIfActivityExists(hour: string, dateToDisplay: IDateToDisplay): boolean {
-    if(+hour < 10)
-      hour = '0' + hour;
+    for (let i = 0; i < this.hours.length; i++) {
+      this.tilesToDisplay.push(
+        {
+          hour: this.hours[i],
+          activities: []
+        }
+      );
 
-    hour = hour.slice(0, 4).replace('.', ':');
-
-    let date: string = dateToDisplay.date.slice(0, 10);
-    let result: boolean = false;
-
-    this.activities = [
-      {
-        id: "1",
-        area: "Squash",
-        trainer: "Me",
-        name: "First",
-        date: "2021-05-10",
-        current_bookings_number: 250,
-        max_clients: 250,
-        start_hour: "08:00",
-        end_hour: "10:00",
-        is_booked_by_me: false
-      },
-      {
-        id: "1",
-        area: "Squash",
-        trainer: "Me",
-        name: "Third",
-        date: "2021-05-11",
-        current_bookings_number: 250,
-        max_clients: 250,
-        start_hour: "08:00",
-        end_hour: "10:00",
-        is_booked_by_me: true
-      },
-      {
-        id: "1",
-        area: "Squash",
-        trainer: "Me",
-        name: "Second",
-        date: "2021-05-12",
-        current_bookings_number: 244,
-        max_clients: 250,
-        start_hour: "08:00",
-        end_hour: "10:00",
-        is_booked_by_me: true
-      },
-      {
-        id: "1",
-        area: "Squash",
-        trainer: "Me",
-        name: "First",
-        date: "2021-05-10",
-        current_bookings_number: 244,
-        max_clients: 250,
-        start_hour: "16:00",
-        end_hour: "18:00",
-        is_booked_by_me: false
-      },
-      {
-        id: "1",
-        area: "Squash",
-        trainer: "Me",
-        name: "Third",
-        date: "2021-05-11",
-        current_bookings_number: 244,
-        max_clients: 250,
-        start_hour: "12:00",
-        end_hour: "14:00",
-        is_booked_by_me: false
-      },
-      {
-        id: "1",
-        area: "Squash",
-        trainer: "Me",
-        name: "Second",
-        date: "2021-05-15",
-        current_bookings_number: 244,
-        max_clients: 250,
-        start_hour: "08:00",
-        end_hour: "10:00",
-        is_booked_by_me: false
-      },
-    ]
-
-    if(this.activities.length > 0) {
-      let filteredActivities: Array<IActivity> = this.activities.filter(a => a.date.slice(0, 10) == date
-        && a.start_hour.slice(0, 4) == hour);
-        if(filteredActivities.length > 0)
-        result = true;
+      for (let j = 0; j < this.calendarData.display_dates.length; j++) {
+        let activity: IActivity = this.getActivity(this.hours[i], this.calendarData.display_dates[j]);
+        this.tilesToDisplay[i].activities.push(activity);
+      }
     }
-
-    return result;
   }
 
   getActivity(hour: string, dateToDisplay: IDateToDisplay): IActivity {
@@ -177,24 +101,32 @@ export class CalendarComponent implements OnInit {
     let date: string = dateToDisplay.date.slice(0, 10);
 
     let filteredActivities: Array<IActivity> = this.activities.filter(a => a.date.slice(0, 10) == date
-    && a.start_hour.slice(0,4) == hour);
+      && a.start_hour.slice(0,4) == hour);
 
     return filteredActivities[0];
   }
 
-  getCurrentAreaModel(): IAreaInfo {
-    const areas: Array<IAreaInfo> = this.gymInfo.areas.filter(a => a.name === this.currentArea);
+  getAnotherWeek(previous: boolean): void {
+    let dates: Array<Date>;
 
-    return areas[0];
+    if(previous)
+      dates = this.getPreviousWeek();
+    else
+      dates = this.getNextWeek();
+
+    this.store.dispatch(calendarActions.loadCalendarData({
+      startDate: formatDate(dates[0], 'yyyy-MM-dd', 'en-US'),
+      endDate: formatDate(dates[1], 'yyyy-MM-dd', 'en-US')}));
   }
 
   private setOpeningHours(): void {
     let allHours: Array<string> = ["6.00", "8.00", "10.00", "12.00", "14.00", "16.00", "18.00", "20.00", "22.00"];
-    let startHour: number = +(this.currentGym.open_hour.slice(0, 3).replace(':', '.'));
-    let endHour: number = +(this.currentGym.close_hour.slice(0, 3).replace(':', '.'));
+    let startHour: number = +(this.currentGym.open_hour.slice(0, 4).replace(':', '.'));
+    let endHour: number = +(this.currentGym.close_hour.slice(0, 4).replace(':', '.'));
 
     for (let i = 0; i < allHours.length; i++) {
       const hour: number = +allHours[i];
+
       if (hour >= startHour && hour + 2 <= endHour)
         this.hours.push(allHours[i]);
     }
@@ -209,21 +141,22 @@ export class CalendarComponent implements OnInit {
   }
 
   private filterActivities(): void {
-    this.activities = this.calendarData.activities.filter(a => a.area === this.currentArea && a.name == this.currentActivity);
+    if(this.currentArea !== undefined && this.currentActivity !== undefined)
+      this.activities = this.calendarData.activities.filter(a => a.area === this.currentArea && a.name == this.currentActivity);
   }
 
   private getPreviousWeek(): Array<Date>{
     let date: Date = new Date(this.calendarData.display_dates[0].date);
-    let startDate: Date = new Date(date.getDate() - 7);
-    let endDate: Date = new Date(date.getDate() - 1);
+    let startDate: Date = new Date(new Date(date).setDate(date.getDate() - 7));
+    let endDate: Date = new Date(new Date(date).setDate(date.getDate() - 1));
 
     return [startDate, endDate];
   }
 
   private getNextWeek(): Array<Date>{
     let date: Date = new Date(this.calendarData.display_dates[6].date);
-    let startDate: Date = new Date(date.getDate() + 1);
-    let endDate: Date = new Date(date.getDate() + 7);
+    let startDate: Date = new Date(new Date(date).setDate(date.getDate() + 1));
+    let endDate: Date = new Date(new Date(date).setDate(date.getDate() + 7));
 
     return [startDate, endDate];
   }

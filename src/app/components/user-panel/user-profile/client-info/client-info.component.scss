@@ -1,12 +1,16 @@
 @import './../../../../utils/mixins-meta.scss';
 
 section.client-info-layer {
-  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   min-height: $client-info-height;
   width: 100%;
 
   section.client-info-wrapper {
-    @include panel();
+    width: $panel-width;
+    padding: $panel-padding;
+    background-color: $panel-part-bg;
 
     h1 {
       @include h1(2px);
