@@ -12,7 +12,10 @@ import { UserActions } from 'src/app/state+/actions/user.actions';
 })
 export class ToolbarComponent implements OnInit {
 
-  constructor(private router: Router, private store: Store<any>) { }
+  constructor(
+    private router: Router,
+    private store: Store<any>
+    ) { }
 
   ngOnInit(): void {
   }

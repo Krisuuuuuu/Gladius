@@ -129,6 +129,7 @@ export class CalendarComponent implements OnInit {
 
       if (hour >= startHour && hour + 2 <= endHour)
         this.hours.push(allHours[i]);
+
     }
   }
 

@@ -6,6 +6,8 @@ td.card {
   width: 182px;
   margin: 5px;
   background-color: $card-bg;
+  border: 1px solid transparent;
+  border-radius: 3px;
   letter-spacing: 1px;
   color: $content-active;
   transition: 0.3s ease-in;

@@ -1,7 +1,8 @@
-<div class="gym-card-wrapper">
+<div class="gym-card-wrapper {{isCurrentGym ? 'active' : ''}}">
   <img [src]="thumbnail" alt="" />
   <div class="gym-card-layer"></div>
   <h1>{{ gym.name }}</h1>
   <h2>{{ gym.street }}, {{ gym.city }}</h2>
-  <p>{{ gym.open_hour }} - {{ gym.close_hour }}</p>
+  <p>{{ gym.open_hour[0] === "0" ? gym.open_hour.slice(1,5) : gym.open_hour.slice(0,5) }}
+    - {{ gym.close_hour[0] === "0" ? gym.close_hour.slice(1,5) : gym.close_hour.slice(0,5) }} </p>
 </div>
