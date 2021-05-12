@@ -11,6 +11,10 @@ const gymsReceived = createAction(
   props<{ gyms: Array<IGym> }>()
 );
 
+const loadingGymsFailed = createAction(
+  '[Gym Selection] Loading list of gyms failed'
+);
+
 const currentGymChanged = createAction(
   '[Gym Selection] Current gym changed',
   props<{ gym: IGym }>()
@@ -19,5 +23,6 @@ const currentGymChanged = createAction(
 export const GymSelectionActions = {
   loadGyms,
   gymsReceived,
+  loadingGymsFailed,
   currentGymChanged
 };

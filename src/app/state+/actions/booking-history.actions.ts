@@ -11,13 +11,21 @@ const bookingHistoryReceived = createAction(
   props<{ bookingHistory: Array<IBooking> }>()
 );
 
+const loadingBookingHistoryFailed = createAction(
+  '[Booking History] Loading of booking history failed',
+);
+
 const deleteBooking = createAction(
   '[Booking History] Delete booking',
   props<{ booking: IDeleteBooking }>()
 );
 
-const deleteBookingSuccess = createAction(
-  '[Booking History] Delete booking'
+const deletingBookingSuccess = createAction(
+  '[Booking History] Deleting booking success'
+);
+
+const deletingBookingFailed = createAction(
+  '[Booking History] Deleting booking failed'
 );
 
 const updateDisplayedData = createAction(
@@ -28,7 +36,9 @@ const updateDisplayedData = createAction(
 export const BookingHistoryActions = {
   loadBookingHistory,
   bookingHistoryReceived,
+  loadingBookingHistoryFailed,
   deleteBooking,
-  deleteBookingSuccess,
+  deletingBookingSuccess,
+  deletingBookingFailed,
   updateDisplayedData,
 };

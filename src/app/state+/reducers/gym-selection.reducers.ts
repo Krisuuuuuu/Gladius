@@ -17,6 +17,12 @@ const reducer = createReducer(
       gyms: gyms,
     };
   }),
+  on(GymSelectionActions.loadingGymsFailed, (state: IGymSelectionState) => {
+    return {
+      ...state,
+      areGymsReceiving: false,
+    };
+  }),
   on(GymSelectionActions.currentGymChanged, (state: IGymSelectionState, { gym }) => {
     return {
       ...state,

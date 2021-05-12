@@ -22,7 +22,7 @@ export class UserProfileEffects {
       mergeMap(() => this.userService.getUserProfile().pipe(
         map(userProfile => importedActions.UserActions.userProfileReceived({ userProfile })),
         catchError(() => {
-          this.toastr.error("Loading user profile failed.");
+          this.toastr.error("Loading of user profile failed.");
           return of(importedActions.UserActions.signInFailed());
         })
       ))

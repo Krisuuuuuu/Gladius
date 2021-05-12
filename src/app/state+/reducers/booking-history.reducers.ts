@@ -17,6 +17,12 @@ const reducer = createReducer(
       bookings: bookingHistory,
     };
   }),
+  on(BookingHistoryActions.loadingBookingHistoryFailed, (state: IBookingHistoryState) => {
+    return {
+      ...state,
+      areBookingsReceiving: false,
+    };
+  }),
   on(BookingHistoryActions.updateDisplayedData, (state: IBookingHistoryState, {displayedBookingHistory }) => {
     return {
       ...state,
@@ -29,7 +35,13 @@ const reducer = createReducer(
       isBookingDeleting: true
     };
   }),
-  on(BookingHistoryActions.deleteBookingSuccess, (state: IBookingHistoryState) => {
+  on(BookingHistoryActions.deletingBookingSuccess, (state: IBookingHistoryState) => {
+    return {
+      ...state,
+      isBookingDeleting: false
+    };
+  }),
+  on(BookingHistoryActions.deletingBookingFailed, (state: IBookingHistoryState) => {
     return {
       ...state,
       isBookingDeleting: false
