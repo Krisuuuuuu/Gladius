@@ -40,10 +40,6 @@ export class BookingTableComponent implements OnInit, AfterViewInit {
 
   dataSource = new MatTableDataSource<IBooking>(this.data);
 
-  currentSize: number;
-
-  totalSize: number;
-
   constructor(public dialog: MatDialog, private store: Store<any>) { }
 
   ngOnInit(): void {
@@ -51,7 +47,6 @@ export class BookingTableComponent implements OnInit, AfterViewInit {
       bookingsHistory => {
         if(bookingsHistory.length > 0){
           this.bookingsHistory = bookingsHistory;
-          this.totalSize = bookingsHistory.length;
           this.filterData();
           this.dataSource = new MatTableDataSource<IBooking>(this.data);
         }

@@ -1,6 +1,6 @@
 <div class="booking-table-wrapper">
   <table mat-table
-  [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
+  [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8 booking-history-table">
 
     <ng-container matColumnDef="No.">
      <th mat-header-cell *matHeaderCellDef> No. </th>
@@ -55,5 +55,4 @@
       </tr>
       <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
   </table>
-  <mat-paginator [pageSizeOptions]="[1, 10, 25, 50, 100]" [length]="totalSize" [pageSize]="currentSize" showFirstLastButtons></mat-paginator>
 </div>

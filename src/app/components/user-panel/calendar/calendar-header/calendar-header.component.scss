@@ -4,6 +4,7 @@ th {
   width: $calendar-cell-width;
   margin: 0 5px;
   padding: 10px 0;
+  cursor: default;
 
   h2{
     @include alt-h2(5px);

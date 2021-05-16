@@ -1,8 +1,8 @@
 <td class="card {{specialClass}}" (click)='createNewBooking()'>
   <div class="content">
     <div class="duration">
-      <p class="hour">{{ visible == true ? activity.start_hour.slice(1, 5) : '' }}
-        - {{visible == true ? activity.end_hour.slice(1, 5) : '' }}</p>
+      <p class="hour">{{ visible == true ? activity.start_hour.slice(0, 5) : '' }}
+        - {{visible == true ? activity.end_hour.slice(0, 5) : '' }}</p>
     </div>
     <p class="title">{{ visible == true ? activity.name : '' }}</p>
     <p class="places">{{ visible == true ? activity.current_bookings_number : '' }} /

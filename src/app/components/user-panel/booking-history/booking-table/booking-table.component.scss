@@ -3,4 +3,9 @@
 div.booking-table-wrapper {
   @include table();
   @include paginator();
+
+  .booking-history-table {
+    overflow: hidden;
+    cursor: default;
+  }
 }

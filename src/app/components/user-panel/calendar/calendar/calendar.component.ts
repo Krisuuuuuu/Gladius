@@ -28,12 +28,14 @@ export class CalendarComponent implements OnInit {
   activities: Array<IActivity> = [];
   startWeekDate: Date;
   endWeekDate: Date;
+  tilesToDisplayBase: Array<ITileToDisplay> = [];
   tilesToDisplay: Array<ITileToDisplay> = [];
 
   constructor(private store: Store<any>) { }
 
   ngOnInit(): void {
     this.getWeekBorder();
+
     this.store.select(CalendarSelectors.selectGymInfo).subscribe(
       gymInfo => this.gymInfo = gymInfo
     );
@@ -41,12 +43,36 @@ export class CalendarComponent implements OnInit {
     this.store.select(CalendarSelectors.selectCurrentArea).subscribe(
       currentArea => {
         currentArea = currentArea;
+
+        // if(this.currentArea !== '')
+        //   this.filterActivities();
       }
     );
 
     this.store.select(CalendarSelectors.selectCurrentActivity).subscribe(
       currentActivity => {
         currentActivity = currentActivity;
+
+        // if(this.currentActivity !== '')
+        //   this.filterActivities();
+      }
+    );
+
+    this.store.select(CalendarSelectors.selectCalendarData).subscribe(
+      calendarData => {
+        this.store.select(GymSelectionSelectors.selectCurrentGym).subscribe(
+          currentGym => {
+            this.currentGym = currentGym;
+            if (Object.keys(currentGym).length > 0) {
+              this.setOpeningHours();
+            }
+          }
+        );
+
+        this.calendarData = calendarData;
+        if (Object.keys(calendarData).length > 0) {
+          this.getTiles();
+        }
       }
     );
 
@@ -63,7 +89,7 @@ export class CalendarComponent implements OnInit {
       calendarData => {
         this.calendarData = calendarData;
         if (Object.keys(calendarData).length > 0) {
-          this.getTiles(calendarData);
+          this.getTiles();
         }
       }
     );
@@ -73,7 +99,7 @@ export class CalendarComponent implements OnInit {
       endDate: formatDate(this.endWeekDate, 'yyyy-MM-dd', 'en-US')}));
   }
 
-  getTiles(calendarData: ICalendarData): void {
+  getTiles(): void {
     this.activities = [...this.calendarData.activities];
 
     this.tilesToDisplay = [];
@@ -91,17 +117,19 @@ export class CalendarComponent implements OnInit {
         this.tilesToDisplay[i].activities.push(activity);
       }
     }
+
+    this.tilesToDisplayBase = [...this.tilesToDisplay];
   }
 
   getActivity(hour: string, dateToDisplay: IDateToDisplay): IActivity {
-    if(+hour < 10)
-    hour = '0' + hour;
+    if (+hour < 10)
+      hour = '0' + hour;
 
-    hour = hour.slice(0,4).replace('.', ':');
+    hour = hour.slice(0, 4).replace('.', ':');
     let date: string = dateToDisplay.date.slice(0, 10);
 
     let filteredActivities: Array<IActivity> = this.activities.filter(a => a.date.slice(0, 10) == date
-      && a.start_hour.slice(0,4) == hour);
+      && a.start_hour.slice(0, 4) == hour);
 
     return filteredActivities[0];
   }
@@ -109,18 +137,37 @@ export class CalendarComponent implements OnInit {
   getAnotherWeek(previous: boolean): void {
     let dates: Array<Date>;
 
-    if(previous)
+    if (previous)
       dates = this.getPreviousWeek();
     else
       dates = this.getNextWeek();
 
     this.store.dispatch(calendarActions.loadCalendarData({
       startDate: formatDate(dates[0], 'yyyy-MM-dd', 'en-US'),
-      endDate: formatDate(dates[1], 'yyyy-MM-dd', 'en-US')}));
+      endDate: formatDate(dates[1], 'yyyy-MM-dd', 'en-US')
+    }));
+  }
+
+  private filterActivities(): void {
+    for (let i = 0; i < this.hours.length; i++) {
+
+      for (let j = 0; j < this.calendarData.display_dates.length; j++) {
+
+        if(this.tilesToDisplayBase[i].activities[j] !== undefined) {
+
+          if(this.tilesToDisplayBase[i].activities[j].area === this.currentArea
+            && this.tilesToDisplayBase[i].activities[j].name === this.currentActivity)
+              continue;
+          else
+            this.tilesToDisplay[i].activities[j] = undefined;
+        }
+      }
+    }
   }
 
   private setOpeningHours(): void {
-    let allHours: Array<string> = ["6.00", "8.00", "10.00", "12.00", "14.00", "16.00", "18.00", "20.00", "22.00"];
+    this.hours = [];
+    let allHours: Array<string> = ["6.00", "8.00", "10.00", "12.00", "14.00", "16.00", "18.00", "20.00", "22.00", "24.00"];
     let startHour: number = +(this.currentGym.open_hour.slice(0, 4).replace(':', '.'));
     let endHour: number = +(this.currentGym.close_hour.slice(0, 4).replace(':', '.'));
 
@@ -141,12 +188,7 @@ export class CalendarComponent implements OnInit {
     this.endWeekDate = new Date(new Date(this.startWeekDate).setDate(this.startWeekDate.getDate() + 6));
   }
 
-  private filterActivities(): void {
-    if(this.currentArea !== undefined && this.currentActivity !== undefined)
-      this.activities = this.calendarData.activities.filter(a => a.area === this.currentArea && a.name == this.currentActivity);
-  }
-
-  private getPreviousWeek(): Array<Date>{
+  private getPreviousWeek(): Array<Date> {
     let date: Date = new Date(this.calendarData.display_dates[0].date);
     let startDate: Date = new Date(new Date(date).setDate(date.getDate() - 7));
     let endDate: Date = new Date(new Date(date).setDate(date.getDate() - 1));
@@ -154,7 +196,7 @@ export class CalendarComponent implements OnInit {
     return [startDate, endDate];
   }
 
-  private getNextWeek(): Array<Date>{
+  private getNextWeek(): Array<Date> {
     let date: Date = new Date(this.calendarData.display_dates[6].date);
     let startDate: Date = new Date(new Date(date).setDate(date.getDate() + 1));
     let endDate: Date = new Date(new Date(date).setDate(date.getDate() + 7));

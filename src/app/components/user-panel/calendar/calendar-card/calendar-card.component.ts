@@ -36,6 +36,8 @@ export class CalendarCardComponent implements OnInit, OnChanges {
   ngOnChanges(): void {
     if(this.visible)
       this.setColorOfCard();
+    else
+      this.specialClass = 'unvisible';
   }
 
   setColorOfCard(): void {

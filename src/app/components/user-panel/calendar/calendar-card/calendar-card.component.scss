@@ -55,3 +55,7 @@ td.card.locked {
   background-color: $card-locked-bg;
 }
 
+td.card.unvisible {
+  cursor: default;
+}
+
