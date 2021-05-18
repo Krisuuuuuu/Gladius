@@ -9,19 +9,40 @@ import { UserPanelComponent } from '../components/user-panel/user-panel/user-pan
 import { ChangePasswordComponent } from '../components/user-panel/user-profile/change-password/change-password.component';
 import { ClientInfoComponent } from '../components/user-panel/user-profile/client-info/client-info.component';
 import { UserProfileComponent } from '../components/user-panel/user-profile/user-profile/user-profile.component';
+import { AuthorizationGuard } from '../state+/guards/authorization.guard';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: 'home', component: MainPageComponent },
   { path: 'panel', component: UserPanelComponent, children: [
     { path: '', pathMatch: 'full', redirectTo: 'gyms'},
-    { path: 'gyms', component: GymSelectionComponent },
-    { path: 'calendar', component: CalendarComponent },
-    { path: 'history', component: BookingHistoryComponent },
+    {
+      path: 'gyms',
+      canActivate: [AuthorizationGuard],
+      component: GymSelectionComponent
+    },
+    {
+      path: 'calendar',
+      canActivate: [AuthorizationGuard],
+      component: CalendarComponent
+    },
+    {
+      path: 'history',
+      canActivate: [AuthorizationGuard],
+      component: BookingHistoryComponent
+    },
     { path: 'edit', component: UserProfileComponent, children: [
       { path: '', pathMatch: 'full', redirectTo: 'profile'},
-      { path: 'profile', component: ClientInfoComponent },
-      { path: 'password', component: ChangePasswordComponent}
+      {
+        path: 'profile',
+        canActivate: [AuthorizationGuard],
+        component: ClientInfoComponent
+      },
+      {
+        path: 'password',
+        canActivate: [AuthorizationGuard],
+        component: ChangePasswordComponent
+      }
     ]},
   ]},
 ];

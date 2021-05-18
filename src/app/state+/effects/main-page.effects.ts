@@ -19,9 +19,6 @@ export class MainPageEffects {
       return this.actions$.pipe(
         ofType(importedActions.UserActions.signInButtonClicked),
         mergeMap(({ signInData}) => this.userService.postDataToSignIn(signInData).pipe(
-          tap(() => {
-            this.router.navigateByUrl('panel');
-          }),
           map((token) => importedActions.UserActions.signInSuccess({ token: token})),
           catchError(() => {
             this.toastr.error("Invalid email or password");
@@ -37,6 +34,7 @@ export class MainPageEffects {
         ofType(importedActions.UserActions.signInSuccess),
         tap(({ token }) => {
           localStorage.setItem('token', token.token);
+          this.router.navigateByUrl('panel');
         })
       ),
       { dispatch: false }

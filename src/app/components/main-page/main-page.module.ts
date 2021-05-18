@@ -15,6 +15,7 @@ import { MainPageEffects } from 'src/app/state+/effects/main-page.effects';
 
 
 
+
 @NgModule({
   declarations: [
     MainPageComponent,

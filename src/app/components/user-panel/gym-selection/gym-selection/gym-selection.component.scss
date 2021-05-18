@@ -1,7 +1,7 @@
 @import '../../../../utils/mixins-meta.scss';
 
 section.gym-selection-wrapper {
-  background-image: url(./../../../../../assets/images/gyms_background.jpg);
+  background-image: url(./../../../../../assets/images/fog.jpg);
   @include background-image();
   background-position: center 80%;
 
@@ -11,7 +11,7 @@ section.gym-selection-wrapper {
     background-color: $panel-wrapper-bg;
 
     div.header {
-      padding-top: 30px;
+      padding-top: 50px;
 
       h2 {
         @include h2(30px);

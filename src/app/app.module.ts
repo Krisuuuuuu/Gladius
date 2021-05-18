@@ -31,7 +31,7 @@ import { ToastrModule } from 'ngx-toastr';
       logOnly: environment.production
     }),
     EffectsModule.forRoot([]),
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

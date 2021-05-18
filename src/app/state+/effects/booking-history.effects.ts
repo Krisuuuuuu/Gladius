@@ -41,5 +41,5 @@ export class BookingHistoryEffects {
         ))
     ),
     { dispatch: false }
-  )
+  );
 }

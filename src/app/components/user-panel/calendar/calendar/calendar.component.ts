@@ -2,7 +2,6 @@ import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { IActivity } from 'src/app/model/calendar/IActivity';
-import { IAreaInfo } from 'src/app/model/calendar/IAreaInfo';
 import { ICalendarData } from 'src/app/model/calendar/ICalendarData';
 import { IDateToDisplay } from 'src/app/model/calendar/IDateToDisplay';
 import { IGymInfo } from 'src/app/model/calendar/IGymInfo';
@@ -42,19 +41,16 @@ export class CalendarComponent implements OnInit {
 
     this.store.select(CalendarSelectors.selectCurrentArea).subscribe(
       currentArea => {
-        currentArea = currentArea;
-
-        // if(this.currentArea !== '')
-        //   this.filterActivities();
+        this.currentArea = currentArea;
       }
     );
 
     this.store.select(CalendarSelectors.selectCurrentActivity).subscribe(
       currentActivity => {
-        currentActivity = currentActivity;
+        this.currentActivity = currentActivity;
 
-        // if(this.currentActivity !== '')
-        //   this.filterActivities();
+        if(currentActivity !== undefined)
+          this.filterActivities();
       }
     );
 
@@ -118,7 +114,7 @@ export class CalendarComponent implements OnInit {
       }
     }
 
-    this.tilesToDisplayBase = [...this.tilesToDisplay];
+    this.tilesToDisplayBase = [].concat(this.tilesToDisplay.map(t => ({ ...t })));
   }
 
   getActivity(hour: string, dateToDisplay: IDateToDisplay): IActivity {
@@ -149,20 +145,28 @@ export class CalendarComponent implements OnInit {
   }
 
   private filterActivities(): void {
+    if(this.tilesToDisplay.length === 0)
+      return;
+
     for (let i = 0; i < this.hours.length; i++) {
 
       for (let j = 0; j < this.calendarData.display_dates.length; j++) {
 
         if(this.tilesToDisplayBase[i].activities[j] !== undefined) {
-
-          if(this.tilesToDisplayBase[i].activities[j].area === this.currentArea
-            && this.tilesToDisplayBase[i].activities[j].name === this.currentActivity)
+          if(this.tilesToDisplayBase[i].activities[j].name === this.currentActivity)
               continue;
-          else
+          else{
+            console.log(this.tilesToDisplayBase[i].activities[j]);
+            console.log(this.tilesToDisplay[i].activities[j]);
+            console.log(this.currentActivity);
+            console.log(this.tilesToDisplayBase[i].activities[j].name === this.currentActivity);
             this.tilesToDisplay[i].activities[j] = undefined;
+          }
         }
       }
     }
+
+    debugger
   }
 
   private setOpeningHours(): void {
