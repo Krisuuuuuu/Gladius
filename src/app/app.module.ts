@@ -7,11 +7,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainPageModule } from './components/main-page/main-page.module';
 import { UserPanelModule } from './components/user-panel/user-panel.module';
 import { StoreModule } from '@ngrx/store';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from 'src/environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { ToastrModule } from 'ngx-toastr';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { LoaderService } from './services/progress-spinner/loader.service';
+import { LoaderInterceptor } from './services/progress-spinner/loader-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -21,6 +24,7 @@ import { ToastrModule } from 'ngx-toastr';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    MatProgressSpinnerModule,
     MainPageModule,
     UserPanelModule,
     HttpClientModule,
@@ -33,7 +37,9 @@ import { ToastrModule } from 'ngx-toastr';
     EffectsModule.forRoot([]),
     ToastrModule.forRoot(),
   ],
-  providers: [],
+  providers: [
+    LoaderService,
+    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

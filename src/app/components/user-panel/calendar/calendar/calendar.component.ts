@@ -7,6 +7,7 @@ import { IDateToDisplay } from 'src/app/model/calendar/IDateToDisplay';
 import { IGymInfo } from 'src/app/model/calendar/IGymInfo';
 import { ITileToDisplay } from 'src/app/model/calendar/ITileToDisplay';
 import { IGym } from 'src/app/model/gym-selection/IGym';
+import { LoaderService } from 'src/app/services/progress-spinner/loader.service';
 import { calendarActions } from 'src/app/state+/actions/calendar.actions';
 import { CalendarSelectors } from 'src/app/state+/selectors/calendar.selectors';
 import { GymSelectionSelectors } from 'src/app/state+/selectors/gym-selection.selectors';
@@ -30,7 +31,9 @@ export class CalendarComponent implements OnInit {
   tilesToDisplayBase: Array<ITileToDisplay> = [];
   tilesToDisplay: Array<ITileToDisplay> = [];
 
-  constructor(private store: Store<any>) { }
+  constructor(
+    private store: Store<any>
+    ) { }
 
   ngOnInit(): void {
     this.getWeekBorder();
@@ -114,7 +117,7 @@ export class CalendarComponent implements OnInit {
       }
     }
 
-    this.tilesToDisplayBase = [].concat(this.tilesToDisplay.map(t => ({ ...t })));
+    this.tilesToDisplayBase = JSON.parse(JSON.stringify(this.tilesToDisplay));
   }
 
   getActivity(hour: string, dateToDisplay: IDateToDisplay): IActivity {
@@ -145,6 +148,8 @@ export class CalendarComponent implements OnInit {
   }
 
   private filterActivities(): void {
+    this.tilesToDisplay = JSON.parse(JSON.stringify(this.tilesToDisplay));
+
     if(this.tilesToDisplay.length === 0)
       return;
 
