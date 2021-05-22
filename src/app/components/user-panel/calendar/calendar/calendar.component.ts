@@ -52,8 +52,8 @@ export class CalendarComponent implements OnInit {
       currentActivity => {
         this.currentActivity = currentActivity;
 
-        if(currentActivity !== undefined)
-          this.filterActivities();
+        // if(currentActivity !== undefined)
+        //   this.filterActivities();
       }
     );
 
@@ -116,8 +116,7 @@ export class CalendarComponent implements OnInit {
         this.tilesToDisplay[i].activities.push(activity);
       }
     }
-
-    this.tilesToDisplayBase = JSON.parse(JSON.stringify(this.tilesToDisplay));
+    debugger
   }
 
   getActivity(hour: string, dateToDisplay: IDateToDisplay): IActivity {
@@ -170,8 +169,6 @@ export class CalendarComponent implements OnInit {
         }
       }
     }
-
-    debugger
   }
 
   private setOpeningHours(): void {

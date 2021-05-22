@@ -7,14 +7,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainPageModule } from './components/main-page/main-page.module';
 import { UserPanelModule } from './components/user-panel/user-panel.module';
 import { StoreModule } from '@ngrx/store';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from 'src/environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { ToastrModule } from 'ngx-toastr';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { LoaderService } from './services/progress-spinner/loader.service';
-import { LoaderInterceptor } from './services/progress-spinner/loader-interceptor.service';
+import { ProgressSpinnerModule } from './services/progress-spinner/progress-spinner.module';
 
 @NgModule({
   declarations: [
@@ -24,7 +22,6 @@ import { LoaderInterceptor } from './services/progress-spinner/loader-intercepto
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatProgressSpinnerModule,
     MainPageModule,
     UserPanelModule,
     HttpClientModule,
@@ -36,10 +33,8 @@ import { LoaderInterceptor } from './services/progress-spinner/loader-intercepto
     }),
     EffectsModule.forRoot([]),
     ToastrModule.forRoot(),
+    ProgressSpinnerModule,
   ],
-  providers: [
-    LoaderService,
-    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

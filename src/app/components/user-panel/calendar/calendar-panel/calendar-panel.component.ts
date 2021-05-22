@@ -31,6 +31,7 @@ export class CalendarPanelComponent implements OnInit {
   constructor(private router: Router, private store: Store<any>) { }
 
   ngOnInit(): void {
+    debugger
     this.store.select(CalendarSelectors.selectCurrentArea).subscribe(
       area => this.currentArea = area
     );
