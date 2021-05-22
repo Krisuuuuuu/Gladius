@@ -7,10 +7,10 @@ import { IDateToDisplay } from 'src/app/model/calendar/IDateToDisplay';
 import { IGymInfo } from 'src/app/model/calendar/IGymInfo';
 import { ITileToDisplay } from 'src/app/model/calendar/ITileToDisplay';
 import { IGym } from 'src/app/model/gym-selection/IGym';
-import { LoaderService } from 'src/app/services/progress-spinner/loader.service';
 import { calendarActions } from 'src/app/state+/actions/calendar.actions';
 import { CalendarSelectors } from 'src/app/state+/selectors/calendar.selectors';
 import { GymSelectionSelectors } from 'src/app/state+/selectors/gym-selection.selectors';
+import * as _ from 'lodash'
 
 @Component({
   selector: 'app-calendar',
@@ -52,22 +52,13 @@ export class CalendarComponent implements OnInit {
       currentActivity => {
         this.currentActivity = currentActivity;
 
-        // if(currentActivity !== undefined)
-        //   this.filterActivities();
+        if(currentActivity !== undefined && this.calendarData !== undefined && Object.keys(this.calendarData).length > 0)
+          this.filterActivities();
       }
     );
 
     this.store.select(CalendarSelectors.selectCalendarData).subscribe(
       calendarData => {
-        // this.store.select(GymSelectionSelectors.selectCurrentGym).subscribe(
-        //   currentGym => {
-        //     this.currentGym = currentGym;
-        //     if (Object.keys(currentGym).length > 0) {
-        //       this.setOpeningHours();
-        //     }
-        //   }
-        // );
-
         this.calendarData = calendarData;
         if (Object.keys(calendarData).length > 0) {
           this.getTiles();
@@ -93,42 +84,12 @@ export class CalendarComponent implements OnInit {
         this.calendarData = calendarData;
         if (Object.keys(calendarData).length > 0) {
           this.getTiles();
+
+          if(this.currentActivity !== undefined)
+            this.filterActivities();
         }
       }
     );
-  }
-
-  getTiles(): void {
-    this.activities = [...this.calendarData.activities];
-
-    this.tilesToDisplay = [];
-
-    for (let i = 0; i < this.hours.length; i++) {
-      this.tilesToDisplay.push(
-        {
-          hour: this.hours[i],
-          activities: []
-        }
-      );
-
-      for (let j = 0; j < this.calendarData.display_dates.length; j++) {
-        let activity: IActivity = this.getActivity(this.hours[i], this.calendarData.display_dates[j]);
-        this.tilesToDisplay[i].activities.push(activity);
-      }
-    }
-  }
-
-  getActivity(hour: string, dateToDisplay: IDateToDisplay): IActivity {
-    if (+hour < 10)
-      hour = '0' + hour;
-
-    hour = hour.slice(0, 4).replace('.', ':');
-    let date: string = dateToDisplay.date.slice(0, 10);
-
-    let filteredActivities: Array<IActivity> = this.activities.filter(a => a.date.slice(0, 10) == date
-      && a.start_hour.slice(0, 4) == hour);
-
-    return filteredActivities[0];
   }
 
   getAnotherWeek(previous: boolean): void {
@@ -146,8 +107,30 @@ export class CalendarComponent implements OnInit {
     }));
   }
 
+  private getTiles(): void {
+    this.activities = [...this.calendarData.activities];
+
+    this.tilesToDisplay = [];
+
+    for (let i = 0; i < this.hours.length; i++) {
+      this.tilesToDisplay.push(
+        {
+          hour: this.hours[i],
+          activities: []
+        }
+      );
+
+      for (let j = 0; j < this.calendarData.display_dates.length; j++) {
+        let activity: IActivity = this.getActivity(this.hours[i], this.calendarData.display_dates[j]);
+        this.tilesToDisplay[i].activities.push(activity);
+      }
+    }
+
+    this.tilesToDisplayBase = _.cloneDeep(this.tilesToDisplay);
+  }
+
   private filterActivities(): void {
-    this.tilesToDisplay = JSON.parse(JSON.stringify(this.tilesToDisplay));
+    this.tilesToDisplay = _.cloneDeep(this.tilesToDisplayBase);
 
     if(this.tilesToDisplay.length === 0)
       return;
@@ -159,16 +142,24 @@ export class CalendarComponent implements OnInit {
         if(this.tilesToDisplayBase[i].activities[j] !== undefined) {
           if(this.tilesToDisplayBase[i].activities[j].name === this.currentActivity)
               continue;
-          else{
-            console.log(this.tilesToDisplayBase[i].activities[j]);
-            console.log(this.tilesToDisplay[i].activities[j]);
-            console.log(this.currentActivity);
-            console.log(this.tilesToDisplayBase[i].activities[j].name === this.currentActivity);
+          else
             this.tilesToDisplay[i].activities[j] = undefined;
-          }
         }
       }
     }
+  }
+
+  private getActivity(hour: string, dateToDisplay: IDateToDisplay): IActivity {
+    if (+hour < 10)
+      hour = '0' + hour;
+
+    hour = hour.slice(0, 4).replace('.', ':');
+    let date: string = dateToDisplay.date.slice(0, 10);
+
+    let filteredActivities: Array<IActivity> = this.activities.filter(a => a.date.slice(0, 10) == date
+      && a.start_hour.slice(0, 4) == hour);
+
+    return filteredActivities[0];
   }
 
   private setOpeningHours(): void {
