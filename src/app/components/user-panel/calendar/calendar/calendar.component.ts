@@ -59,14 +59,14 @@ export class CalendarComponent implements OnInit {
 
     this.store.select(CalendarSelectors.selectCalendarData).subscribe(
       calendarData => {
-        this.store.select(GymSelectionSelectors.selectCurrentGym).subscribe(
-          currentGym => {
-            this.currentGym = currentGym;
-            if (Object.keys(currentGym).length > 0) {
-              this.setOpeningHours();
-            }
-          }
-        );
+        // this.store.select(GymSelectionSelectors.selectCurrentGym).subscribe(
+        //   currentGym => {
+        //     this.currentGym = currentGym;
+        //     if (Object.keys(currentGym).length > 0) {
+        //       this.setOpeningHours();
+        //     }
+        //   }
+        // );
 
         this.calendarData = calendarData;
         if (Object.keys(calendarData).length > 0) {
@@ -79,6 +79,10 @@ export class CalendarComponent implements OnInit {
       currentGym => {
         this.currentGym = currentGym;
         if (Object.keys(currentGym).length > 0){
+          this.store.dispatch(calendarActions.loadCalendarData({
+            startDate: formatDate(this.startWeekDate, 'yyyy-MM-dd', 'en-US'),
+            endDate: formatDate(this.endWeekDate, 'yyyy-MM-dd', 'en-US'),
+            gymId: this.currentGym.id}));
           this.setOpeningHours();
         }
       }
@@ -92,10 +96,6 @@ export class CalendarComponent implements OnInit {
         }
       }
     );
-
-    this.store.dispatch(calendarActions.loadCalendarData({
-      startDate: formatDate(this.startWeekDate, 'yyyy-MM-dd', 'en-US'),
-      endDate: formatDate(this.endWeekDate, 'yyyy-MM-dd', 'en-US')}));
   }
 
   getTiles(): void {
@@ -116,7 +116,6 @@ export class CalendarComponent implements OnInit {
         this.tilesToDisplay[i].activities.push(activity);
       }
     }
-    debugger
   }
 
   getActivity(hour: string, dateToDisplay: IDateToDisplay): IActivity {
@@ -142,7 +141,8 @@ export class CalendarComponent implements OnInit {
 
     this.store.dispatch(calendarActions.loadCalendarData({
       startDate: formatDate(dates[0], 'yyyy-MM-dd', 'en-US'),
-      endDate: formatDate(dates[1], 'yyyy-MM-dd', 'en-US')
+      endDate: formatDate(dates[1], 'yyyy-MM-dd', 'en-US'),
+      gymId: this.currentGym.id
     }));
   }
 

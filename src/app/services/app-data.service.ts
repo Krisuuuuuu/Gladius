@@ -38,9 +38,9 @@ export class AppDataService {
     return this.httpClient.get<IGymInfo>(url, authenticationHeader);
   }
 
-  getActivitiesForWeek(startDate: string, endDate: string): Observable<ICalendarData> {
+  getActivitiesForWeek(startDate: string, endDate: string, gymId: string): Observable<ICalendarData> {
     authenticationHeader.headers = authenticationHeader.headers.set('Authorization', 'Token ' + localStorage.getItem('token'));
-    const url: string = `${this.baseUrl}/reservations/${startDate}/${endDate}/`;
+    const url: string = `${this.baseUrl}/reservations/${startDate}/${endDate}/${gymId}/`;
 
     return this.httpClient.get<ICalendarData>(url, authenticationHeader);
   }

@@ -21,7 +21,8 @@ const loadCalendarData = createAction(
   '[Calendar] Load calendar data',
   props<{
     startDate: string,
-    endDate: string
+    endDate: string,
+    gymId: string
    }>()
 );
 

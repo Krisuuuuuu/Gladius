@@ -31,7 +31,7 @@ export class CalendarEffects {
     getCalendarData$ = createEffect(() => {
       return this.actions$.pipe(
         ofType(importedActions.calendarActions.loadCalendarData),
-        mergeMap(({ startDate, endDate }) => this.appDataService.getActivitiesForWeek(startDate, endDate).pipe(
+        mergeMap(({ startDate, endDate, gymId }) => this.appDataService.getActivitiesForWeek(startDate, endDate, gymId).pipe(
           map(calendarData => importedActions.calendarActions.calendarDataReceived({ calendarData })),
           catchError(() => {
             this.toastr.error("Loading of calendar info failed");
