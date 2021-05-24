@@ -1,6 +1,7 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
 import { IGymInfo } from 'src/app/model/calendar/IGymInfo';
 import { IGym } from 'src/app/model/gym-selection/IGym';
 import { calendarActions } from 'src/app/state+/actions/calendar.actions';
@@ -15,7 +16,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./calendar-panel.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class CalendarPanelComponent implements OnInit {
+export class CalendarPanelComponent implements OnInit, OnDestroy {
   companyName: string = environment.companyName;
   gymInfo: IGymInfo;
   gyms: Array<IGym>;
@@ -28,22 +29,28 @@ export class CalendarPanelComponent implements OnInit {
   activities: string[] = [];
   activitiesToDisplay: string[] = [];
 
+  private currentAreaSubsription: Subscription;
+  private currentActivitySubsription: Subscription;
+  private currentGymSubsription: Subscription;
+  private gymInfoSubsription: Subscription;
+  private gymsSubsription: Subscription;
+
   constructor(private router: Router, private store: Store<any>) { }
 
   ngOnInit(): void {
-    this.store.select(CalendarSelectors.selectCurrentArea).subscribe(
+    this.currentAreaSubsription = this.store.select(CalendarSelectors.selectCurrentArea).subscribe(
       area => this.currentArea = area
     );
 
-    this.store.select(CalendarSelectors.selectCurrentActivity).subscribe(
+    this.currentActivitySubsription = this.store.select(CalendarSelectors.selectCurrentActivity).subscribe(
       activity => this.currentActivity = activity
     );
 
-    this.store.select(GymSelectionSelectors.selectCurrentGym).subscribe(
+    this.currentGymSubsription = this.store.select(GymSelectionSelectors.selectCurrentGym).subscribe(
       currentGym => this.currentGym = currentGym
     );
 
-    this.store.select(CalendarSelectors.selectGymInfo).subscribe(
+    this.gymInfoSubsription = this.store.select(CalendarSelectors.selectGymInfo).subscribe(
       gymInfo => {
         if (Object.keys(gymInfo).length > 0) {
           this.gymInfo = gymInfo;
@@ -55,7 +62,7 @@ export class CalendarPanelComponent implements OnInit {
       }
     );
 
-    this.store.select(GymSelectionSelectors.selectGyms).subscribe(
+    this.gymsSubsription = this.store.select(GymSelectionSelectors.selectGyms).subscribe(
       gyms => {
         if (gyms.length > 0) {
           this.gyms = gyms;
@@ -70,6 +77,14 @@ export class CalendarPanelComponent implements OnInit {
         }
       }
     );
+  }
+
+  ngOnDestroy(): void {
+    this.currentAreaSubsription.unsubscribe();
+    this.currentActivitySubsription.unsubscribe();
+    this.currentGymSubsription.unsubscribe();
+    this.gymInfoSubsription.unsubscribe();
+    this.gymsSubsription.unsubscribe();
   }
 
   redirectToGymSelection(): void {

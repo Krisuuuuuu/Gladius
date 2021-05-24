@@ -1,10 +1,11 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { AfterViewInit, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
 import { ConfirmDialogComponent } from 'src/app/components/dialogs/confirm-dialog/confirm-dialog.component';
 import { IBooking } from 'src/app/model/booking-history/IBooking';
 import { IDeleteBooking } from 'src/app/model/booking-history/IDeleteBooking';
@@ -25,7 +26,7 @@ import { BookingHistorySelectors } from 'src/app/state+/selectors/booking-histor
   encapsulation: ViewEncapsulation.None
 })
 
-export class BookingTableComponent implements OnInit, AfterViewInit {
+export class BookingTableComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   @Input()bookingsType: string;
@@ -40,10 +41,12 @@ export class BookingTableComponent implements OnInit, AfterViewInit {
 
   dataSource = new MatTableDataSource<IBooking>(this.data);
 
+  private bookingSubsription: Subscription;
+
   constructor(public dialog: MatDialog, private store: Store<any>) { }
 
   ngOnInit(): void {
-    this.store.select(BookingHistorySelectors.selectBookings).subscribe(
+    this.bookingSubsription = this.store.select(BookingHistorySelectors.selectBookings).subscribe(
       bookingsHistory => {
         if(bookingsHistory.length > 0){
           this.bookingsHistory = bookingsHistory;
@@ -58,6 +61,10 @@ export class BookingTableComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
+  }
+
+  ngOnDestroy(): void {
+    this.bookingSubsription.unsubscribe();
   }
 
   cancelBooking(booking: IBooking): void {

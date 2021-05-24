@@ -1,5 +1,5 @@
 import { formatDate } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { IActivity } from 'src/app/model/calendar/IActivity';
 import { ICalendarData } from 'src/app/model/calendar/ICalendarData';
@@ -11,13 +11,14 @@ import { calendarActions } from 'src/app/state+/actions/calendar.actions';
 import { CalendarSelectors } from 'src/app/state+/selectors/calendar.selectors';
 import { GymSelectionSelectors } from 'src/app/state+/selectors/gym-selection.selectors';
 import * as _ from 'lodash'
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.scss']
 })
-export class CalendarComponent implements OnInit {
+export class CalendarComponent implements OnInit, OnDestroy {
   currentGym: IGym;
   calendarData: ICalendarData;
   currentArea: string;
@@ -31,6 +32,12 @@ export class CalendarComponent implements OnInit {
   tilesToDisplayBase: Array<ITileToDisplay> = [];
   tilesToDisplay: Array<ITileToDisplay> = [];
 
+  private currentAreaSubsription: Subscription;
+  private currentActivitySubsription: Subscription;
+  private currentGymSubsription: Subscription;
+  private gymInfoSubsription: Subscription;
+  private calendarDataSubscription: Subscription;
+
   constructor(
     private store: Store<any>
     ) { }
@@ -38,17 +45,17 @@ export class CalendarComponent implements OnInit {
   ngOnInit(): void {
     this.getWeekBorder();
 
-    this.store.select(CalendarSelectors.selectGymInfo).subscribe(
+    this.gymInfoSubsription = this.store.select(CalendarSelectors.selectGymInfo).subscribe(
       gymInfo => this.gymInfo = gymInfo
     );
 
-    this.store.select(CalendarSelectors.selectCurrentArea).subscribe(
+    this.currentAreaSubsription = this.store.select(CalendarSelectors.selectCurrentArea).subscribe(
       currentArea => {
         this.currentArea = currentArea;
       }
     );
 
-    this.store.select(CalendarSelectors.selectCurrentActivity).subscribe(
+    this.currentActivitySubsription = this.store.select(CalendarSelectors.selectCurrentActivity).subscribe(
       currentActivity => {
         this.currentActivity = currentActivity;
 
@@ -57,16 +64,7 @@ export class CalendarComponent implements OnInit {
       }
     );
 
-    this.store.select(CalendarSelectors.selectCalendarData).subscribe(
-      calendarData => {
-        this.calendarData = calendarData;
-        if (Object.keys(calendarData).length > 0) {
-          this.getTiles();
-        }
-      }
-    );
-
-    this.store.select(GymSelectionSelectors.selectCurrentGym).subscribe(
+    this.currentGymSubsription = this.store.select(GymSelectionSelectors.selectCurrentGym).subscribe(
       currentGym => {
         this.currentGym = currentGym;
         if (Object.keys(currentGym).length > 0){
@@ -79,7 +77,7 @@ export class CalendarComponent implements OnInit {
       }
     );
 
-    this.store.select(CalendarSelectors.selectCalendarData).subscribe(
+    this.calendarDataSubscription = this.store.select(CalendarSelectors.selectCalendarData).subscribe(
       calendarData => {
         this.calendarData = calendarData;
         if (Object.keys(calendarData).length > 0) {
@@ -90,6 +88,14 @@ export class CalendarComponent implements OnInit {
         }
       }
     );
+  }
+
+  ngOnDestroy(): void {
+    this.currentAreaSubsription.unsubscribe();
+    this.currentActivitySubsription.unsubscribe();
+    this.currentGymSubsription.unsubscribe();
+    this.gymInfoSubsription.unsubscribe();
+    this.calendarDataSubscription.unsubscribe();
   }
 
   getAnotherWeek(previous: boolean): void {

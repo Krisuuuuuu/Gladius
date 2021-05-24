@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
 import { IUserProfile } from 'src/app/model/user-profile/IUserProfile';
 import { UserActions } from 'src/app/state+/actions/user.actions';
 import { UserProfileSelectors } from 'src/app/state+/selectors/user-profile.selectors';
@@ -12,10 +13,12 @@ import { UserProfileSelectors } from 'src/app/state+/selectors/user-profile.sele
   styleUrls: ['./client-info.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class ClientInfoComponent implements OnInit {
+export class ClientInfoComponent implements OnInit, OnDestroy {
   userProfile: IUserProfile;
 
   clientInfoForm: FormGroup;
+
+  private userProfileSubscription: Subscription;
 
   constructor(private formBuilder: FormBuilder, private router: Router, private store: Store<any>) {}
 
@@ -33,7 +36,7 @@ export class ClientInfoComponent implements OnInit {
       phoneNumber: ''
     });
 
-    this.store.select(UserProfileSelectors.selectUserProfile).subscribe(
+    this.userProfileSubscription = this.store.select(UserProfileSelectors.selectUserProfile).subscribe(
       userProfile => {
         if(Object.keys(userProfile).length > 0) {
           this.userProfile = userProfile;
@@ -52,6 +55,10 @@ export class ClientInfoComponent implements OnInit {
     );
 
     this.getUserProfile();
+  }
+
+  ngOnDestroy(): void {
+    this.userProfileSubscription.unsubscribe();
   }
 
   save(): void {
