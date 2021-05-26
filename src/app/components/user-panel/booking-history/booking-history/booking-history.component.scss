@@ -27,6 +27,7 @@ section.booking-history-wrapper {
     h2 {
       @include h2(30px);
       text-align: center;
+      cursor: default
     }
 
     @include tabs();

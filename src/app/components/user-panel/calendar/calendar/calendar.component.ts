@@ -45,25 +45,6 @@ export class CalendarComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.getWeekBorder();
 
-    this.gymInfoSubsription = this.store.select(CalendarSelectors.selectGymInfo).subscribe(
-      gymInfo => this.gymInfo = gymInfo
-    );
-
-    this.currentAreaSubsription = this.store.select(CalendarSelectors.selectCurrentArea).subscribe(
-      currentArea => {
-        this.currentArea = currentArea;
-      }
-    );
-
-    this.currentActivitySubsription = this.store.select(CalendarSelectors.selectCurrentActivity).subscribe(
-      currentActivity => {
-        this.currentActivity = currentActivity;
-
-        if(currentActivity !== undefined && this.calendarData !== undefined && Object.keys(this.calendarData).length > 0)
-          this.filterActivities();
-      }
-    );
-
     this.currentGymSubsription = this.store.select(GymSelectionSelectors.selectCurrentGym).subscribe(
       currentGym => {
         this.currentGym = currentGym;
@@ -86,6 +67,25 @@ export class CalendarComponent implements OnInit, OnDestroy {
           if(this.currentActivity !== undefined)
             this.filterActivities();
         }
+      }
+    );
+
+    this.gymInfoSubsription = this.store.select(CalendarSelectors.selectGymInfo).subscribe(
+      gymInfo => this.gymInfo = gymInfo
+    );
+
+    this.currentAreaSubsription = this.store.select(CalendarSelectors.selectCurrentArea).subscribe(
+      currentArea => {
+        this.currentArea = currentArea;
+      }
+    );
+
+    this.currentActivitySubsription = this.store.select(CalendarSelectors.selectCurrentActivity).subscribe(
+      currentActivity => {
+        this.currentActivity = currentActivity;
+
+        if(currentActivity !== undefined && this.calendarData !== undefined && Object.keys(this.calendarData).length > 0)
+          this.filterActivities();
       }
     );
   }

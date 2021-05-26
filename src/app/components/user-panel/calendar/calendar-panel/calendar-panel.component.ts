@@ -38,28 +38,8 @@ export class CalendarPanelComponent implements OnInit, OnDestroy {
   constructor(private router: Router, private store: Store<any>) { }
 
   ngOnInit(): void {
-    this.currentAreaSubsription = this.store.select(CalendarSelectors.selectCurrentArea).subscribe(
-      area => this.currentArea = area
-    );
-
-    this.currentActivitySubsription = this.store.select(CalendarSelectors.selectCurrentActivity).subscribe(
-      activity => this.currentActivity = activity
-    );
-
     this.currentGymSubsription = this.store.select(GymSelectionSelectors.selectCurrentGym).subscribe(
       currentGym => this.currentGym = currentGym
-    );
-
-    this.gymInfoSubsription = this.store.select(CalendarSelectors.selectGymInfo).subscribe(
-      gymInfo => {
-        if (Object.keys(gymInfo).length > 0) {
-          this.gymInfo = gymInfo;
-          this.initPanel();
-        }
-        else {
-          this.store.dispatch(GymSelectionActions.loadGyms({ companyName: environment.companyName }));
-        }
-      }
     );
 
     this.gymsSubsription = this.store.select(GymSelectionSelectors.selectGyms).subscribe(
@@ -76,6 +56,26 @@ export class CalendarPanelComponent implements OnInit, OnDestroy {
           }
         }
       }
+    );
+
+    this.gymInfoSubsription = this.store.select(CalendarSelectors.selectGymInfo).subscribe(
+      gymInfo => {
+        if (Object.keys(gymInfo).length > 0) {
+          this.gymInfo = gymInfo;
+          this.initPanel();
+        }
+        else {
+          this.store.dispatch(GymSelectionActions.loadGyms({ companyName: environment.companyName }));
+        }
+      }
+    );
+
+    this.currentAreaSubsription = this.store.select(CalendarSelectors.selectCurrentArea).subscribe(
+      area => this.currentArea = area
+    );
+
+    this.currentActivitySubsription = this.store.select(CalendarSelectors.selectCurrentActivity).subscribe(
+      activity => this.currentActivity = activity
     );
   }
 
@@ -105,7 +105,7 @@ export class CalendarPanelComponent implements OnInit, OnDestroy {
       this.store.dispatch(calendarActions.currentAreaChanged({ areaName: this.areas[0] }));
 
     if (this.gymInfo.areas[0].activities.length > 0) {
-      this.activities = this.gymInfo.areas[0].activities.map(a => a.name);
+      this.activities = this.gymInfo.areas[0].activities;
       this.store.dispatch(calendarActions.currentActivityChanged({ activityName: this.activities[0] }));
     }
   }
@@ -117,7 +117,7 @@ export class CalendarPanelComponent implements OnInit, OnDestroy {
 
   private customizeActivities(): void {
     const index: number = this.areas.indexOf(this.currentArea);
-    let activities: string[] = this.gymInfo.areas[index].activities.map(a => a.name);
+    let activities: string[] = this.gymInfo.areas[index].activities;
     this.activities = activities;
     this.store.dispatch(calendarActions.currentActivityChanged({ activityName: this.activities[0] }));
   }
