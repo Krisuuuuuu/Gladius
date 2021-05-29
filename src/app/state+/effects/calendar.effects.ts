@@ -19,9 +19,7 @@ export class CalendarEffects {
       return this.actions$.pipe(
         ofType(importedActions.calendarActions.loadGymInfo),
         mergeMap(({id}) => this.appDataService.getGymInfo(id).pipe(
-          tap(() => console.log("rozpocząłem")),
           map(gymInfo => importedActions.calendarActions.gymInfoReceived({ gymInfo })),
-          tap(() => console.log("dostałem")),
           catchError(() => {
             this.toastr.error("Loading of gyms info failed");
             return of(importedActions.calendarActions.loadingGymInfoFailed());
@@ -34,9 +32,7 @@ export class CalendarEffects {
       return this.actions$.pipe(
         ofType(importedActions.calendarActions.loadCalendarData),
         mergeMap(({ startDate, endDate, gymId }) => this.appDataService.getActivitiesForWeek(startDate, endDate, gymId).pipe(
-          tap(() => console.log("rozpocząłem")),
           map(calendarData => importedActions.calendarActions.calendarDataReceived({ calendarData })),
-          tap(() => console.log("dostałem")),
           catchError(() => {
             this.toastr.error("Loading of calendar info failed");
             return of(importedActions.calendarActions.loadingCalendarDataFailed());

@@ -63,6 +63,7 @@
               formControlName="country"
               autocomplete="off"
             />
+            <mat-error *ngIf="clientInfoForm.get('country').hasError('required')"><strong>Country is required</strong></mat-error>
           </mat-form-field>
           <mat-form-field appearance="fill">
             <mat-label>City</mat-label>
@@ -72,6 +73,7 @@
               formControlName="city"
               autocomplete="off"
             />
+            <mat-error *ngIf="clientInfoForm.get('city').hasError('required')"><strong>City is required</strong></mat-error>
           </mat-form-field>
           <mat-form-field appearance="fill">
             <mat-label>Postal Code</mat-label>
@@ -81,6 +83,7 @@
               formControlName="postalCode"
               autocomplete="off"
             />
+            <mat-error *ngIf="clientInfoForm.get('postalCode').hasError('required')"><strong>Postal code is required</strong></mat-error>
           </mat-form-field>
           <mat-form-field appearance="fill">
             <mat-label>Address</mat-label>
@@ -90,6 +93,7 @@
               formControlName="street"
               autocomplete="off"
             />
+            <mat-error *ngIf="clientInfoForm.get('street').hasError('required')"><strong>Address is required</strong></mat-error>
           </mat-form-field>
         </div>
       </div>
@@ -104,6 +108,9 @@
               formControlName="email"
               autocomplete="off"
             />
+            <mat-error *ngIf="clientInfoForm.get('email').hasError('email') && !clientInfoForm.get('email').hasError('required')">
+              <strong>Enter email in proper form</strong></mat-error>
+            <mat-error *ngIf="clientInfoForm.get('email').hasError('required')"><strong>Email is required</strong></mat-error>
           </mat-form-field>
           <mat-form-field appearance="fill">
             <mat-label>Phone Number</mat-label>
@@ -113,10 +120,11 @@
               formControlName="phoneNumber"
               autocomplete="off"
             />
+            <mat-error *ngIf="clientInfoForm.get('phoneNumber').hasError('required')"><strong>Phone number is required</strong></mat-error>
           </mat-form-field>
         </div>
       </div>
-      <button mat-raised-button type="submit">Confirm</button>
+      <button mat-raised-button type="submit" [disabled]="!clientInfoForm.valid">Confirm</button>
     </form>
     <button mat-raised-button (click)="this.changePassword()">
       Change Password

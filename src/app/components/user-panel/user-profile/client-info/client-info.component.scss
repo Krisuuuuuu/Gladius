@@ -28,7 +28,7 @@ section.client-info-layer {
       div.info-set {
         margin: 10px 0;
 
-        @include form-field($input-width, $input-height, inline-block, 0 15px 0 0);
+        @include form-field($input-width, $input-height, inline-block, 0 15px 8px 0);
 
         .mat-icon {
           color: $fg-primary-2;

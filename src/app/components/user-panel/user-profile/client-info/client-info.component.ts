@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
@@ -28,12 +28,12 @@ export class ClientInfoComponent implements OnInit, OnDestroy {
       surname: new FormControl({ value: '', disabled: true }),
       pesel: new FormControl({ value: '', disabled: true }),
       birthDate: new FormControl({ value: '', disabled: true }),
-      country: '',
-      city: '',
-      postalCode: '',
-      street: '',
-      email: '',
-      phoneNumber: ''
+      country: [, { validators: [Validators.required], updateOn: "change" }],
+      city: [, { validators: [Validators.required], updateOn: "change" }],
+      postalCode: [, { validators: [Validators.required], updateOn: "change" }],
+      street: [, { validators: [Validators.required], updateOn: "change" }],
+      email: [, { validators: [Validators.required, Validators.email], updateOn: "change" }],
+      phoneNumber: [, { validators: [Validators.required], updateOn: "change" }]
     });
 
     this.userProfileSubscription = this.store.select(UserProfileSelectors.selectUserProfile).subscribe(

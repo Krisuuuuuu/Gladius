@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { ISignInData } from 'src/app/model/main-page/ISignInData';
 import { UserActions } from 'src/app/state+/actions/user.actions';
@@ -18,8 +17,8 @@ export class SignInPartComponent implements OnInit {
 
   ngOnInit(): void {
     this.signInForm = this.formBuilder.group({
-      email: '',
-      password: ''
+      email: [, { validators: [Validators.required], updateOn: "change" }],
+      password:  [, { validators: [Validators.required], updateOn: "change" }]
     })
   }
 
@@ -30,6 +29,7 @@ export class SignInPartComponent implements OnInit {
     };
 
     this.store.dispatch(UserActions.signInButtonClicked({ signInData: signInData }));
-    this.signInForm.reset();
+    this.signInForm.controls['email'].setValue('example@email.com');
+    this.signInForm.controls['password'].setValue('Password');
   }
 }

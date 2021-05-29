@@ -18,7 +18,7 @@ div.wrapper {
       @include p(100px);
     }
 
-    @include form-field($input-width, $input-height, block, 0);
+    @include form-field($input-width, $input-height, block, 0 0 8px 0);
 
     button {
       @include button($input-width, $input-height, block);
